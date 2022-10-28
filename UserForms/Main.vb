@@ -86,6 +86,41 @@
             Using CommonRoutines.Performance.StartCounter("Utilities.Forms.Main", "Me_Shown")
                 StartUp("")
 
+                Using CommonRoutines.Performance.StartCounter("Utilities.Forms.Main", "Me_Shown", "Populate Visual Studio Menu")
+                    Dim Solutions As New List(Of Models.SolutionInformation)
+
+                    For Each Current As String In IO.Directory.GetFiles("D:\Projects\", "*.sln", IO.SearchOption.AllDirectories)
+                        Solutions.Add(New Models.SolutionInformation(Current))
+                    Next
+
+                    For Each GroupName As String In Solutions.Select(Function(o) o.Group).Distinct().OrderBy(Function(o) o)
+                        If GroupName.IsNotSet() Then
+                            Continue For
+                        End If
+
+                        Dim GroupItem As New ToolStripMenuItem() With {
+                                .Name = "Solutions_{0}ToolStripMenuItem".FormatWith(GroupName).Replace(" ", ""),
+                                .Size = New Size(180, 22),
+                                .Text = GroupName
+                            }
+
+                        For Each Current As Models.SolutionInformation In Solutions.Where(Function(o) o.Group.IsEqualTo(GroupName)).OrderBy(Function(o) o.Name)
+                            Dim SolutionItem As New ToolStripMenuItem() With {
+                                    .Name = "Solutions_{0}_{1}ToolStripMenuItem".FormatWith(GroupName, Current.Name).Replace(" ", ""),
+                                    .Size = New Size(180, 22),
+                                    .Tag = Current,
+                                    .Text = Current.Name
+                                }
+
+                            AddHandler SolutionItem.Click, AddressOf SolutionItem_Click
+
+                            GroupItem.DropDownItems.Add(SolutionItem)
+                        Next
+
+                        SolutionsToolStripMenuItem.DropDownItems.Add(GroupItem)
+                    Next
+                End Using
+
                 SetTheme()
 
                 For Each Current As UserControls.Tabs.ITab In _Tabs.OrderBy(Function(o) o.OrderButton).ThenBy(Function(o) o.Text)
@@ -192,74 +227,26 @@
             Close()
         End Sub
 
-#Region " Keys "
-
-        Private Const _Key As String = "HKEY_LOCAL_MACHINE\Software\Aprotec"
-        Private Const _KeyAPRENPASSWD As String = "APRENPASSWD"
-        Private Const _KeyAPRENUSER As String = "APRENUSER"
-        Private Const _KeyEN20SERVER As String = "EN20SERVER"
-        Private Const _KeyEnginePort As String = "EnginePort"
-        Private Const _KeyEngineServer As String = "EngineServer"
-        Private Const _KeySQLPASSWORD As String = "SQLPASSWORD"
-        Private Const _KeySQLUSERNAME As String = "SQLUSERNAME"
-
-        Private Sub Keys_DevelopmentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Keys_DevelopmentToolStripMenuItem.Click
+        Private Sub SolutionItem_Click(sender As Object, e As EventArgs)
             Try
-                CommonRoutines.Registry.Set(_Key, _KeyAPRENPASSWD, "Aprotec")
-                CommonRoutines.Registry.Set(_Key, _KeyAPRENUSER, "bjorn.falt")
-                CommonRoutines.Registry.Set(_Key, _KeyEN20SERVER, "192.168.9.43\SQLDEV")
-                CommonRoutines.Registry.Set(_Key, _KeyEnginePort, "45002")
-                CommonRoutines.Registry.Set(_Key, _KeyEngineServer, "192.168.9.43")
-                CommonRoutines.Registry.Set(_Key, _KeySQLPASSWORD, "KIx1hQmVANjH9MP7XICebA==")
-                CommonRoutines.Registry.Set(_Key, _KeySQLUSERNAME, "VUtntl2IGR9PPUSkl3YZFg==")
+                Dim SolutionItem As ToolStripMenuItem = DirectCast(sender, ToolStripMenuItem)
+                Dim SolutionInformation As Models.SolutionInformation = DirectCast(SolutionItem.Tag, Models.SolutionInformation)
+
+                Dim Process As New Process()
+
+                Process.StartInfo.Arguments = SolutionInformation.Filename
+                Process.StartInfo.FileName = "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe"
+                Process.StartInfo.UseShellExecute = True
+
+                If SolutionInformation.RequiresAdmin Then
+                    Process.StartInfo.Verb = "RunAs"
+                End If
+
+                Process.Start()
             Catch ex As Exception
                 ex.ToLog()
             End Try
         End Sub
-
-        Private Sub Keys_ProductionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Keys_ProductionToolStripMenuItem.Click
-            Try
-                CommonRoutines.Registry.Set(_Key, _KeyAPRENPASSWD, "nZHUxkGC4br6CKLv")
-                CommonRoutines.Registry.Set(_Key, _KeyAPRENUSER, "Bjorn")
-                CommonRoutines.Registry.Set(_Key, _KeyEN20SERVER, "192.168.10.205\DMSSALES")
-                CommonRoutines.Registry.Set(_Key, _KeyEnginePort, "45001")
-                CommonRoutines.Registry.Set(_Key, _KeyEngineServer, "192.168.10.205")
-                CommonRoutines.Registry.Set(_Key, _KeySQLPASSWORD, "bJoDrxTHxl2fBamOr6AStQ==")
-                CommonRoutines.Registry.Set(_Key, _KeySQLUSERNAME, "pid+8QT77QRTzN1qUh5iLA==")
-            Catch ex As Exception
-                ex.ToLog()
-            End Try
-        End Sub
-
-        Private Sub Keys_Test2012ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Keys_Test2012ToolStripMenuItem.Click
-            Try
-                CommonRoutines.Registry.Set(_Key, _KeyAPRENPASSWD, "")
-                CommonRoutines.Registry.Set(_Key, _KeyAPRENUSER, "")
-                CommonRoutines.Registry.Set(_Key, _KeyEN20SERVER, "192.168.10.147\SQLEXPRESS")
-                CommonRoutines.Registry.Set(_Key, _KeyEnginePort, "45001")
-                CommonRoutines.Registry.Set(_Key, _KeyEngineServer, "192.168.10.147")
-                CommonRoutines.Registry.Set(_Key, _KeySQLPASSWORD, "")
-                CommonRoutines.Registry.Set(_Key, _KeySQLUSERNAME, "")
-            Catch ex As Exception
-                ex.ToLog()
-            End Try
-        End Sub
-
-        Private Sub Keys_Test2016ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Keys_Test2016ToolStripMenuItem.Click
-            Try
-                CommonRoutines.Registry.Set(_Key, _KeyAPRENPASSWD, "aprotec")
-                CommonRoutines.Registry.Set(_Key, _KeyAPRENUSER, "Bjorn")
-                CommonRoutines.Registry.Set(_Key, _KeyEN20SERVER, "192.168.10.148\SQLEXPRESS")
-                CommonRoutines.Registry.Set(_Key, _KeyEnginePort, "45001")
-                CommonRoutines.Registry.Set(_Key, _KeyEngineServer, "192.168.10.148")
-                CommonRoutines.Registry.Set(_Key, _KeySQLPASSWORD, "")
-                CommonRoutines.Registry.Set(_Key, _KeySQLUSERNAME, "")
-            Catch ex As Exception
-                ex.ToLog()
-            End Try
-        End Sub
-
-#End Region
 
 #End Region
 

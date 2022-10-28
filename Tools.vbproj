@@ -69,10 +69,14 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="SevenZipSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c8ff6ba0184838bb, processorArchitecture=MSIL">
+      <HintPath>packages\Squid-Box.SevenZipSharp.1.5.0.366\lib\net45\SevenZipSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -96,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompressedContent.vb" />
+    <Compile Include="Models\SolutionInformation.vb" />
     <Compile Include="Models\LuaFile.vb" />
     <Compile Include="Models\ApiUpload.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -114,11 +119,18 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="UserControls\Tabs\ArchiveFolder.vb" />
     <Compile Include="UserControls\Tabs\WoWProfileChecker.vb" />
     <Compile Include="UserControls\Tabs\WoWThingUpload.vb" />
     <Compile Include="UserControls\Tabs\Theme.vb" />
     <Compile Include="UserControls\Tabs\_TabBase.vb" />
     <Compile Include="UserControls\Tabs\_ITab.vb" />
+    <Compile Include="UserControls\Views\ArchiveFolder.Designer.vb">
+      <DependentUpon>ArchiveFolder.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Views\ArchiveFolder.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UserControls\Views\WoWProfileChecker.Designer.vb">
       <DependentUpon>WoWProfileChecker.vb</DependentUpon>
     </Compile>
@@ -146,6 +158,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Views\ArchiveFolder.resx">
+      <DependentUpon>ArchiveFolder.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Views\WoWProfileChecker.resx">
       <DependentUpon>WoWProfileChecker.vb</DependentUpon>

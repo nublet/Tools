@@ -30,13 +30,7 @@
             Me.ButtonsPanel = New System.Windows.Forms.Panel()
             Me.MainNotifyIcon = New System.Windows.Forms.NotifyIcon(Me.components)
             Me.MainContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
-            Me.KeysToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-            Me.Keys_DevelopmentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-            Me.Keys_ProductionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-            Me.Keys_Test2012ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-            Me.Keys_Test2016ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.SolutionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-            Me.Solutions_DMSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.MainContextMenuStrip.SuspendLayout()
             Me.SuspendLayout()
@@ -71,53 +65,15 @@
             '
             'MainContextMenuStrip
             '
-            Me.MainContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.KeysToolStripMenuItem, Me.SolutionsToolStripMenuItem, Me.ExitToolStripMenuItem})
+            Me.MainContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SolutionsToolStripMenuItem, Me.ExitToolStripMenuItem})
             Me.MainContextMenuStrip.Name = "MainContextMenuStrip"
-            Me.MainContextMenuStrip.Size = New System.Drawing.Size(124, 70)
-            '
-            'KeysToolStripMenuItem
-            '
-            Me.KeysToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Keys_DevelopmentToolStripMenuItem, Me.Keys_ProductionToolStripMenuItem, Me.Keys_Test2012ToolStripMenuItem, Me.Keys_Test2016ToolStripMenuItem})
-            Me.KeysToolStripMenuItem.Name = "KeysToolStripMenuItem"
-            Me.KeysToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
-            Me.KeysToolStripMenuItem.Text = "Keys"
-            '
-            'Keys_DevelopmentToolStripMenuItem
-            '
-            Me.Keys_DevelopmentToolStripMenuItem.Name = "Keys_DevelopmentToolStripMenuItem"
-            Me.Keys_DevelopmentToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
-            Me.Keys_DevelopmentToolStripMenuItem.Text = "Development"
-            '
-            'Keys_ProductionToolStripMenuItem
-            '
-            Me.Keys_ProductionToolStripMenuItem.Name = "Keys_ProductionToolStripMenuItem"
-            Me.Keys_ProductionToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
-            Me.Keys_ProductionToolStripMenuItem.Text = "Production"
-            '
-            'Keys_Test2012ToolStripMenuItem
-            '
-            Me.Keys_Test2012ToolStripMenuItem.Name = "Keys_Test2012ToolStripMenuItem"
-            Me.Keys_Test2012ToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
-            Me.Keys_Test2012ToolStripMenuItem.Text = "Test - 2012SVRX64"
-            '
-            'Keys_Test2016ToolStripMenuItem
-            '
-            Me.Keys_Test2016ToolStripMenuItem.Name = "Keys_Test2016ToolStripMenuItem"
-            Me.Keys_Test2016ToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
-            Me.Keys_Test2016ToolStripMenuItem.Text = "Test - 2016SERVER"
+            Me.MainContextMenuStrip.Size = New System.Drawing.Size(124, 48)
             '
             'SolutionsToolStripMenuItem
             '
-            Me.SolutionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Solutions_DMSToolStripMenuItem})
             Me.SolutionsToolStripMenuItem.Name = "SolutionsToolStripMenuItem"
             Me.SolutionsToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
             Me.SolutionsToolStripMenuItem.Text = "Solutions"
-            '
-            'Solutions_DMSToolStripMenuItem
-            '
-            Me.Solutions_DMSToolStripMenuItem.Name = "Solutions_DMSToolStripMenuItem"
-            Me.Solutions_DMSToolStripMenuItem.Size = New System.Drawing.Size(99, 22)
-            Me.Solutions_DMSToolStripMenuItem.Text = "DMS"
             '
             'ExitToolStripMenuItem
             '
@@ -146,13 +102,7 @@
         Private WithEvents ButtonsPanel As Panel
         Private WithEvents MainNotifyIcon As NotifyIcon
         Private WithEvents MainContextMenuStrip As ContextMenuStrip
-        Private WithEvents KeysToolStripMenuItem As ToolStripMenuItem
-        Private WithEvents Keys_DevelopmentToolStripMenuItem As ToolStripMenuItem
-        Private WithEvents Keys_ProductionToolStripMenuItem As ToolStripMenuItem
         Private WithEvents SolutionsToolStripMenuItem As ToolStripMenuItem
-        Private WithEvents Solutions_DMSToolStripMenuItem As ToolStripMenuItem
-        Private WithEvents Keys_Test2012ToolStripMenuItem As ToolStripMenuItem
-        Private WithEvents Keys_Test2016ToolStripMenuItem As ToolStripMenuItem
         Private WithEvents ExitToolStripMenuItem As ToolStripMenuItem
     End Class
 
