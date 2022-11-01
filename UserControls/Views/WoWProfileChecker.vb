@@ -116,17 +116,16 @@
 
 #Region " Names "
 
-        Private Function GetProfileName_Bjorn(addonName As String, lastTable As String) As String
+        Private Function GetProfileName_Bjorn(filename As String, keyName As String) As String
             Try
-                Dim Key As String = "{0}_{1}".FormatWith(addonName, lastTable).ToLower()
-                Select Case Key
+                Select Case keyName
                     Case "elvui_elvdb"
                         Return "Poesboi"
                     Case "elvui_elvprivatedb"
                         Return "Poesboi"
                 End Select
 
-                Return GetProfileName_Shared(addonName, lastTable)
+                Return GetProfileName_Shared(filename, keyName)
             Catch ex As Exception
                 ex.ToLog()
             End Try
@@ -134,17 +133,16 @@
             Return "Default"
         End Function
 
-        Private Function GetProfileName_Nix(addonName As String, lastTable As String) As String
+        Private Function GetProfileName_Nix(fileName As String, keyName As String) As String
             Try
-                Dim Key As String = "{0}_{1}".FormatWith(addonName, lastTable).ToLower()
-                Select Case Key
+                Select Case keyName
                     Case "elvui_elvdb"
                         Return "Nix"
                     Case "elvui_elvprivatedb"
                         Return "Nix"
                 End Select
 
-                Return GetProfileName_Shared(addonName, lastTable)
+                Return GetProfileName_Shared(fileName, keyName)
             Catch ex As Exception
                 ex.ToLog()
             End Try
@@ -152,10 +150,9 @@
             Return "Default"
         End Function
 
-        Private Function GetProfileName_Shared(addonName As String, lastTable As String) As String
+        Private Function GetProfileName_Shared(fileName As String, keyName As String) As String
             Try
-                Dim Key As String = "{0}_{1}".FormatWith(addonName, lastTable).ToLower()
-                Select Case Key
+                Select Case keyName
                     Case "mogit_mogitwishlist"
                         Return "Default"
 
@@ -307,6 +304,8 @@
                         Return "Poesboi"
                     Case "mountfarmhelper_mountfarmhelperdb"
                         Return "Poesboi"
+                    Case "mouseoveractionbars_mouseoveractionbarsdb"
+                        Return "Poesboi"
                     Case "mythicdungeontools_mythicdungeontoolsdb"
                         Return "Poesboi"
                     Case "nameplatesct_nameplatesctdb"
@@ -315,7 +314,11 @@
                         Return "Poesboi"
                     Case "npcscan_npcscandb"
                         Return "Poesboi"
+                    Case "omnicd_omnicddb"
+                        Return "Poesboi"
                     Case "paste_pastedb"
+                        Return "Poesboi"
+                    Case "personalloottrader_pltraderdb"
                         Return "Poesboi"
                     Case "petbattleteams_petbattleteamsdb"
                         Return "Poesboi"
@@ -345,6 +348,8 @@
                         Return "Poesboi"
                     Case "tdbattlepetscript_td_db_battlepetscript_global"
                         Return "Poesboi"
+                    Case "tldrmissions_tldrmissionsprofiles"
+                        Return "Poesboi"
                     Case "tomtom_tomtomdb"
                         Return "Poesboi"
                     Case "tomtom_tomtomwaypointsm"
@@ -367,7 +372,7 @@
                         Return "Poesboi"
 
                     Case Else
-                        System_String_1.ToLog("frmMain->GetProfileName_Shared, new Key found: {0}".FormatWith(Key), True)
+                        System_String_1.ToLog("frmMain->GetProfileName_Shared, new Key found: {0}, Filename: {1}".FormatWith(keyName, fileName), True)
                 End Select
             Catch ex As Exception
                 ex.ToLog()
@@ -376,12 +381,12 @@
             Return "Default"
         End Function
 
-        Private Function GetProfileName(addonName As String, isBjorn As Boolean, lastTable As String) As String
+        Private Function GetProfileName(fileName As String, isBjorn As Boolean, keyName As String) As String
             Try
                 If isBjorn Then
-                    Return GetProfileName_Bjorn(addonName, lastTable)
+                    Return GetProfileName_Bjorn(fileName, keyName)
                 Else
-                    Return GetProfileName_Nix(addonName, lastTable)
+                    Return GetProfileName_Nix(fileName, keyName)
                 End If
             Catch ex As Exception
                 ex.ToLog()
@@ -390,9 +395,9 @@
             Return "Default"
         End Function
 
-        Private Sub CheckProfileNames(filename As String, isBjorn As Boolean)
+        Private Sub CheckProfileNames(fileName As String, isBjorn As Boolean)
             Try
-                Dim AddonName As String = IO.Path.GetFileNameWithoutExtension(filename)
+                Dim AddonName As String = IO.Path.GetFileNameWithoutExtension(fileName)
                 Dim HasChanged As Boolean = False
                 Dim InProfileKeys As Boolean = False
                 Dim LastTable As String = ""
@@ -400,7 +405,7 @@
                 Dim StringBuilder As New Text.StringBuilder()
 
                 AddMessage("         Checking AddOn: {0}...".FormatWith(AddonName))
-                For Each CurrentLine As String In IO.File.ReadLines(filename)
+                For Each CurrentLine As String In IO.File.ReadLines(fileName)
                     If CurrentLine.IsNotSet() Then
                         StringBuilder.AppendLine(CurrentLine)
                         Continue For
@@ -409,7 +414,10 @@
                     If CurrentLine.EndsWith("] = {") Then
                         If CurrentLine.Trim().Replace("[", "").Replace("""", "").StartsWith("profileKeys]") Then
                             InProfileKeys = True
-                            ProfileName = GetProfileName(AddonName, isBjorn, LastTable)
+
+                            Dim KeyName As String = "{0}_{1}".FormatWith(AddonName, LastTable).ToLower()
+
+                            ProfileName = GetProfileName(fileName, isBjorn, KeyName)
                         End If
                     ElseIf CurrentLine.EndsWith(" = {") Then
                         LastTable = CurrentLine.ToLower().Substring(0, CurrentLine.Length - 4).Trim()
@@ -437,7 +445,7 @@
                 Next
 
                 If HasChanged Then
-                    IO.File.WriteAllText(filename, StringBuilder.ToString())
+                    IO.File.WriteAllText(fileName, StringBuilder.ToString())
                     AddMessage("            Updated.")
                 End If
             Catch ex As Exception

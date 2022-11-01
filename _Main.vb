@@ -20,7 +20,7 @@
                 Application.SetCompatibleTextRenderingDefault(False)
                 Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException)
 
-                CommonRoutines.Initialise("E:\GoogleDrive\Applications\Errors", False, "")
+                CommonRoutines.Initialise("E:\GoogleDrive\Applications\Errors\{0} - {1}_{2}.txt".FormatWith(My.Application.Info.ProductName, CommonRoutines.GetComputerName(), CommonRoutines.GetUsername()), False, "")
 
                 CommonRoutines.Settings.Icon = My.Resources.App
 

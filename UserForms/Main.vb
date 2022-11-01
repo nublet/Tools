@@ -99,10 +99,10 @@
                         End If
 
                         Dim GroupItem As New ToolStripMenuItem() With {
-                                .Name = "Solutions_{0}ToolStripMenuItem".FormatWith(GroupName).Replace(" ", ""),
-                                .Size = New Size(180, 22),
-                                .Text = GroupName
-                            }
+                            .Name = "Solutions_{0}ToolStripMenuItem".FormatWith(GroupName).Replace(" ", ""),
+                            .Size = New Size(180, 22),
+                            .Text = GroupName
+                        }
 
                         For Each Current As Models.SolutionInformation In Solutions.Where(Function(o) o.Group.IsEqualTo(GroupName)).OrderBy(Function(o) o.Name)
                             Dim SolutionItem As New ToolStripMenuItem() With {
