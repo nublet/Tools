@@ -90,11 +90,15 @@
                 Dim AccountFolderNix As String = "\\Study21R1\World of Warcraft\_retail_\WTF\Account\POESBOI2\"
                 Dim TemplateFolderNix As String = "E:\GoogleDrive\BackUps\Nix\WoW\Template\"
 
-                AddMessage("Checking Profiles - Bjorn...")
-                CheckProfiles(AccountFolderBjorn, True, TemplateFolderBjorn)
+                If IO.Directory.Exists(AccountFolderBjorn) Then
+                    AddMessage("Checking Profiles - Bjorn...")
+                    CheckProfiles(AccountFolderBjorn, True, TemplateFolderBjorn)
+                End If
 
-                AddMessage("Checking Profiles - Nix...")
-                CheckProfiles(AccountFolderNix, False, TemplateFolderNix)
+                If IO.Directory.Exists(AccountFolderNix) Then
+                    AddMessage("Checking Profiles - Nix...")
+                    CheckProfiles(AccountFolderNix, False, TemplateFolderNix)
+                End If
             Catch ex As Exception
                 ex.ToLog()
             End Try
@@ -260,7 +264,9 @@
                         Return "Poesboi"
                     Case "handynotes_brokenshore_handynotes_brokenshoredb"
                         Return "Poesboi"
-                    Case "handynotes_draenortreasures_draenortreasuresdb"
+                    Case "handynotes_draenor_handynotesdraenordb", "handynotes_draenortreasures_draenortreasuresdb"
+                        Return "Poesboi"
+                    Case "handynotes_dragonflighttreasures_handynotes_dragonflighttreasuresdb", ""
                         Return "Poesboi"
                     Case "handynotes_dungeonlocations_handynotes_dungeonlocationsdb"
                         Return "Poesboi"
@@ -284,9 +290,13 @@
                         Return "Poesboi"
                     Case "handynotes_suramartelemancy_handynotes_suramartelemancydb"
                         Return "Poesboi"
+                    Case "handynotes_treasurehunter_handynotes_treasurehunterdb"
+                        Return "Poesboi"
                     Case "handynotes_visionsofnzoth_handynotes_visionsofnzothdb"
                         Return "Poesboi"
                     Case "handynotes_warfrontrares_handynotesarathidb"
+                        Return "Poesboi"
+                    Case "healthbarcolor_healthbarcolordb"
                         Return "Poesboi"
                     Case "hekili_hekilidb"
                         Return "Poesboi"

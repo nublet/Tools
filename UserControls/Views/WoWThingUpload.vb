@@ -47,8 +47,7 @@
             Try
                 For Each Current As Models.LuaFile In _Files
                     If Not Current.Filename.FileExists() Then
-                        AddMessage("Error: File NOT found - {0}".FormatWith(Current.Filename))
-                        Return
+                        Continue For
                     End If
 
                     Dim LastWriteUTC As Date = IO.File.GetLastWriteTimeUtc(Current.Filename)

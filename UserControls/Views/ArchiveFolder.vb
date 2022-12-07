@@ -48,24 +48,24 @@
             Try
                 Dim FileSize As Double = New IO.FileInfo(fileName).Length
 
-                If fileSize <= 999 Then
-                    Return Format$(fileSize, "0") & " bytes"
-                ElseIf fileSize <= ONE_KB * 999 Then
-                    Return GetNumberToThreeSig(fileSize / ONE_KB) & " " & "KB"
-                ElseIf fileSize <= ONE_MB * 999 Then
-                    Return GetNumberToThreeSig(fileSize / ONE_MB) & " " & "MB"
-                ElseIf fileSize <= ONE_GB * 999 Then
-                    Return GetNumberToThreeSig(fileSize / ONE_GB) & " " & "GB"
-                ElseIf fileSize <= ONE_TB * 999 Then
-                    Return GetNumberToThreeSig(fileSize / ONE_TB) & " " & "TB"
-                ElseIf fileSize <= ONE_PB * 999 Then
-                    Return GetNumberToThreeSig(fileSize / ONE_PB) & " " & "PB"
-                ElseIf fileSize <= ONE_EB * 999 Then
-                    Return GetNumberToThreeSig(fileSize / ONE_EB) & " " & "EB"
-                ElseIf fileSize <= ONE_ZB * 999 Then
-                    Return GetNumberToThreeSig(fileSize / ONE_ZB) & " " & "ZB"
+                If FileSize <= 999 Then
+                    Return Format$(FileSize, "0") & " bytes"
+                ElseIf FileSize <= ONE_KB * 999 Then
+                    Return GetNumberToThreeSig(FileSize / ONE_KB) & " " & "KB"
+                ElseIf FileSize <= ONE_MB * 999 Then
+                    Return GetNumberToThreeSig(FileSize / ONE_MB) & " " & "MB"
+                ElseIf FileSize <= ONE_GB * 999 Then
+                    Return GetNumberToThreeSig(FileSize / ONE_GB) & " " & "GB"
+                ElseIf FileSize <= ONE_TB * 999 Then
+                    Return GetNumberToThreeSig(FileSize / ONE_TB) & " " & "TB"
+                ElseIf FileSize <= ONE_PB * 999 Then
+                    Return GetNumberToThreeSig(FileSize / ONE_PB) & " " & "PB"
+                ElseIf FileSize <= ONE_EB * 999 Then
+                    Return GetNumberToThreeSig(FileSize / ONE_EB) & " " & "EB"
+                ElseIf FileSize <= ONE_ZB * 999 Then
+                    Return GetNumberToThreeSig(FileSize / ONE_ZB) & " " & "ZB"
                 Else
-                    Return GetNumberToThreeSig(fileSize / ONE_YB) & " " & "YB"
+                    Return GetNumberToThreeSig(FileSize / ONE_YB) & " " & "YB"
                 End If
             Catch ex As Exception
                 ex.ToLog()
