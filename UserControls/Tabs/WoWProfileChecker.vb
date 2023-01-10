@@ -1,7 +1,7 @@
 ﻿Namespace Tools.UserControls.Tabs
 
     Public Class WoWProfileChecker
-        Inherits TabBase
+        Inherits CommonRoutines.Controls.TabBase
 
         Private ReadOnly _View As Views.WoWProfileChecker = Nothing
 
@@ -20,11 +20,11 @@
 
 #Region " TabBase "
 
-        Protected Friend Overrides Function GetUserControl() As UserControl
+        Public Overrides Function GetUserControl() As UserControl
             Return _View
         End Function
 
-        Protected Friend Overrides Sub LoadData()
+        Public Overrides Sub LoadData()
             _View.StartTimer()
         End Sub
 

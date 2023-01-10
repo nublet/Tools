@@ -66,6 +66,12 @@
                         Else
                             AddMessage("   Upload failed: {0}".FormatWith(Response.Content.ReadAsStringAsync().Result))
                         End If
+
+                        If Current.User.IsEqualTo("Bjorn") Then
+                            IO.File.Copy(Current.Filename, "E:\GoogleDrive\BackUps\Bjorn\WoW\POESBOI\SavedVariables\WoWthing_Collector.lua", True)
+                        Else
+                            IO.File.Copy(Current.Filename, "E:\GoogleDrive\BackUps\Nix\WoW\POESBOI2\SavedVariables\WoWthing_Collector.lua", True)
+                        End If
                     End If
 
                     Current.LastModified = LastWriteUTC

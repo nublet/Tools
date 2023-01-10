@@ -43,18 +43,16 @@
                 Try
                     Net.ServicePointManager.SecurityProtocol = Net.SecurityProtocolType.Ssl3 Or Net.SecurityProtocolType.SystemDefault Or Net.SecurityProtocolType.Tls Or Net.SecurityProtocolType.Tls11 Or Net.SecurityProtocolType.Tls12
 
-                    Initialise()
-
                     Using CommonRoutines.Performance.StartCounter("Utilities.Forms.Main", "Me_Load", "Create Tabs")
                         _Tabs.Clear()
-                        _Tabs.AddRange(CommonRoutines.Reflection.GetInstances(Of UserControls.Tabs.ITab))
+                        _Tabs.AddRange(CommonRoutines.Reflection.GetInstances(Of CommonRoutines.Controls.ITab))
                     End Using
 
                     Using CommonRoutines.Performance.StartCounter("Utilities.Forms.Main", "Me_Load", "Populate Tabs")
                         Dim IsFirst As Boolean = True
                         Dim LastY As Integer = 1
 
-                        For Each Current As UserControls.Tabs.ITab In _Tabs.OrderBy(Function(o) o.OrderButton).ThenBy(Function(o) o.Text)
+                        For Each Current As CommonRoutines.Controls.ITab In _Tabs.OrderBy(Function(o) o.OrderButton).ThenBy(Function(o) o.Text)
                             ControlsPanel.Controls.Add(Current.UserControl)
 
                             ButtonsPanel.Controls.Add(Current.Button)
@@ -123,7 +121,7 @@
 
                 SetTheme()
 
-                For Each Current As UserControls.Tabs.ITab In _Tabs.OrderBy(Function(o) o.OrderButton).ThenBy(Function(o) o.Text)
+                For Each Current As CommonRoutines.Controls.ITab In _Tabs.OrderBy(Function(o) o.OrderButton).ThenBy(Function(o) o.Text)
                     SetButtons(Current.Button)
 
                     Exit For
@@ -140,11 +138,11 @@
             Try
                 Opacity = 0.75
 
-                For Each Current As UserControls.Tabs.ITab In _Tabs
+                For Each Current As CommonRoutines.Controls.ITab In _Tabs
                     Current.IsSelected = False
                 Next
 
-                Dim Tab As UserControls.Tabs.ITab = _Tabs.Where(Function(o) o.Button.Name.IsEqualTo(currentButton.Name)).FirstOrDefault()
+                Dim Tab As CommonRoutines.Controls.ITab = _Tabs.Where(Function(o) o.Button.Name.IsEqualTo(currentButton.Name)).FirstOrDefault()
 
                 If Tab Is Nothing Then
                     Return
@@ -168,7 +166,7 @@
 
 #Region " Shared "
 
-        Private Shared ReadOnly _Tabs As New List(Of UserControls.Tabs.ITab)
+        Private Shared ReadOnly _Tabs As New List(Of CommonRoutines.Controls.ITab)
 
         Private Shared _Instance As Main = Nothing
 
@@ -198,7 +196,7 @@
 
                 _Instance.SetTheme()
 
-                Dim Tab As UserControls.Tabs.ITab = _Tabs.Where(Function(o) o.IsSelected).FirstOrDefault()
+                Dim Tab As CommonRoutines.Controls.ITab = _Tabs.Where(Function(o) o.IsSelected).FirstOrDefault()
                 If Tab Is Nothing Then
                     Return
                 End If

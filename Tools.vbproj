@@ -123,8 +123,6 @@
     <Compile Include="UserControls\Tabs\WoWProfileChecker.vb" />
     <Compile Include="UserControls\Tabs\WoWThingUpload.vb" />
     <Compile Include="UserControls\Tabs\Theme.vb" />
-    <Compile Include="UserControls\Tabs\_TabBase.vb" />
-    <Compile Include="UserControls\Tabs\_ITab.vb" />
     <Compile Include="UserControls\Views\ArchiveFolder.Designer.vb">
       <DependentUpon>ArchiveFolder.vb</DependentUpon>
     </Compile>
@@ -150,7 +148,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="_Main.vb" />
-    <Compile Include="_Shared.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
