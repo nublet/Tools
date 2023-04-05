@@ -1,5 +1,7 @@
 ﻿Public Module _Shared
 
+    Public Const WindowCaption As String = "SIA_Tools"
+
     Private ReadOnly _Keywords As New List(Of String) From {
             "Alias".ToLower(),
             "Date".ToLower(),

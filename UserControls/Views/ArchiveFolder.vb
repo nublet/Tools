@@ -74,10 +74,6 @@
             Return ""
         End Function
 
-        Private Sub AddMessage(message As String)
-            MainListResults.AddMessage("[{0}] - {1}".FormatWith(CommonRoutines.GetCurrentDate().GetSQLString("HH:mm:ss"), message))
-        End Sub
-
         Public Sub StartTimer()
             _ArchiveName = CommonRoutines.Settings.Get(Of String)("ArchiveFolder.ArchiveName")
             _FolderName = CommonRoutines.Settings.Get(Of String)("ArchiveFolder.FolderName")
@@ -120,12 +116,12 @@
 
         Private Sub MainBackgroundWorker_DoWork(sender As Object, e As ComponentModel.DoWorkEventArgs) Handles MainBackgroundWorker.DoWork
             Try
-                AddMessage("Starting...")
-                AddMessage("   Archive: {0}".FormatWith(_ArchiveName))
-                AddMessage("   Folder: {0}".FormatWith(_FolderName))
+                MainListResults.AddMessage("Starting...")
+                MainListResults.AddMessage("   Archive: {0}".FormatWith(_ArchiveName))
+                MainListResults.AddMessage("   Folder: {0}".FormatWith(_FolderName))
 
                 If _ArchiveName.IsNotSet() Then
-                    AddMessage("   ERROR: Invalid Archive Name")
+                    MainListResults.AddMessage("   ERROR: Invalid Archive Name")
 
                     Return
                 End If
@@ -133,17 +129,17 @@
                 If _ArchiveName.FileExists() Then
                     IO.File.Delete(_ArchiveName)
 
-                    AddMessage("   Existing Archive DELETED")
+                    MainListResults.AddMessage("   Existing Archive DELETED")
                 End If
 
                 If _FolderName.IsNotSet() Then
-                    AddMessage("   ERROR: Invalid Folder Name")
+                    MainListResults.AddMessage("   ERROR: Invalid Folder Name")
 
                     Return
                 End If
 
                 If Not IO.Directory.Exists(_FolderName) Then
-                    AddMessage("   ERROR: Folder not found, or access denied")
+                    MainListResults.AddMessage("   ERROR: Folder not found, or access denied")
 
                     Return
                 End If
@@ -156,12 +152,12 @@
                 SZC.CompressionMethod = SevenZip.CompressionMethod.Lzma2
                 SZC.CompressionMode = SevenZip.CompressionMode.Create
                 SZC.CompressDirectory(_FolderName, _ArchiveName, "", "*", True)
-                AddMessage("   File Size: {0}".FormatWith(GetFileLength(_ArchiveName)))
+                MainListResults.AddMessage("   File Size: {0}".FormatWith(GetFileLength(_ArchiveName)))
             Catch ex As Exception
                 ex.ToLog()
-                AddMessage("   ERROR: {0}".FormatWith(ex.Message))
+                MainListResults.AddMessage("   ERROR: {0}".FormatWith(ex.Message))
             Finally
-                AddMessage("Complete.")
+                MainListResults.AddMessage("Complete.")
             End Try
         End Sub
 
@@ -196,7 +192,7 @@
         Private Sub Timer_Elapsed(sender As Object, e As Timers.ElapsedEventArgs)
             _Timer.Stop()
 
-            AddMessage("Checking Daily WTF Backup...")
+            MainListResults.AddMessage("Checking Daily WTF Backup...")
 
             _ArchiveName = "Z:\BackUps\WoW\POESBOI_{0}.7z".FormatWith(CommonRoutines.GetCurrentDate().GetSQLString("yyyy_MM_dd"))
             _FolderName = "D:\Games\Activision\World of Warcraft\_retail_\WTF\Account\POESBOI"

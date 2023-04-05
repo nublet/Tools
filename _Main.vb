@@ -4,8 +4,8 @@
 
         Public Sub Main(args As String())
             Try
-                If CommonRoutines.SingleInstanceApplication.AlreadyExists Then
-                    CommonRoutines.SingleInstanceApplication.NotifyExistingInstance(String.Join(CommonRoutines.SingleInstanceApplication.ParameterSplit, args))
+                If CommonRoutines.SingleInstanceApplication.AlreadyExists(WindowCaption) Then
+                    CommonRoutines.SingleInstanceApplication.NotifyExistingInstance(String.Join(CommonRoutines.ParameterSplit, args), WindowCaption)
                     Application.Exit()
                     Return
                 End If
@@ -20,12 +20,11 @@
                 Application.SetCompatibleTextRenderingDefault(False)
                 Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException)
 
-                CommonRoutines.Initialise("D:\Projects\_Errors\{0} - {1}_{2}.txt".FormatWith(My.Application.Info.ProductName, CommonRoutines.GetComputerName(), CommonRoutines.GetUsername()), False, "")
+                CommonRoutines.Initialise("D:\Projects\_Errors\{0} - {1}_{2}.txt".FormatWith(My.Application.Info.ProductName, CommonRoutines.GetComputerName(), CommonRoutines.GetUsername()), False, "", False)
 
                 CommonRoutines.Settings.Icon = My.Resources.App
 
-                CommonRoutines.SingleInstanceApplication.Initialize()
-                AddHandler CommonRoutines.SingleInstanceApplication.NewInstanceMessage, AddressOf SIA_NewInstanceMessage
+                CommonRoutines.SingleInstanceApplication.Initialize(WindowCaption, New CommonRoutines.SingleInstanceApplication.NewInstanceMessageHandler(AddressOf SIA_NewInstanceMessage))
 
                 CommonRoutines.Settings.DebugLogging = False
                 CommonRoutines.Settings.DebugLoggingDBAccess = False

@@ -9,24 +9,20 @@
             ' Add any initialization after the InitializeComponent() call.
         End Sub
 
-        Private Sub AddMessage(message As String)
-            MainListResults.AddMessage("[{0}] - {1}".FormatWith(CommonRoutines.GetCurrentDate().GetSQLString("HH:mm:ss"), message))
-        End Sub
-
         Private Sub CheckProfiles(accountFolder As String, isBjorn As Boolean, templateFolder As String)
             Try
                 Dim FileContents As String = ""
 
-                AddMessage("   Checking Profile Names...")
+                MainListResults.AddMessage("   Checking Profile Names...")
                 For Each Current As String In IO.Directory.GetFiles("{0}SavedVariables\".FormatWith(accountFolder), "*.lua", IO.SearchOption.TopDirectoryOnly).OrderBy(Function(o) o)
                     CheckProfileNames(Current, isBjorn)
                 Next
 
-                AddMessage("   Checking Template Files...")
+                MainListResults.AddMessage("   Checking Template Files...")
                 For Each TemplateFile As String In IO.Directory.GetFiles(templateFolder, "*.*", IO.SearchOption.TopDirectoryOnly)
                     Dim FileName As String = TemplateFile.Substring(TemplateFile.LastIndexOf("\"c) + 1)
 
-                    AddMessage("      Checking Files: {0}...".FormatWith(FileName))
+                    MainListResults.AddMessage("      Checking Files: {0}...".FormatWith(FileName))
                     Dim FileNames As New List(Of String)
 
                     For Each RealmFolder As String In IO.Directory.GetDirectories(accountFolder, "*.*", IO.SearchOption.TopDirectoryOnly)
@@ -41,7 +37,7 @@
 
                             If AccountFile.FileExists() Then
                                 Try
-                                    AddMessage("         Deleting: {0}...".FormatWith(AccountFile))
+                                    MainListResults.AddMessage("         Deleting: {0}...".FormatWith(AccountFile))
 
                                     IO.File.Delete(AccountFile)
                                 Catch exInner As Exception
@@ -59,7 +55,7 @@
                         FileContents = IO.File.ReadAllText(TemplateFile)
 
                         For Each AccountFile As String In FileNames
-                            AddMessage("         Creating: {0}...".FormatWith(AccountFile))
+                            MainListResults.AddMessage("         Creating: {0}...".FormatWith(AccountFile))
 
                             Using writer As New IO.StreamWriter(AccountFile, False)
                                 writer.WriteLine(FileContents)
@@ -91,19 +87,19 @@
                 Dim TemplateFolderNix As String = "E:\GoogleDrive\BackUps\Nix\WoW\Template\"
 
                 If IO.Directory.Exists(AccountFolderBjorn) Then
-                    AddMessage("Checking Profiles - Bjorn...")
+                    MainListResults.AddMessage("Checking Profiles - Bjorn...")
                     CheckProfiles(AccountFolderBjorn, True, TemplateFolderBjorn)
                 End If
 
                 If IO.Directory.Exists(AccountFolderNix) Then
-                    AddMessage("Checking Profiles - Nix...")
+                    MainListResults.AddMessage("Checking Profiles - Nix...")
                     CheckProfiles(AccountFolderNix, False, TemplateFolderNix)
                 End If
             Catch ex As Exception
                 ex.ToLog()
             End Try
 
-            AddMessage("Complete.")
+            MainListResults.AddMessage("Complete.")
         End Sub
 
         Private Sub MainBackgroundWorker_RunWorkerCompleted(sender As Object, e As ComponentModel.RunWorkerCompletedEventArgs) Handles MainBackgroundWorker.RunWorkerCompleted
@@ -268,6 +264,10 @@
                         Return "Poesboi"
                     Case "handynotes_dragonflighttreasures_handynotes_dragonflighttreasuresdb", ""
                         Return "Poesboi"
+                    Case "handynotes_dragonflight_handynotes_dragonflightdb"
+                        Return "Poesboi"
+                    Case "handynotes_dragonglyphs_handynotes_dragonglyphsdb"
+                        Return "Poesboi"
                     Case "handynotes_dungeonlocations_handynotes_dungeonlocationsdb"
                         Return "Poesboi"
                     Case "handynotes_hallowsend_handynotes_hallowsenddb"
@@ -304,6 +304,8 @@
                         Return "Poesboi"
                     Case "iskarassist_radatabase"
                         Return "Poesboi"
+                    Case "!kalielstracker_kalielstrackerdb"
+                        Return "Poesboi"
                     Case "loggerhead_loggerheaddb"
                         Return "Poesboi"
                     Case "macrotoolkit_macrotoolkitdb"
@@ -317,6 +319,8 @@
                     Case "mouseoveractionbars_mouseoveractionbarsdb"
                         Return "Poesboi"
                     Case "mythicdungeontools_mythicdungeontoolsdb"
+                        Return "Poesboi"
+                    Case "nameplateauras_nameplateaurasacedb"
                         Return "Poesboi"
                     Case "nameplatesct_nameplatesctdb"
                         Return "Poesboi"
@@ -370,6 +374,8 @@
                         Return "Poesboi"
                     Case "vanaskos_vanaskosdb"
                         Return "Poesboi"
+                    Case "warpdeplete_warpdepletedb"
+                        Return "Poesboi"
                     Case "worldbosstimers_worldbosstimersdb"
                         Return "Poesboi"
                     Case "worldquesttracker_wqtrackerdb"
@@ -393,11 +399,11 @@
 
         Private Function GetProfileName(fileName As String, isBjorn As Boolean, keyName As String) As String
             Try
-                If isBjorn Then
-                    Return GetProfileName_Bjorn(fileName, keyName)
-                Else
-                    Return GetProfileName_Nix(fileName, keyName)
-                End If
+                'If isBjorn Then
+                Return GetProfileName_Bjorn(fileName, keyName)
+                'Else
+                'Return GetProfileName_Nix(fileName, keyName)
+                'End If
             Catch ex As Exception
                 ex.ToLog()
             End Try
@@ -407,6 +413,10 @@
 
         Private Sub CheckProfileNames(fileName As String, isBjorn As Boolean)
             Try
+                If fileName.ToLower().EndsWith("savedvariables\naowhui_installer.lua") Then
+                    Return
+                End If
+
                 Dim AddonName As String = IO.Path.GetFileNameWithoutExtension(fileName)
                 Dim HasChanged As Boolean = False
                 Dim InProfileKeys As Boolean = False
@@ -414,7 +424,7 @@
                 Dim ProfileName As String = ""
                 Dim StringBuilder As New Text.StringBuilder()
 
-                AddMessage("         Checking AddOn: {0}...".FormatWith(AddonName))
+                MainListResults.AddMessage("         Checking AddOn: {0}...".FormatWith(AddonName))
                 For Each CurrentLine As String In IO.File.ReadLines(fileName)
                     If CurrentLine.IsNotSet() Then
                         StringBuilder.AppendLine(CurrentLine)
@@ -456,7 +466,7 @@
 
                 If HasChanged Then
                     IO.File.WriteAllText(fileName, StringBuilder.ToString())
-                    AddMessage("            Updated.")
+                    MainListResults.AddMessage("            Updated.")
                 End If
             Catch ex As Exception
                 ex.ToLog()

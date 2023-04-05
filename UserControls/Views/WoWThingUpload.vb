@@ -39,10 +39,6 @@
             End Try
         End Sub
 
-        Private Sub AddMessage(message As String)
-            MainListResults.AddMessage("[{0}] - {1}".FormatWith(CommonRoutines.GetCurrentDate().GetSQLString("HH:mm:ss"), message))
-        End Sub
-
         Private Async Function DoCheck() As Task
             Try
                 For Each Current As Models.LuaFile In _Files
@@ -53,7 +49,7 @@
                     Dim LastWriteUTC As Date = IO.File.GetLastWriteTimeUtc(Current.Filename)
 
                     If LastWriteUTC > Current.LastModified Then
-                        AddMessage("Uploading {0}...{1}                {2}".FormatWith(Current.User, Environment.NewLine, Current.Filename))
+                        MainListResults.AddMessage("Uploading {0}...{1}                {2}".FormatWith(Current.User, Environment.NewLine, Current.Filename))
 
                         Dim NewItem As New Models.ApiUpload(_APIKey, Current.Filename)
                         Dim JSONString As String = Newtonsoft.Json.JsonConvert.SerializeObject(NewItem, _SerializerSettings)
@@ -62,15 +58,9 @@
                         Dim Response As Net.Http.HttpResponseMessage = Await _Client.PostAsync("/api/upload/", Content)
 
                         If Response.IsSuccessStatusCode Then
-                            AddMessage("   Upload successful.")
+                            MainListResults.AddMessage("   Upload successful.")
                         Else
-                            AddMessage("   Upload failed: {0}".FormatWith(Response.Content.ReadAsStringAsync().Result))
-                        End If
-
-                        If Current.User.IsEqualTo("Bjorn") Then
-                            IO.File.Copy(Current.Filename, "E:\GoogleDrive\BackUps\Bjorn\WoW\POESBOI\SavedVariables\WoWthing_Collector.lua", True)
-                        Else
-                            IO.File.Copy(Current.Filename, "E:\GoogleDrive\BackUps\Nix\WoW\POESBOI2\SavedVariables\WoWthing_Collector.lua", True)
+                            MainListResults.AddMessage("   Upload failed: {0}".FormatWith(Response.Content.ReadAsStringAsync().Result))
                         End If
                     End If
 
