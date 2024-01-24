@@ -1,4 +1,4 @@
-﻿Namespace Tools.UserControls.Views
+﻿Namespace UserControls.Views
 
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class ArchiveFolder
@@ -25,17 +25,17 @@
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
             Me.MainBackgroundWorker = New System.ComponentModel.BackgroundWorker()
-            Me.ClearButton = New CommonRoutines.Controls.Button()
-            Me.ProcessButton = New CommonRoutines.Controls.Button()
-            Me.FolderNameButton = New CommonRoutines.Controls.Button()
-            Me.FolderNameTextBox = New CommonRoutines.Controls.TextBox()
-            Me.ArchiveNameTextBox = New CommonRoutines.Controls.TextBox()
-            Me.ArchiveNameButton = New CommonRoutines.Controls.Button()
+            Me.ClearButton = New CommonRoutines.UserControls.Button()
+            Me.ProcessButton = New CommonRoutines.UserControls.Button()
+            Me.FolderNameButton = New CommonRoutines.UserControls.Button()
+            Me.FolderNameTextBox = New CommonRoutines.UserControls.TextBox()
+            Me.ArchiveNameTextBox = New CommonRoutines.UserControls.TextBox()
+            Me.ArchiveNameButton = New CommonRoutines.UserControls.Button()
             Me.FolderNameLabel = New System.Windows.Forms.Label()
             Me.ArchiveNameLabel = New System.Windows.Forms.Label()
-            Me.MainListResults = New CommonRoutines.Controls.ListResults()
-            Me.BackupAddonsButton = New CommonRoutines.Controls.Button()
-            Me.BackupWTFButton = New CommonRoutines.Controls.Button()
+            Me.MainListResults = New CommonRoutines.UserControls.ListResults()
+            Me.BackupAddonsButton = New CommonRoutines.UserControls.Button()
+            Me.BackupWTFButton = New CommonRoutines.UserControls.Button()
             Me.SuspendLayout()
             '
             'MainBackgroundWorker
@@ -272,17 +272,17 @@
 
         End Sub
         Private WithEvents MainBackgroundWorker As System.ComponentModel.BackgroundWorker
-        Private WithEvents ClearButton As CommonRoutines.Controls.Button
-        Private WithEvents ProcessButton As CommonRoutines.Controls.Button
-        Private WithEvents FolderNameButton As CommonRoutines.Controls.Button
-        Friend WithEvents FolderNameTextBox As CommonRoutines.Controls.TextBox
-        Friend WithEvents ArchiveNameTextBox As CommonRoutines.Controls.TextBox
-        Private WithEvents ArchiveNameButton As CommonRoutines.Controls.Button
+        Private WithEvents ClearButton As CommonRoutines.UserControls.Button
+        Private WithEvents ProcessButton As CommonRoutines.UserControls.Button
+        Private WithEvents FolderNameButton As CommonRoutines.UserControls.Button
+        Friend WithEvents FolderNameTextBox As CommonRoutines.UserControls.TextBox
+        Friend WithEvents ArchiveNameTextBox As CommonRoutines.UserControls.TextBox
+        Private WithEvents ArchiveNameButton As CommonRoutines.UserControls.Button
         Private WithEvents FolderNameLabel As Label
         Private WithEvents ArchiveNameLabel As Label
-        Private WithEvents MainListResults As CommonRoutines.Controls.ListResults
-        Private WithEvents BackupAddonsButton As CommonRoutines.Controls.Button
-        Private WithEvents BackupWTFButton As CommonRoutines.Controls.Button
+        Private WithEvents MainListResults As CommonRoutines.UserControls.ListResults
+        Private WithEvents BackupAddonsButton As CommonRoutines.UserControls.Button
+        Private WithEvents BackupWTFButton As CommonRoutines.UserControls.Button
     End Class
 
 End Namespace

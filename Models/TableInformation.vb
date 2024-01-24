@@ -1,12 +1,14 @@
-﻿Namespace Tools.Models
+﻿Imports Humanizer
+
+Namespace Models
 
     Public Class TableInformation
 
-        Private _Columns As New List(Of ColumnInformation)
-        Private _ModelName As String = ""
-        Private _SafeModelName As String = ""
-        Private _SchemaName As String = ""
-        Private _TableName As String = ""
+        Private ReadOnly _Columns As New List(Of ColumnInformation)
+        Private ReadOnly _ModelName As String = ""
+        Private ReadOnly _SafeModelName As String = ""
+        Private ReadOnly _SchemaName As String = ""
+        Private ReadOnly _TableName As String = ""
 
         Public ReadOnly Property Columns As List(Of ColumnInformation)
             Get
@@ -50,9 +52,7 @@
             _ModelName = tableName
 
             If Not _ModelName.ToLower.EndsWith("alias") Then
-                If _ModelName.IsPlural() Then
-                    _ModelName = _ModelName.Singularize()
-                End If
+                _ModelName = _ModelName.Singularize()
             End If
             _ModelName = _ModelName.ReplaceInvalidCharacters("_")
 

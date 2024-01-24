@@ -1,4 +1,4 @@
-﻿Namespace Tools.UserControls.Views
+﻿Namespace UserControls.Views
 
     Public Class ArchiveFolder
 

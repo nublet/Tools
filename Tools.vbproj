@@ -1,64 +1,47 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{27161FDA-7BAA-4BD4-BA52-426E1AF9C145}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>Sub Main</StartupObject>
-    <RootNamespace>
-    </RootNamespace>
-    <AssemblyName>Tools</AssemblyName>
-    <FileAlignment>512</FileAlignment>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <StartupObject>Tools.UserForms.Main</StartupObject>
+    <UseWindowsForms>True</UseWindowsForms>
     <MyType>WindowsFormsWithCustomSubMain</MyType>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
+    <ImportedNamespaces>CommonRoutines.Extensions=False,System.Data=False,System.Drawing=False,System.Windows.Forms=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,Tools=True</ImportedNamespaces>
+    <ApplicationIcon>App.ico</ApplicationIcon>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <DefineDebug>true</DefineDebug>
-    <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\</OutputPath>
-    <DocumentationFile>
-    </DocumentationFile>
-    <NoWarn>
-    </NoWarn>
-    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <DefineDebug>false</DefineDebug>
-    <DefineTrace>true</DefineTrace>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\</OutputPath>
-    <DocumentationFile>
-    </DocumentationFile>
-    <NoWarn>
-    </NoWarn>
-    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup>
-    <OptionExplicit>On</OptionExplicit>
-  </PropertyGroup>
-  <PropertyGroup>
-    <OptionCompare>Binary</OptionCompare>
-  </PropertyGroup>
-  <PropertyGroup>
-    <OptionStrict>On</OptionStrict>
-  </PropertyGroup>
-  <PropertyGroup>
-    <OptionInfer>On</OptionInfer>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>Resources\App.ico</ApplicationIcon>
-  </PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<OutputPath>D:\Projects\GitHub\Tools\bin</OutputPath>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<OutputPath>D:\Projects\GitHub\Tools\bin</OutputPath>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Content Include="App.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+    <Import Include="CommonRoutines.Extensions" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Humanizer.Core" Version="2.14.1" />
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	  <PackageReference Include="Squid-Box.SevenZipSharp" Version="1.6.1.23" />
+	  <PackageReference Include="System.Data.OleDb" Version="8.0.0" />
+	  <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+	</ItemGroup>
+
   <ItemGroup>
     <Reference Include="CommonRoutines.Base">
       <HintPath>..\..\_Binaries\CommonRoutines.Base.dll</HintPath>
@@ -66,157 +49,34 @@
     <Reference Include="CommonRoutines.Forms">
       <HintPath>..\..\_Binaries\CommonRoutines.Forms.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="SevenZipSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c8ff6ba0184838bb, processorArchitecture=MSIL">
-      <HintPath>packages\Squid-Box.SevenZipSharp.1.5.0.366\lib\net45\SevenZipSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.IO.Compression.FileSystem" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
   </ItemGroup>
+
   <ItemGroup>
-    <Import Include="CommonRoutines.Extensions" />
-    <Import Include="Microsoft.VisualBasic" />
-    <Import Include="System" />
-    <Import Include="System.Collections" />
-    <Import Include="System.Collections.Generic" />
-    <Import Include="System.Data" />
-    <Import Include="System.Drawing" />
-    <Import Include="System.Diagnostics" />
-    <Import Include="System.Windows.Forms" />
-    <Import Include="System.Linq" />
-    <Import Include="System.Xml.Linq" />
-    <Import Include="System.Threading.Tasks" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="CompressedContent.vb" />
-    <Compile Include="Models\ColumnInformation.vb" />
-    <Compile Include="Models\SolutionInformation.vb" />
-    <Compile Include="Models\LuaFile.vb" />
-    <Compile Include="Models\ApiUpload.vb" />
-    <Compile Include="Models\TableInformation.vb" />
-    <Compile Include="My Project\AssemblyInfo.vb" />
-    <Compile Include="My Project\Application.Designer.vb">
+    <Compile Update="My Project\Application.Designer.vb">
+      <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="My Project\Resources.Designer.vb">
-      <AutoGen>True</AutoGen>
+    <Compile Update="My Project\Resources.Designer.vb">
       <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="My Project\Settings.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="UserControls\ModelGenerator\FromAccess.designer.vb">
-      <DependentUpon>FromAccess.vb</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\ModelGenerator\FromAccess.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\ModelGenerator\FromSQL.designer.vb">
-      <DependentUpon>FromSQL.vb</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\ModelGenerator\FromSQL.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\ModelGenerator\_IInterface.vb" />
-    <Compile Include="UserControls\Tabs\ArchiveFolder.vb" />
-    <Compile Include="UserControls\Tabs\ModelGenerator.vb" />
-    <Compile Include="UserControls\Tabs\WoWProfileChecker.vb" />
-    <Compile Include="UserControls\Tabs\WoWThingUpload.vb" />
-    <Compile Include="UserControls\Tabs\Theme.vb" />
-    <Compile Include="UserControls\Views\ArchiveFolder.Designer.vb">
-      <DependentUpon>ArchiveFolder.vb</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\Views\ArchiveFolder.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\Views\ModelGenerator.designer.vb">
-      <DependentUpon>ModelGenerator.vb</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\Views\ModelGenerator.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\Views\WoWProfileChecker.Designer.vb">
-      <DependentUpon>WoWProfileChecker.vb</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\Views\WoWProfileChecker.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\Views\WoWThingUpload.Designer.vb">
-      <DependentUpon>WoWThingUpload.vb</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\Views\WoWThingUpload.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserForms\Main.Designer.vb">
-      <DependentUpon>Main.vb</DependentUpon>
-    </Compile>
-    <Compile Include="UserForms\Main.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="_Main.vb" />
-    <Compile Include="_Shared.vb" />
   </ItemGroup>
+
   <ItemGroup>
-    <EmbeddedResource Include="My Project\Resources.resx">
+    <EmbeddedResource Update="My Project\Resources.resx">
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
-      <CustomToolNamespace>My.Resources</CustomToolNamespace>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\ModelGenerator\FromAccess.resx">
-      <DependentUpon>FromAccess.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\ModelGenerator\FromSQL.resx">
-      <DependentUpon>FromSQL.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\Views\ArchiveFolder.resx">
-      <DependentUpon>ArchiveFolder.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\Views\ModelGenerator.resx">
-      <DependentUpon>ModelGenerator.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\Views\WoWProfileChecker.resx">
-      <DependentUpon>WoWProfileChecker.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\Views\WoWThingUpload.resx">
-      <DependentUpon>WoWThingUpload.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserForms\Main.resx">
-      <DependentUpon>Main.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+
   <ItemGroup>
-    <None Include="My Project\Application.myapp">
+    <None Update="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
-    <None Include="My Project\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <CustomToolNamespace>My</CustomToolNamespace>
-      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
-    </None>
-    <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-    <None Include="Resources\App.ico" />
-  </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+
 </Project>

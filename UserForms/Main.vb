@@ -1,4 +1,4 @@
-﻿Namespace Tools.UserForms
+﻿Namespace UserForms
 
     Public Class Main
 
@@ -12,10 +12,9 @@
 
             ' Add any initialization after the InitializeComponent() call.
             Try
-                _Instance = Me
-
                 Enabled = False
-                Opacity = 0.75
+                Opacity = 0
+                SuspendLayout()
             Catch ex As Exception
                 ex.ToLog()
             End Try
@@ -39,15 +38,15 @@
 
         Private Sub Me_Load(sender As Object, e As EventArgs) Handles Me.Load
             Try
-                Net.ServicePointManager.SecurityProtocol = Net.SecurityProtocolType.Ssl3 Or Net.SecurityProtocolType.SystemDefault Or Net.SecurityProtocolType.Tls Or Net.SecurityProtocolType.Tls11 Or Net.SecurityProtocolType.Tls12
+                Net.ServicePointManager.SecurityProtocol = Net.SecurityProtocolType.SystemDefault Or Net.SecurityProtocolType.Tls Or Net.SecurityProtocolType.Tls11 Or Net.SecurityProtocolType.Tls12
 
                 _Tabs.Clear()
-                _Tabs.AddRange(CommonRoutines.Reflection.GetInstances(Of CommonRoutines.Controls.ITab))
+                _Tabs.AddRange(CommonRoutines.Reflection.GetInstances(Of CommonRoutines.UserControls.ITab))
 
                 Dim IsFirst As Boolean = True
                 Dim LastY As Integer = 1
 
-                For Each Current As CommonRoutines.Controls.ITab In _Tabs.OrderBy(Function(o) o.OrderButton).ThenBy(Function(o) o.Text)
+                For Each Current As CommonRoutines.UserControls.ITab In _Tabs.OrderBy(Function(o) o.OrderButton).ThenBy(Function(o) o.Text)
                     ControlsPanel.Controls.Add(Current.UserControl)
 
                     ButtonsPanel.Controls.Add(Current.Button)
@@ -74,51 +73,63 @@
         End Sub
 
         Private Sub Me_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-            StartUp("")
+            Try
+                Dim Solutions As New List(Of Models.SolutionInformation)
 
-            Dim Solutions As New List(Of Models.SolutionInformation)
-
-            For Each Current As String In IO.Directory.GetFiles("D:\Projects\", "*.sln", IO.SearchOption.AllDirectories)
-                Solutions.Add(New Models.SolutionInformation(Current))
-            Next
-
-            For Each GroupName As String In Solutions.Select(Function(o) o.Group).Distinct().OrderBy(Function(o) o)
-                If GroupName.IsNotSet() Then
-                    Continue For
-                End If
-
-                Dim GroupItem As New ToolStripMenuItem() With {
-                            .Name = "Solutions_{0}ToolStripMenuItem".FormatWith(GroupName).Replace(" ", ""),
-                            .Size = New Size(180, 22),
-                            .Text = GroupName
-                        }
-
-                For Each Current As Models.SolutionInformation In Solutions.Where(Function(o) o.Group.IsEqualTo(GroupName)).OrderBy(Function(o) o.Name)
-                    Dim SolutionItem As New ToolStripMenuItem() With {
-                                    .Name = "Solutions_{0}_{1}ToolStripMenuItem".FormatWith(GroupName, Current.Name).Replace(" ", ""),
-                                    .Size = New Size(180, 22),
-                                    .Tag = Current,
-                                    .Text = Current.Name
-                                }
-
-                    AddHandler SolutionItem.Click, AddressOf SolutionItem_Click
-
-                    GroupItem.DropDownItems.Add(SolutionItem)
+                For Each Current As String In IO.Directory.GetFiles("D:\Projects\", "*.sln", IO.SearchOption.AllDirectories)
+                    Solutions.Add(New Models.SolutionInformation(Current))
                 Next
 
-                SolutionsToolStripMenuItem.DropDownItems.Add(GroupItem)
-            Next
+                For Each GroupName As String In Solutions.Select(Function(o) o.Group).Distinct().OrderBy(Function(o) o)
+                    If GroupName.IsNotSet() Then
+                        Continue For
+                    End If
 
-            SetTheme()
+                    Dim GroupItem As New ToolStripMenuItem() With {
+                                .Name = "Solutions_{0}ToolStripMenuItem".FormatWith(GroupName).Replace(" ", ""),
+                                .Size = New Size(180, 22),
+                                .Text = GroupName
+                            }
 
-            For Each Current As CommonRoutines.Controls.ITab In _Tabs.OrderBy(Function(o) o.OrderButton).ThenBy(Function(o) o.Text)
-                SetButtons(Current.Button)
+                    For Each Current As Models.SolutionInformation In Solutions.Where(Function(o) o.Group.IsEqualTo(GroupName)).OrderBy(Function(o) o.Name)
+                        Dim SolutionItem As New ToolStripMenuItem() With {
+                                        .Name = "Solutions_{0}_{1}ToolStripMenuItem".FormatWith(GroupName, Current.Name).Replace(" ", ""),
+                                        .Size = New Size(180, 22),
+                                        .Tag = Current,
+                                        .Text = Current.Name
+                                    }
 
-                Exit For
-            Next
+                        AddHandler SolutionItem.Click, AddressOf SolutionItem_Click
 
-            Opacity = 1
-            Enabled = True
+                        GroupItem.DropDownItems.Add(SolutionItem)
+                    Next
+
+                    SolutionsToolStripMenuItem.DropDownItems.Add(GroupItem)
+                Next
+            Catch ex As Exception
+                ex.ToLog()
+            Finally
+                Try
+                    If IsDisposed OrElse Disposing Then
+                    Else
+                        Enabled = True
+
+                        ResumeLayout(False)
+
+                        StartUp("")
+
+                        SetTheme()
+
+                        For Each Current As CommonRoutines.UserControls.ITab In _Tabs.OrderBy(Function(o) o.OrderButton).ThenBy(Function(o) o.Text)
+                            SetButtons(Current.Button)
+
+                            Exit For
+                        Next
+                    End If
+                Catch ex As Exception
+                    ex.ToLog()
+                End Try
+            End Try
         End Sub
 
 #End Region
@@ -127,11 +138,11 @@
             Try
                 Opacity = 0.75
 
-                For Each Current As CommonRoutines.Controls.ITab In _Tabs
+                For Each Current As CommonRoutines.UserControls.ITab In _Tabs
                     Current.IsSelected = False
                 Next
 
-                Dim Tab As CommonRoutines.Controls.ITab = _Tabs.Where(Function(o) o.Button.Name.IsEqualTo(currentButton.Name)).FirstOrDefault()
+                Dim Tab As CommonRoutines.UserControls.ITab = _Tabs.Where(Function(o) o.Button.Name.IsEqualTo(currentButton.Name)).FirstOrDefault()
 
                 If Tab Is Nothing Then
                     Return
@@ -155,9 +166,13 @@
 
 #Region " Shared "
 
-        Private Shared ReadOnly _Tabs As New List(Of CommonRoutines.Controls.ITab)
+        Private Shared ReadOnly _Tabs As New List(Of CommonRoutines.UserControls.ITab)
 
         Private Shared _Instance As Main = Nothing
+
+        Private Shared Sub SIA_NewInstanceMessage(sender As Object, message As Object)
+            BringForward()
+        End Sub
 
         Public Shared Sub BringForward()
             Try
@@ -177,6 +192,44 @@
             End Try
         End Sub
 
+        Public Shared Sub Main(args As String())
+            Try
+                If CommonRoutines.SingleInstanceApplication.NotifyExistingInstance(String.Join(CommonRoutines.ParameterSplit, args), WindowCaption) Then
+                    Application.Exit()
+                    Return
+                End If
+            Catch ex As Exception
+            End Try
+
+            Try
+                AddHandler Application.ThreadException, AddressOf CommonRoutines.Errors.Application_ThreadException
+                AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf CommonRoutines.Errors.CurrentDomain_UnhandledException
+
+                Application.EnableVisualStyles()
+                Application.SetCompatibleTextRenderingDefault(False)
+                Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException)
+
+                CommonRoutines.Initialise("\\192.168.50.35\Projects\_Errors\{0} - {1}_{2}.txt".FormatWith(My.Application.Info.ProductName, CommonRoutines.GetComputerName(), CommonRoutines.GetUsername()), False, "", False)
+
+                CommonRoutines.Performance.Handlers.Clear()
+
+                CommonRoutines.Settings.DebugLogging = False
+                CommonRoutines.Settings.DebugLoggingDBAccess = False
+
+                CommonRoutines.Settings.Icon = My.Resources.App
+
+                _Instance = New Main()
+
+                CommonRoutines.SingleInstanceApplication.Initialize(WindowCaption, New CommonRoutines.SingleInstanceApplication.NewInstanceMessageHandler(AddressOf SIA_NewInstanceMessage))
+
+                Application.Run(_Instance)
+            Catch ex As Exception
+                ex.ToLog()
+
+                Application.Exit()
+            End Try
+        End Sub
+
         Public Shared Sub UpdateTheme()
             Try
                 If _Instance Is Nothing Then
@@ -185,7 +238,7 @@
 
                 _Instance.SetTheme()
 
-                Dim Tab As CommonRoutines.Controls.ITab = _Tabs.Where(Function(o) o.IsSelected).FirstOrDefault()
+                Dim Tab As CommonRoutines.UserControls.ITab = _Tabs.Where(Function(o) o.IsSelected).FirstOrDefault()
                 If Tab Is Nothing Then
                     Return
                 End If

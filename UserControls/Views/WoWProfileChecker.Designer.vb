@@ -1,4 +1,4 @@
-﻿Namespace Tools.UserControls.Views
+﻿Namespace UserControls.Views
 
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class WoWProfileChecker
@@ -25,10 +25,10 @@
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
             Me.StatusLabel = New System.Windows.Forms.Label()
-            Me.MainListResults = New CommonRoutines.Controls.ListResults()
+            Me.MainListResults = New CommonRoutines.UserControls.ListResults()
             Me.MainBackgroundWorker = New System.ComponentModel.BackgroundWorker()
-            Me.ClearButton = New CommonRoutines.Controls.Button()
-            Me.ProcessButton = New CommonRoutines.Controls.Button()
+            Me.ClearButton = New CommonRoutines.UserControls.Button()
+            Me.ProcessButton = New CommonRoutines.UserControls.Button()
             Me.SuspendLayout()
             '
             'StatusLabel
@@ -126,10 +126,10 @@
 
         End Sub
         Private StatusLabel As Label
-        Private WithEvents MainListResults As CommonRoutines.Controls.ListResults
+        Private WithEvents MainListResults As CommonRoutines.UserControls.ListResults
         Private WithEvents MainBackgroundWorker As System.ComponentModel.BackgroundWorker
-        Private WithEvents ClearButton As CommonRoutines.Controls.Button
-        Private WithEvents ProcessButton As CommonRoutines.Controls.Button
+        Private WithEvents ClearButton As CommonRoutines.UserControls.Button
+        Private WithEvents ProcessButton As CommonRoutines.UserControls.Button
     End Class
 
 End Namespace

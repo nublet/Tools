@@ -1,4 +1,4 @@
-﻿Namespace Tools.UserForms
+﻿Namespace UserForms
 
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class Main

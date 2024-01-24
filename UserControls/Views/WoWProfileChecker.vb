@@ -1,4 +1,4 @@
-﻿Namespace Tools.UserControls.Views
+﻿Namespace UserControls.Views
 
     Public Class WoWProfileChecker
 
@@ -68,7 +68,7 @@
             End Try
         End Sub
 
-        Public Sub StartTimer()
+        Public Shared Sub StartTimer()
 
         End Sub
 
@@ -396,7 +396,7 @@
                         Return "Poesboi"
 
                     Case Else
-                        System_String_1.ToLog("frmMain->GetProfileName_Shared, new Key found: {0}, Filename: {1}".FormatWith(keyName, fileName), True)
+                        System_String.ToLog("frmMain->GetProfileName_Shared, new Key found: {0}, Filename: {1}".FormatWith(keyName, fileName), True)
                 End Select
             Catch ex As Exception
                 ex.ToLog()
@@ -449,7 +449,7 @@
                         End If
                     ElseIf CurrentLine.EndsWith(" = {") Then
                         LastTable = CurrentLine.ToLower().Substring(0, CurrentLine.Length - 4).Trim()
-                    ElseIf CurrentLine.EndsWith("},") OrElse CurrentLine.EndsWith("}") Then
+                    ElseIf CurrentLine.EndsWith("},") OrElse CurrentLine.EndsWith("}"c) Then
                         InProfileKeys = False
                     End If
 

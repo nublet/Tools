@@ -1,7 +1,7 @@
-﻿Namespace Tools.UserControls.Tabs
+﻿Namespace UserControls.Tabs
 
     Public Class WoWThingUpload
-        Inherits CommonRoutines.Controls.TabBase
+        Inherits CommonRoutines.UserControls.TabBase
 
         Private ReadOnly _View As Views.WoWThingUpload = Nothing
 
@@ -25,7 +25,7 @@
         End Function
 
         Public Overrides Sub LoadData()
-            _View.StartTimer()
+            Views.WoWThingUpload.StartTimer()
         End Sub
 
 #End Region

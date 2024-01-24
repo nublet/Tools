@@ -1,4 +1,4 @@
-﻿Namespace Tools.UserControls.Views
+﻿Namespace UserControls.Views
 
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class ModelGenerator
@@ -28,13 +28,13 @@
             Me.OutputDirectoryLabel = New System.Windows.Forms.Label()
             Me.NamespaceLabel = New System.Windows.Forms.Label()
             Me.MainPanel = New System.Windows.Forms.Panel()
-            Me.OpenOutputButton = New CommonRoutines.Controls.Button()
-            Me.GenerateButton = New CommonRoutines.Controls.Button()
-            Me.MainListResults = New CommonRoutines.Controls.ListResults()
-            Me.GeneratorComboBox = New CommonRoutines.Controls.ComboBox()
-            Me.OutputDirectoryButton = New CommonRoutines.Controls.Button()
-            Me.OutputDirectoryTextBox = New CommonRoutines.Controls.TextBox()
-            Me.NamespaceTextBox = New CommonRoutines.Controls.TextBox()
+            Me.OpenOutputButton = New CommonRoutines.UserControls.Button()
+            Me.GenerateButton = New CommonRoutines.UserControls.Button()
+            Me.MainListResults = New CommonRoutines.UserControls.ListResults()
+            Me.GeneratorComboBox = New CommonRoutines.UserControls.ComboBox()
+            Me.OutputDirectoryButton = New CommonRoutines.UserControls.Button()
+            Me.OutputDirectoryTextBox = New CommonRoutines.UserControls.TextBox()
+            Me.NamespaceTextBox = New CommonRoutines.UserControls.TextBox()
             Me.SuspendLayout()
             '
             'GeneratorLabel
@@ -257,17 +257,17 @@
 
         End Sub
 
-        Private WithEvents OutputDirectoryButton As CommonRoutines.Controls.Button
+        Private WithEvents OutputDirectoryButton As CommonRoutines.UserControls.Button
         Private WithEvents GeneratorLabel As Label
         Private WithEvents OutputDirectoryLabel As Label
         Private WithEvents NamespaceLabel As Label
-        Private WithEvents GeneratorComboBox As CommonRoutines.Controls.ComboBox
-        Private WithEvents OutputDirectoryTextBox As CommonRoutines.Controls.TextBox
-        Private WithEvents NamespaceTextBox As CommonRoutines.Controls.TextBox
+        Private WithEvents GeneratorComboBox As CommonRoutines.UserControls.ComboBox
+        Private WithEvents OutputDirectoryTextBox As CommonRoutines.UserControls.TextBox
+        Private WithEvents NamespaceTextBox As CommonRoutines.UserControls.TextBox
         Private WithEvents MainPanel As Panel
-        Private WithEvents MainListResults As CommonRoutines.Controls.ListResults
-        Private WithEvents GenerateButton As CommonRoutines.Controls.Button
-        Private WithEvents OpenOutputButton As CommonRoutines.Controls.Button
+        Private WithEvents MainListResults As CommonRoutines.UserControls.ListResults
+        Private WithEvents GenerateButton As CommonRoutines.UserControls.Button
+        Private WithEvents OpenOutputButton As CommonRoutines.UserControls.Button
     End Class
 
 End Namespace

@@ -1,4 +1,4 @@
-﻿Namespace Tools.UserControls.ModelGenerator
+﻿Namespace UserControls.ModelGenerator
 
     Public Interface IInterface
 

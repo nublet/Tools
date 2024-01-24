@@ -1,7 +1,7 @@
-﻿Namespace Tools.UserControls.Tabs
+﻿Namespace UserControls.Tabs
 
     Public Class WoWProfileChecker
-        Inherits CommonRoutines.Controls.TabBase
+        Inherits CommonRoutines.UserControls.TabBase
 
         Private ReadOnly _View As Views.WoWProfileChecker = Nothing
 
@@ -25,7 +25,7 @@
         End Function
 
         Public Overrides Sub LoadData()
-            _View.StartTimer()
+            Views.WoWProfileChecker.StartTimer()
         End Sub
 
 #End Region

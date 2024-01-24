@@ -1,4 +1,4 @@
-﻿Namespace Tools.UserControls.ModelGenerator
+﻿Namespace UserControls.ModelGenerator
 
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class FromAccess
@@ -27,10 +27,10 @@
             Me.PasswordLabel = New System.Windows.Forms.Label()
             Me.UsernameLabel = New System.Windows.Forms.Label()
             Me.DatabaseLabel = New System.Windows.Forms.Label()
-            Me.DatabaseButton = New CommonRoutines.Controls.Button()
-            Me.DatabaseTextBox = New CommonRoutines.Controls.TextBox()
-            Me.UsernameTextBox = New CommonRoutines.Controls.TextBox()
-            Me.PasswordTextBox = New CommonRoutines.Controls.TextBox()
+            Me.DatabaseButton = New CommonRoutines.UserControls.Button()
+            Me.DatabaseTextBox = New CommonRoutines.UserControls.TextBox()
+            Me.UsernameTextBox = New CommonRoutines.UserControls.TextBox()
+            Me.PasswordTextBox = New CommonRoutines.UserControls.TextBox()
             Me.SuspendLayout()
             '
             'PasswordLabel
@@ -182,10 +182,10 @@
         Private WithEvents PasswordLabel As Label
         Private WithEvents UsernameLabel As Label
         Private WithEvents DatabaseLabel As Label
-        Private WithEvents DatabaseButton As CommonRoutines.Controls.Button
-        Friend WithEvents DatabaseTextBox As CommonRoutines.Controls.TextBox
-        Friend WithEvents UsernameTextBox As CommonRoutines.Controls.TextBox
-        Friend WithEvents PasswordTextBox As CommonRoutines.Controls.TextBox
+        Private WithEvents DatabaseButton As CommonRoutines.UserControls.Button
+        Friend WithEvents DatabaseTextBox As CommonRoutines.UserControls.TextBox
+        Friend WithEvents UsernameTextBox As CommonRoutines.UserControls.TextBox
+        Friend WithEvents PasswordTextBox As CommonRoutines.UserControls.TextBox
     End Class
 
 End Namespace

@@ -1,4 +1,4 @@
-﻿Namespace Tools.Models
+﻿Namespace Models
 
     Public Class ApiUpload
 

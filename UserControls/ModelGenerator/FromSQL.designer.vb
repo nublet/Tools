@@ -1,4 +1,4 @@
-﻿Namespace Tools.UserControls.ModelGenerator
+﻿Namespace UserControls.ModelGenerator
 
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class FromSQL
@@ -25,9 +25,9 @@
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
             Me.DatabaseLabel = New System.Windows.Forms.Label()
-            Me.ServerComboBox = New CommonRoutines.Controls.ComboBox()
+            Me.ServerComboBox = New CommonRoutines.UserControls.ComboBox()
             Me.ServerLabel = New System.Windows.Forms.Label()
-            Me.DatabaseComboBox = New CommonRoutines.Controls.ComboBox()
+            Me.DatabaseComboBox = New CommonRoutines.UserControls.ComboBox()
             Me.SuspendLayout()
             '
             'DatabaseLabel
@@ -115,9 +115,9 @@
 
         End Sub
         Private WithEvents DatabaseLabel As Label
-        Private WithEvents ServerComboBox As CommonRoutines.Controls.ComboBox
+        Private WithEvents ServerComboBox As CommonRoutines.UserControls.ComboBox
         Private WithEvents ServerLabel As Label
-        Private WithEvents DatabaseComboBox As CommonRoutines.Controls.ComboBox
+        Private WithEvents DatabaseComboBox As CommonRoutines.UserControls.ComboBox
     End Class
 
 End Namespace

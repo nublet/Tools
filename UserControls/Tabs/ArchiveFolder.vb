@@ -1,7 +1,7 @@
-﻿Namespace Tools.UserControls.Tabs
+﻿Namespace UserControls.Tabs
 
     Public Class ArchiveFolder
-        Inherits CommonRoutines.Controls.TabBase
+        Inherits CommonRoutines.UserControls.TabBase
 
         Private ReadOnly _View As Views.ArchiveFolder = Nothing
 

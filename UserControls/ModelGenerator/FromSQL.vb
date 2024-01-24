@@ -1,4 +1,4 @@
-﻿Namespace Tools.UserControls.ModelGenerator
+﻿Namespace UserControls.ModelGenerator
 
     Public Class FromSQL
         Implements IInterface
@@ -151,7 +151,7 @@
                         Dim TableInfo As New Models.TableInformation(SchemaName, TableName)
 
                         For Each cd As ColumnDetail In ColumnDetails.Where(Function(o) o.Table_Name.IsEqualTo(TableName)).OrderBy(Function(o) o.Ordinal_Position)
-                            If ConstraintDetails.Where(Function(o) o.Table_Name.IsEqualTo(TableName)).Where(Function(o) o.Column_Name.IsEqualTo(cd.Column_Name)).Count > 0 Then
+                            If ConstraintDetails.Where(Function(o) o.Table_Name.IsEqualTo(TableName)).Where(Function(o) o.Column_Name.IsEqualTo(cd.Column_Name)).Any() Then
                                 TableInfo.Columns.Add(New Models.ColumnInformation(cd.Column_Name, cd.DataType_DB, cd.DataType_CLR, cd.DefaultValue, cd.IsIdentity.IsEqualTo(1), True, cd.Ordinal_Position - 1))
                             Else
                                 TableInfo.Columns.Add(New Models.ColumnInformation(cd.Column_Name, cd.DataType_DB, cd.DataType_CLR, cd.DefaultValue, cd.IsIdentity.IsEqualTo(1), False, cd.Ordinal_Position - 1))

@@ -1,4 +1,4 @@
-﻿Namespace Tools.UserControls.Views
+﻿Namespace UserControls.Views
 
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class WoWThingUpload
@@ -25,7 +25,7 @@
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
             Me.StatusLabel = New System.Windows.Forms.Label()
-            Me.MainListResults = New CommonRoutines.Controls.ListResults()
+            Me.MainListResults = New CommonRoutines.UserControls.ListResults()
             Me.SuspendLayout()
             '
             'StatusLabel
@@ -80,7 +80,7 @@
 
         End Sub
         Private StatusLabel As Label
-        Private WithEvents MainListResults As CommonRoutines.Controls.ListResults
+        Private WithEvents MainListResults As CommonRoutines.UserControls.ListResults
     End Class
 
 End Namespace

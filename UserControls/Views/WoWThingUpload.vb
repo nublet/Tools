@@ -1,4 +1,4 @@
-﻿Namespace Tools.UserControls.Views
+﻿Namespace UserControls.Views
 
     Public Class WoWThingUpload
 
@@ -71,7 +71,7 @@
             End Try
         End Function
 
-        Public Sub StartTimer()
+        Public Shared Sub StartTimer()
 
         End Sub
 

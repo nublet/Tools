@@ -1,7 +1,7 @@
-﻿Namespace Tools.UserControls.Tabs
+﻿Namespace UserControls.Tabs
 
     Public Class ModelGenerator
-        Inherits CommonRoutines.Controls.TabBase
+        Inherits CommonRoutines.UserControls.TabBase
 
         Private ReadOnly _View As Views.ModelGenerator = Nothing
 
