@@ -16,7 +16,7 @@
             ServerComboBox.DataSource = Nothing
 
             Dim Servers As New List(Of ServerDetail) From {
-                New ServerDetail("Server 15", "", "", "192.168.50.35", "")
+                New ServerDetail("Server 24", "HOME", "", "192.168.50.246", "")
             }
 
             _Servers.Clear()

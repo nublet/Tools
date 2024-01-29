@@ -209,7 +209,7 @@
                 Application.SetCompatibleTextRenderingDefault(False)
                 Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException)
 
-                CommonRoutines.Initialise("\\192.168.50.35\Projects\_Errors\{0} - {1}_{2}.txt".FormatWith(My.Application.Info.ProductName, CommonRoutines.GetComputerName(), CommonRoutines.GetUsername()), False, "", False)
+                CommonRoutines.Initialise("\\192.168.50.246\Projects\Errors.txt", False, "", False)
 
                 CommonRoutines.Performance.Handlers.Clear()
 
