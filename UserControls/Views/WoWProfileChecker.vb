@@ -81,10 +81,10 @@
         Private Sub MainBackgroundWorker_DoWork(sender As Object, e As ComponentModel.DoWorkEventArgs) Handles MainBackgroundWorker.DoWork
             Try
                 Dim AccountFolderBjorn As String = "D:\Games\Activision\World of Warcraft\_retail_\WTF\Account\POESBOI\"
-                Dim TemplateFolderBjorn As String = "E:\GoogleDrive\BackUps\Bjorn\WoW\Template\"
+                Dim TemplateFolderBjorn As String = "E:\GoogleDrive\BackUps\BjornPC\WoW\Template\"
 
                 Dim AccountFolderNix As String = "\\Study21R1\World of Warcraft\_retail_\WTF\Account\POESBOI2\"
-                Dim TemplateFolderNix As String = "E:\GoogleDrive\BackUps\Nix\WoW\Template\"
+                Dim TemplateFolderNix As String = "E:\GoogleDrive\BackUps\NixPC\WoW\Template\"
 
                 If IO.Directory.Exists(AccountFolderBjorn) Then
                     MainListResults.AddMessage("Checking Profiles - Bjorn...")
@@ -193,6 +193,8 @@
                     Case "capping_cappingsettings"
                         Return "Poesboi"
                     Case "choretracker_choretrackerdb"
+                        Return "Poesboi"
+                    Case "cooldowntimeline2_cdtl2db"
                         Return "Poesboi"
                     Case "corruptiontooltips_corruptiontooltipsdb"
                         Return "Poesboi"
@@ -330,6 +332,8 @@
                         Return "Poesboi"
                     Case "nameplatesct_nameplatesctdb"
                         Return "Poesboi"
+                    Case "naowhui_naowhdb"
+                        Return "Poesboi"
                     Case "nop_newopenablesprofile"
                         Return "Poesboi"
                     Case "npcscan_npcscandb"
@@ -352,6 +356,8 @@
                         Return "Poesboi"
                     Case "quickquest_quickquestdb2"
                         Return "Poesboi"
+                    Case "randomhearthtoy_randomhearthtoydb"
+                        Return "Poesboi"
                     Case "rarescanner_rarescannerdb"
                         Return "Poesboi"
                     Case "rarity_raritydb"
@@ -359,6 +365,8 @@
                     Case "relicinspector_relicinspectordb"
                         Return "Poesboi"
                     Case "routes_routesdb"
+                        Return "Poesboi"
+                    Case "sexycooldown_sexycooldowndb"
                         Return "Poesboi"
                     Case "silverdragon_silverdragon3db"
                         Return "Poesboi"

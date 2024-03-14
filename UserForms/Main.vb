@@ -3,6 +3,7 @@
     Public Class Main
 
         Private _ShouldExit As Boolean = False
+        Private _VolumeControl As VolumeControl = Nothing
 
 #Region " Form Events "
 
@@ -30,6 +31,8 @@
 
                 Return
             End If
+
+            _VolumeControl.Close()
 
             CommonRoutines.SingleInstanceApplication.Close()
 
@@ -106,6 +109,9 @@
 
                     SolutionsToolStripMenuItem.DropDownItems.Add(GroupItem)
                 Next
+
+                _VolumeControl = New VolumeControl()
+                _VolumeControl.Show()
             Catch ex As Exception
                 ex.ToLog()
             Finally

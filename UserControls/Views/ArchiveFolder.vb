@@ -146,11 +146,12 @@
 
                 'IO.Compression.ZipFile.CreateFromDirectory(_FolderName, _ArchiveName, IO.Compression.CompressionLevel.Optimal, True)
 
-                Dim SZC As New SevenZip.SevenZipCompressor()
-                SZC.ArchiveFormat = SevenZip.OutArchiveFormat.SevenZip
-                SZC.CompressionLevel = SevenZip.CompressionLevel.Ultra
-                SZC.CompressionMethod = SevenZip.CompressionMethod.Lzma2
-                SZC.CompressionMode = SevenZip.CompressionMode.Create
+                Dim SZC As New SevenZip.SevenZipCompressor With {
+                    .ArchiveFormat = SevenZip.OutArchiveFormat.SevenZip,
+                    .CompressionLevel = SevenZip.CompressionLevel.Ultra,
+                    .CompressionMethod = SevenZip.CompressionMethod.Lzma2,
+                    .CompressionMode = SevenZip.CompressionMode.Create
+                }
                 SZC.CompressDirectory(_FolderName, _ArchiveName, "", "*", True)
                 MainListResults.AddMessage("   File Size: {0}".FormatWith(GetFileLength(_ArchiveName)))
             Catch ex As Exception
