@@ -25,7 +25,7 @@
         End Function
 
         Public Overrides Sub LoadData()
-            Views.WoWProfileChecker.StartTimer()
+            _View.StartTimer()
         End Sub
 
 #End Region

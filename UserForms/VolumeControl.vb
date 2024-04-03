@@ -84,6 +84,10 @@
                 Set10Button.ForeColor = _NormalForeColor
                 Set20Button.BackColor = _NormalBackColor
                 Set20Button.ForeColor = _NormalForeColor
+                Set30Button.BackColor = _NormalBackColor
+                Set30Button.ForeColor = _NormalForeColor
+                Set40Button.BackColor = _NormalBackColor
+                Set40Button.ForeColor = _NormalForeColor
                 SetMuteButton.BackColor = _NormalBackColor
                 SetMuteButton.ForeColor = _NormalForeColor
 

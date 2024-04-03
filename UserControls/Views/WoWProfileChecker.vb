@@ -68,8 +68,17 @@
             End Try
         End Sub
 
-        Public Shared Sub StartTimer()
-
+        Public Sub StartTimer()
+            MainListResults.AddMessage("Clearing Screenshots...")
+            For Each Current In IO.Directory.GetFiles("C:\Users\Poesboi\Pictures\Screenshots", "*.*")
+                Try
+                    MainListResults.AddMessage("   Deleting: {0}".FormatWith(Current))
+                    IO.File.Delete(Current)
+                Catch ex As Exception
+                    MainListResults.AddMessage("   ERROR: {0}".FormatWith(ex.Message))
+                End Try
+            Next
+            MainListResults.AddMessage("Complete.")
         End Sub
 
 #Region " Events "
