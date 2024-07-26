@@ -25,9 +25,9 @@
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
             Me.DatabaseLabel = New System.Windows.Forms.Label()
-            Me.ServerComboBox = New CommonRoutines.UserControls.ComboBox()
+            Me.ServerComboBox = New Aprotec.UserControls.ComboBox()
             Me.ServerLabel = New System.Windows.Forms.Label()
-            Me.DatabaseComboBox = New CommonRoutines.UserControls.ComboBox()
+            Me.DatabaseComboBox = New Aprotec.UserControls.ComboBox()
             Me.SuspendLayout()
             '
             'DatabaseLabel
@@ -102,8 +102,7 @@
             '
             'FromSQL
             '
-            Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-            Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+            Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
             Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(42, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(86, Byte), Integer))
             Me.Controls.Add(Me.DatabaseComboBox)
             Me.Controls.Add(Me.ServerLabel)
@@ -115,9 +114,9 @@
 
         End Sub
         Private WithEvents DatabaseLabel As Label
-        Private WithEvents ServerComboBox As CommonRoutines.UserControls.ComboBox
+        Private WithEvents ServerComboBox As Aprotec.UserControls.ComboBox
         Private WithEvents ServerLabel As Label
-        Private WithEvents DatabaseComboBox As CommonRoutines.UserControls.ComboBox
+        Private WithEvents DatabaseComboBox As Aprotec.UserControls.ComboBox
     End Class
 
 End Namespace

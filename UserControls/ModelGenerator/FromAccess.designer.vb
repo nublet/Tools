@@ -27,10 +27,10 @@
             Me.PasswordLabel = New System.Windows.Forms.Label()
             Me.UsernameLabel = New System.Windows.Forms.Label()
             Me.DatabaseLabel = New System.Windows.Forms.Label()
-            Me.DatabaseButton = New CommonRoutines.UserControls.Button()
-            Me.DatabaseTextBox = New CommonRoutines.UserControls.TextBox()
-            Me.UsernameTextBox = New CommonRoutines.UserControls.TextBox()
-            Me.PasswordTextBox = New CommonRoutines.UserControls.TextBox()
+            Me.DatabaseButton = New Aprotec.UserControls.Button()
+            Me.DatabaseTextBox = New Aprotec.UserControls.TextBox()
+            Me.UsernameTextBox = New Aprotec.UserControls.TextBox()
+            Me.PasswordTextBox = New Aprotec.UserControls.TextBox()
             Me.SuspendLayout()
             '
             'PasswordLabel
@@ -163,8 +163,7 @@
             '
             'FromAccess
             '
-            Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-            Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+            Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
             Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(42, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(86, Byte), Integer))
             Me.Controls.Add(Me.DatabaseButton)
             Me.Controls.Add(Me.DatabaseTextBox)
@@ -182,10 +181,10 @@
         Private WithEvents PasswordLabel As Label
         Private WithEvents UsernameLabel As Label
         Private WithEvents DatabaseLabel As Label
-        Private WithEvents DatabaseButton As CommonRoutines.UserControls.Button
-        Friend WithEvents DatabaseTextBox As CommonRoutines.UserControls.TextBox
-        Friend WithEvents UsernameTextBox As CommonRoutines.UserControls.TextBox
-        Friend WithEvents PasswordTextBox As CommonRoutines.UserControls.TextBox
+        Private WithEvents DatabaseButton As Aprotec.UserControls.Button
+        Friend WithEvents DatabaseTextBox As Aprotec.UserControls.TextBox
+        Friend WithEvents UsernameTextBox As Aprotec.UserControls.TextBox
+        Friend WithEvents PasswordTextBox As Aprotec.UserControls.TextBox
     End Class
 
 End Namespace

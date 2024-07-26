@@ -53,7 +53,7 @@
 
                 Dim Item As ServerDetail = DirectCast(ServerComboBox.SelectedItem, ServerDetail)
 
-                Dim DBA As New CommonRoutines.Data.Sql.DBAccess(Item.ConnectionString)
+                Dim DBA As New Aprotec.DBAccess.SQL(Item.ConnectionString)
 
                 _Databases.Clear()
                 _Databases.AddRange(DBA.ExecuteReader(Of DatabaseDetail)("SELECT * FROM master.dbo.sysdatabases").OrderBy(Function(o) o.Name))
@@ -120,7 +120,7 @@
                     SelectedDatabase = DirectCast(DatabaseComboBox.SelectedItem, DatabaseDetail)
                 End If
 
-                Dim DBA As New CommonRoutines.Data.Sql.DBAccess(SelectedServer.GetConnectionString(SelectedDatabase.Name))
+                Dim DBA As New Aprotec.DBAccess.SQL(SelectedServer.GetConnectionString(SelectedDatabase.Name))
 
                 _ModelDetails = DBA.ConnectionString
 
@@ -359,7 +359,7 @@
             End Sub
 
             Public Function GetConnectionString(tableName As String) As String
-                Return CommonRoutines.Data.Sql.GetConnectionString("master", _ServerName, _UserName, _Password)
+                Return Aprotec.DBAccess.GetSQLConnectionString("master", _ServerName, _UserName, _Password)
             End Function
 
         End Class

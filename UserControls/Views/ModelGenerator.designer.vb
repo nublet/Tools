@@ -28,13 +28,13 @@
             Me.OutputDirectoryLabel = New System.Windows.Forms.Label()
             Me.NamespaceLabel = New System.Windows.Forms.Label()
             Me.MainPanel = New System.Windows.Forms.Panel()
-            Me.OpenOutputButton = New CommonRoutines.UserControls.Button()
-            Me.GenerateButton = New CommonRoutines.UserControls.Button()
-            Me.MainListResults = New CommonRoutines.UserControls.ListResults()
-            Me.GeneratorComboBox = New CommonRoutines.UserControls.ComboBox()
-            Me.OutputDirectoryButton = New CommonRoutines.UserControls.Button()
-            Me.OutputDirectoryTextBox = New CommonRoutines.UserControls.TextBox()
-            Me.NamespaceTextBox = New CommonRoutines.UserControls.TextBox()
+            Me.OpenOutputButton = New Aprotec.UserControls.Button()
+            Me.GenerateButton = New Aprotec.UserControls.Button()
+            Me.MainListResults = New Aprotec.UserControls.ListResultsBorder()
+            Me.GeneratorComboBox = New Aprotec.UserControls.ComboBox()
+            Me.OutputDirectoryButton = New Aprotec.UserControls.Button()
+            Me.OutputDirectoryTextBox = New Aprotec.UserControls.TextBox()
+            Me.NamespaceTextBox = New Aprotec.UserControls.TextBox()
             Me.SuspendLayout()
             '
             'GeneratorLabel
@@ -235,8 +235,7 @@
             '
             'ModelGenerator
             '
-            Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-            Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+            Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
             Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(42, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(86, Byte), Integer))
             Me.Controls.Add(Me.OpenOutputButton)
             Me.Controls.Add(Me.GenerateButton)
@@ -257,17 +256,17 @@
 
         End Sub
 
-        Private WithEvents OutputDirectoryButton As CommonRoutines.UserControls.Button
+        Private WithEvents OutputDirectoryButton As Aprotec.UserControls.Button
         Private WithEvents GeneratorLabel As Label
         Private WithEvents OutputDirectoryLabel As Label
         Private WithEvents NamespaceLabel As Label
-        Private WithEvents GeneratorComboBox As CommonRoutines.UserControls.ComboBox
-        Private WithEvents OutputDirectoryTextBox As CommonRoutines.UserControls.TextBox
-        Private WithEvents NamespaceTextBox As CommonRoutines.UserControls.TextBox
+        Private WithEvents GeneratorComboBox As Aprotec.UserControls.ComboBox
+        Private WithEvents OutputDirectoryTextBox As Aprotec.UserControls.TextBox
+        Private WithEvents NamespaceTextBox As Aprotec.UserControls.TextBox
         Private WithEvents MainPanel As Panel
-        Private WithEvents MainListResults As CommonRoutines.UserControls.ListResults
-        Private WithEvents GenerateButton As CommonRoutines.UserControls.Button
-        Private WithEvents OpenOutputButton As CommonRoutines.UserControls.Button
+        Private WithEvents MainListResults As Aprotec.UserControls.ListResultsBorder
+        Private WithEvents GenerateButton As Aprotec.UserControls.Button
+        Private WithEvents OpenOutputButton As Aprotec.UserControls.Button
     End Class
 
 End Namespace

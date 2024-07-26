@@ -9,7 +9,7 @@
             ' Add any initialization after the InitializeComponent() call.
             Try
                 _Interfaces.Clear()
-                _Interfaces.AddRange(CommonRoutines.Reflection.GetInstances(Of UserControls.ModelGenerator.IInterface).OrderBy(Function(o) o.Description))
+                _Interfaces.AddRange(Aprotec.TypeHelper.GetInstances(Of UserControls.ModelGenerator.IInterface).OrderBy(Function(o) o.Description))
 
                 For Each Current As UserControls.ModelGenerator.IInterface In _Interfaces
                     MainPanel.Controls.Add(Current.UserControl)
@@ -61,7 +61,7 @@
                     Return
                 End If
 
-                Dim SelectedItem As UserControls.ModelGenerator.IInterface = DirectCast(GeneratorComboBox.SelectedItem, UserControls.ModelGenerator.IInterface)
+                Dim SelectedItem = DirectCast(GeneratorComboBox.SelectedItem, UserControls.ModelGenerator.IInterface)
 
                 MainListResults.ClearResults()
                 MainListResults.AddMessage("Generating Models from Database using: {0}".FormatWith(SelectedItem.Description))
@@ -72,7 +72,7 @@
                     Throw New Exception("Invalid Model Directory has been selected.")
                 End If
 
-                If Not OutputDirectory.EndsWith("\") Then
+                If Not OutputDirectory.EndsWith("\"c) Then
                     OutputDirectory.Append("\")
                 End If
 
@@ -99,6 +99,7 @@
 
                 MainListResults.AddMessage("Getting Tables...")
                 TableInformations.AddRange(SelectedItem.GetTables())
+
                 MainListResults.AddMessage("Tables Found: {0}".FormatWith(TableInformations.Count))
                 MainListResults.AddMessage("")
 
@@ -157,7 +158,7 @@
 
                         StringBuilder_GetDataTable.AppendLine("            DT.Columns.Add(""{0}"")".FormatWith(CI.ColumnName))
                         StringBuilder_GetParameters.Append("                {{""{0}"", _{0}}}".FormatWith(CI.ColumnName_Clean))
-                        StringBuilder_PopulateDataRow.AppendLine("            dataRow.Item({0}) = CommonRoutines.Data.GetDBParameter(_{1})".FormatWith(CI.Position, CI.ColumnName_Clean))
+                        StringBuilder_PopulateDataRow.AppendLine("            dataRow.Item({0}) = Aprotec.DBAccess.GetDBParameter(_{1})".FormatWith(CI.Position, CI.ColumnName_Clean))
                     Next
                     StringBuilder_GetParameters.AppendLine()
 
@@ -177,23 +178,23 @@
                     ModelStringBuilder.AppendLine(NamespaceString)
                     ModelStringBuilder.AppendLine()
                     ModelStringBuilder.AppendLine("    <Runtime.Serialization.DataContract> Partial Public Class {0}".FormatWith(TI.SafeModelName))
-                    ModelStringBuilder.AppendLine("        Inherits CommonRoutines.Models.GenericChanged")
+                    ModelStringBuilder.AppendLine("        Inherits Aprotec.Models.GenericChanged")
                     ModelStringBuilder.AppendLine()
                     ModelStringBuilder.AppendLine("#Region "" Properties """)
                     ModelStringBuilder.AppendLine()
-                    ModelStringBuilder.Append(StringBuilder_Fields.ToString())
+                    ModelStringBuilder.Append(StringBuilder_Fields)
                     ModelStringBuilder.AppendLine()
-                    ModelStringBuilder.Append(StringBuilder_Properties.ToString())
+                    ModelStringBuilder.Append(StringBuilder_Properties)
                     ModelStringBuilder.AppendLine("#End Region")
                     ModelStringBuilder.AppendLine()
                     ModelStringBuilder.AppendLine("        Public Function GetParameters() As IDictionary(Of String, Object)")
                     ModelStringBuilder.AppendLine("            Return New Dictionary(Of String, Object) From {")
-                    ModelStringBuilder.Append(StringBuilder_GetParameters.ToString())
+                    ModelStringBuilder.Append(StringBuilder_GetParameters)
                     ModelStringBuilder.AppendLine("            }")
                     ModelStringBuilder.AppendLine("        End Function")
                     ModelStringBuilder.AppendLine()
                     ModelStringBuilder.AppendLine("        Public Sub PopulateDataRow(dataRow As DataRow)")
-                    ModelStringBuilder.Append(StringBuilder_PopulateDataRow.ToString())
+                    ModelStringBuilder.Append(StringBuilder_PopulateDataRow)
                     ModelStringBuilder.AppendLine("        End Sub")
                     ModelStringBuilder.AppendLine()
                     ModelStringBuilder.AppendLine("#Region "" Shared """)
@@ -221,7 +222,7 @@
                     ModelStringBuilder.AppendLine()
                     ModelStringBuilder.AppendLine("        Public Shared Function GetDataTable() As DataTable")
                     ModelStringBuilder.AppendLine("            Dim DT As New DataTable()")
-                    ModelStringBuilder.Append(StringBuilder_GetDataTable.ToString())
+                    ModelStringBuilder.Append(StringBuilder_GetDataTable)
                     ModelStringBuilder.AppendLine("            Return DT")
                     ModelStringBuilder.AppendLine("        End Function")
                     ModelStringBuilder.AppendLine()

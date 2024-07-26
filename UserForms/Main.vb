@@ -13,6 +13,8 @@
 
             ' Add any initialization after the InitializeComponent() call.
             Try
+                Aprotec.MainFormInstance = Me
+
                 Enabled = False
                 Opacity = 0
                 SuspendLayout()
@@ -34,9 +36,14 @@
 
             _VolumeControl.Close()
 
-            CommonRoutines.SingleInstanceApplication.Close()
+            Aprotec.SingleInstanceApplication.Close()
 
-            CommonRoutines.CloseAndSave(Me)
+            Dim ScreenName = Screen.FromControl(Me).DeviceName
+            If ScreenName.Contains(Chr(0)) Then
+                ScreenName = ScreenName.Substring(0, ScreenName.IndexOf(Chr(0)))
+            End If
+            Aprotec.LocalSettings.DefaultScreenName = ScreenName
+            Aprotec.LocalSettings.SaveCache()
         End Sub
 
         Private Sub Me_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -44,12 +51,12 @@
                 Net.ServicePointManager.SecurityProtocol = Net.SecurityProtocolType.SystemDefault Or Net.SecurityProtocolType.Tls Or Net.SecurityProtocolType.Tls11 Or Net.SecurityProtocolType.Tls12
 
                 _Tabs.Clear()
-                _Tabs.AddRange(CommonRoutines.Reflection.GetInstances(Of CommonRoutines.UserControls.ITab))
+                _Tabs.AddRange(Aprotec.TypeHelper.GetInstances(Of Aprotec.UserControls.ITab))
 
                 Dim IsFirst As Boolean = True
                 Dim LastY As Integer = 1
 
-                For Each Current As CommonRoutines.UserControls.ITab In _Tabs.OrderBy(Function(o) o.OrderButton).ThenBy(Function(o) o.Text)
+                For Each Current As Aprotec.UserControls.ITab In _Tabs.OrderBy(Function(o) o.OrderButton).ThenBy(Function(o) o.Text)
                     ControlsPanel.Controls.Add(Current.UserControl)
 
                     ButtonsPanel.Controls.Add(Current.Button)
@@ -126,7 +133,7 @@
 
                         SetTheme()
 
-                        For Each Current As CommonRoutines.UserControls.ITab In _Tabs.OrderBy(Function(o) o.OrderButton).ThenBy(Function(o) o.Text)
+                        For Each Current As Aprotec.UserControls.ITab In _Tabs.OrderBy(Function(o) o.OrderButton).ThenBy(Function(o) o.Text)
                             SetButtons(Current.Button)
 
                             Exit For
@@ -144,11 +151,11 @@
             Try
                 Opacity = 0.75
 
-                For Each Current As CommonRoutines.UserControls.ITab In _Tabs
+                For Each Current As Aprotec.UserControls.ITab In _Tabs
                     Current.IsSelected = False
                 Next
 
-                Dim Tab As CommonRoutines.UserControls.ITab = _Tabs.Where(Function(o) o.Button.Name.IsEqualTo(currentButton.Name)).FirstOrDefault()
+                Dim Tab As Aprotec.UserControls.ITab = _Tabs.Where(Function(o) o.Button.Name.IsEqualTo(currentButton.Name)).FirstOrDefault()
 
                 If Tab Is Nothing Then
                     Return
@@ -172,9 +179,52 @@
 
 #Region " Shared "
 
-        Private Shared ReadOnly _Tabs As New List(Of CommonRoutines.UserControls.ITab)
+        Private Shared ReadOnly _Tabs As New List(Of Aprotec.UserControls.ITab)
 
-        Private Shared _Instance As Main = Nothing
+        Private Shared Sub Application_ThreadException(sender As Object, e As Threading.ThreadExceptionEventArgs)
+            Try
+                Dim MethodName As String = String.Empty
+
+                Try
+                    Dim Frame As New StackFrame(1, False)
+                    MethodName = Frame.GetMethod().Name
+                Catch
+                End Try
+
+                e.Exception.ToLog(True, $"Application_ThreadException - MethodName: {MethodName}")
+            Catch
+            End Try
+        End Sub
+
+        Private Shared Sub CurrentDomain_UnhandledException(sender As Object, e As UnhandledExceptionEventArgs)
+            Try
+                Dim MethodName As String = String.Empty
+
+                Try
+                    Dim Frame As New StackFrame(1, False)
+                    MethodName = Frame.GetMethod().Name
+                Catch exInner As Exception
+                End Try
+
+                DirectCast(e.ExceptionObject, Exception).ToLog(True, $"CurrentDomain_UnhandledException - MethodName: {MethodName}, IsTerminating: {e.IsTerminating}")
+            Catch
+            End Try
+        End Sub
+
+        Private Shared Sub LogError(silent As Boolean, errorInformation As Aprotec.Models.Error)
+            errorInformation.WriteToFile(Aprotec.Errors.Filename)
+
+            If Not silent Then
+                If Aprotec.MainFormInstance IsNot Nothing AndAlso Aprotec.MainFormInstance.IsHandleCreated Then
+                    Try
+                        Aprotec.MainFormInstance.Invoke(Sub()
+                                                            Aprotec.UserMessage.Show(True, errorInformation.Message, "Error...", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                                        End Sub)
+                    Catch
+                    End Try
+                End If
+            End If
+        End Sub
 
         Private Shared Sub SIA_NewInstanceMessage(sender As Object, message As Object)
             BringForward()
@@ -182,17 +232,17 @@
 
         Public Shared Sub BringForward()
             Try
-                If _Instance Is Nothing Then
+                If Aprotec.MainFormInstance Is Nothing Then
                     Return
                 End If
 
-                If Not _Instance.Visible Then
-                    _Instance.Show()
+                If Not Aprotec.MainFormInstance.Visible Then
+                    Aprotec.MainFormInstance.Show()
                 End If
 
-                _Instance.TopMost = True
-                _Instance.BringToFront()
-                _Instance.TopMost = False
+                Aprotec.MainFormInstance.TopMost = True
+                Aprotec.MainFormInstance.BringToFront()
+                Aprotec.MainFormInstance.TopMost = False
             Catch ex As Exception
                 ex.ToLog(True)
             End Try
@@ -200,7 +250,7 @@
 
         Public Shared Sub Main(args As String())
             Try
-                If CommonRoutines.SingleInstanceApplication.NotifyExistingInstance(String.Join(CommonRoutines.ParameterSplit, args), WindowCaption) Then
+                If Aprotec.SingleInstanceApplication.NotifyExistingInstance(String.Empty, WindowCaption) Then
                     Application.Exit()
                     Return
                 End If
@@ -208,27 +258,35 @@
             End Try
 
             Try
-                AddHandler Application.ThreadException, AddressOf CommonRoutines.Errors.Application_ThreadException
-                AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf CommonRoutines.Errors.CurrentDomain_UnhandledException
+                AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf CurrentDomain_UnhandledException
+                AddHandler Application.ThreadException, AddressOf Application_ThreadException
 
                 Application.EnableVisualStyles()
                 Application.SetCompatibleTextRenderingDefault(False)
+                Application.SetDefaultFont(New Font("Tahoma", 8.25!, FontStyle.Regular, GraphicsUnit.Point))
                 Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException)
 
-                CommonRoutines.Initialise("\\192.168.50.246\Projects\Errors.txt", False, "", False)
+                Aprotec.FormIcon = My.Resources.App
+                Aprotec.Settings.DebugLogging = False
+                Aprotec.Settings.DebugLoggingDatabase = False
+                Aprotec.Settings.ProductName = "Tools"
+                Aprotec.Settings.ProductVersion = My.Application.Info.Version.GetVersionString()
 
-                CommonRoutines.Performance.Handlers.Clear()
+                Aprotec.Errors.Filename = "\\192.168.50.246\Projects\Errors.txt"
+                Aprotec.LocalSettings.CacheLocation = $"\\192.168.50.246\Projects\{Aprotec.Settings.ProductName}_LocalSettings.JSON"
+                Aprotec.Performance.Filename = String.Empty
 
-                CommonRoutines.Settings.DebugLogging = False
-                CommonRoutines.Settings.DebugLoggingDBAccess = False
+                Aprotec.Errors.Handlers.Clear()
+                Aprotec.Errors.Handlers.Add(New Aprotec.AddErrorLogEventHandler(AddressOf LogError))
 
-                CommonRoutines.Settings.Icon = My.Resources.App
+                Aprotec.Performance.Handlers.Clear()
 
-                _Instance = New Main()
+                Aprotec.LocalSettings.LoadCache()
 
-                CommonRoutines.SingleInstanceApplication.Initialize(WindowCaption, New CommonRoutines.SingleInstanceApplication.NewInstanceMessageHandler(AddressOf SIA_NewInstanceMessage))
+                Aprotec.SingleInstanceApplication.Initialize(WindowCaption, New Aprotec.SingleInstanceApplication.NewInstanceMessageHandler(AddressOf SIA_NewInstanceMessage))
+                SevenZip.SevenZipBase.SetLibraryPath("D:\Projects\_Binaries\7za.dll")
 
-                Application.Run(_Instance)
+                Application.Run(New Main())
             Catch ex As Exception
                 ex.ToLog()
 
@@ -238,13 +296,13 @@
 
         Public Shared Sub UpdateTheme()
             Try
-                If _Instance Is Nothing Then
+                If Aprotec.MainFormInstance Is Nothing Then
                     Return
                 End If
 
-                _Instance.SetTheme()
+                Aprotec.MainFormInstance.SetTheme()
 
-                Dim Tab As CommonRoutines.UserControls.ITab = _Tabs.Where(Function(o) o.IsSelected).FirstOrDefault()
+                Dim Tab As Aprotec.UserControls.ITab = _Tabs.Where(Function(o) o.IsSelected).FirstOrDefault()
                 If Tab Is Nothing Then
                     Return
                 End If

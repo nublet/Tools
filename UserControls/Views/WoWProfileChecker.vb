@@ -2,6 +2,11 @@
 
     Public Class WoWProfileChecker
 
+        Private _IncludeTemplates As Boolean = False
+        Private _IncludeSavedVariables As Boolean = False
+
+        Private ReadOnly _Folders As New Dictionary(Of String, String)
+
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
@@ -9,61 +14,114 @@
             ' Add any initialization after the InitializeComponent() call.
         End Sub
 
-        Private Sub CheckProfiles(accountFolder As String, isBjorn As Boolean, templateFolder As String)
+        Private Sub CheckProfiles(accountFolder As String, templateFolder As String)
             Try
                 Dim FileContents As String = ""
 
+                Dim IsBjorn As Boolean = accountFolder.EndsWith("\POESBOI\")
+
                 MainListResults.AddMessage("   Checking Profile Names...")
-                For Each Current As String In IO.Directory.GetFiles("{0}SavedVariables\".FormatWith(accountFolder), "*.lua", IO.SearchOption.TopDirectoryOnly).OrderBy(Function(o) o)
-                    CheckProfileNames(Current, isBjorn)
+                For Each Current In IO.Directory.GetFiles("{0}SavedVariables\".FormatWith(accountFolder), "*.lua", IO.SearchOption.TopDirectoryOnly).OrderBy(Function(o) o)
+                    CheckProfileNames(Current, IsBjorn)
                 Next
 
-                MainListResults.AddMessage("   Checking Template Files...")
-                If IO.Directory.Exists(templateFolder) Then
-                    For Each TemplateFile As String In IO.Directory.GetFiles(templateFolder, "*.*", IO.SearchOption.TopDirectoryOnly)
-                        Dim FileName As String = TemplateFile.Substring(TemplateFile.LastIndexOf("\"c) + 1)
+                If _IncludeTemplates Then
+                    MainListResults.AddMessage("   Checking Template Files...")
+                    If IO.Directory.Exists(templateFolder) Then
+                        For Each Current In IO.Directory.GetFiles(templateFolder, "*.*", IO.SearchOption.TopDirectoryOnly)
+                            Dim FileName As String = Current.Substring(Current.LastIndexOf("\"c) + 1)
 
-                        MainListResults.AddMessage("      Checking Files: {0}...".FormatWith(FileName))
-                        Dim FileNames As New List(Of String)
+                            MainListResults.AddMessage("      Checking Files: {0}...".FormatWith(FileName))
+                            Dim FileNames As New List(Of String)
 
-                        For Each RealmFolder As String In IO.Directory.GetDirectories(accountFolder, "*.*", IO.SearchOption.TopDirectoryOnly)
-                            Dim RealmName As String = RealmFolder.Substring(RealmFolder.LastIndexOf("\"c) + 1)
+                            For Each RealmFolder As String In IO.Directory.GetDirectories(accountFolder, "*.*", IO.SearchOption.TopDirectoryOnly)
+                                Dim RealmName As String = RealmFolder.Substring(RealmFolder.LastIndexOf("\"c) + 1)
 
-                            If RealmName.IsEqualTo("SavedVariables") Then
-                                Continue For
-                            End If
-
-                            For Each CharacterFolder As String In IO.Directory.GetDirectories(RealmFolder, "*.*", IO.SearchOption.TopDirectoryOnly)
-                                Dim AccountFile As String = "{0}\{1}".FormatWith(CharacterFolder, FileName)
-
-                                If AccountFile.FileExists() Then
-                                    Try
-                                        MainListResults.AddMessage("         Deleting: {0}...".FormatWith(AccountFile))
-
-                                        IO.File.Delete(AccountFile)
-                                    Catch exInner As Exception
-                                        exInner.ToLog()
-                                    End Try
+                                If RealmName.IsEqualTo("SavedVariables") Then
+                                    Continue For
                                 End If
 
-                                FileNames.Add(AccountFile)
+                                For Each CharacterFolder As String In IO.Directory.GetDirectories(RealmFolder, "*.*", IO.SearchOption.TopDirectoryOnly)
+                                    Dim AccountFile As String = "{0}\{1}".FormatWith(CharacterFolder, FileName)
+
+                                    If AccountFile.FileExists() Then
+                                        Try
+                                            MainListResults.AddMessage("         Deleting: {0}...".FormatWith(AccountFile))
+
+                                            IO.File.Delete(AccountFile)
+                                        Catch exInner As Exception
+                                            exInner.ToLog()
+                                        End Try
+                                    End If
+
+                                    FileNames.Add(AccountFile)
+                                Next
                             Next
+
+                            If FileNames.Count > 0 Then
+                                Threading.Thread.Sleep(250)
+
+                                FileContents = IO.File.ReadAllText(Current)
+
+                                For Each AccountFile As String In FileNames
+                                    MainListResults.AddMessage("         Creating: {0}...".FormatWith(AccountFile))
+
+                                    Using writer As New IO.StreamWriter(AccountFile, False)
+                                        writer.WriteLine(FileContents)
+                                    End Using
+                                Next
+                            End If
                         Next
 
-                        If FileNames.Count > 0 Then
-                            Threading.Thread.Sleep(1000)
+                        If _IncludeSavedVariables Then
+                            Dim TemplateSavedVariables = $"{templateFolder}\SavedVariables"
 
-                            FileContents = IO.File.ReadAllText(TemplateFile)
+                            For Each Current In IO.Directory.GetFiles(TemplateSavedVariables, "*.*", IO.SearchOption.TopDirectoryOnly)
+                                Dim FileName As String = Current.Substring(Current.LastIndexOf("\"c) + 1)
 
-                            For Each AccountFile As String In FileNames
-                                MainListResults.AddMessage("         Creating: {0}...".FormatWith(AccountFile))
+                                MainListResults.AddMessage("      Checking Files: {0}...".FormatWith(FileName))
+                                Dim FileNames As New List(Of String)
 
-                                Using writer As New IO.StreamWriter(AccountFile, False)
-                                    writer.WriteLine(FileContents)
-                                End Using
+                                For Each RealmFolder As String In IO.Directory.GetDirectories(accountFolder, "*.*", IO.SearchOption.TopDirectoryOnly)
+                                    Dim RealmName As String = RealmFolder.Substring(RealmFolder.LastIndexOf("\"c) + 1)
+
+                                    If RealmName.IsEqualTo("SavedVariables") Then
+                                        Continue For
+                                    End If
+
+                                    For Each CharacterFolder As String In IO.Directory.GetDirectories(RealmFolder, "*.*", IO.SearchOption.TopDirectoryOnly)
+                                        Dim AccountFile As String = "{0}\SavedVariables\{1}".FormatWith(CharacterFolder, FileName)
+
+                                        If AccountFile.FileExists() Then
+                                            Try
+                                                MainListResults.AddMessage("         Deleting: {0}...".FormatWith(AccountFile))
+
+                                                IO.File.Delete(AccountFile)
+                                            Catch exInner As Exception
+                                                exInner.ToLog()
+                                            End Try
+                                        End If
+
+                                        FileNames.Add(AccountFile)
+                                    Next
+                                Next
+
+                                If FileNames.Count > 0 Then
+                                    Threading.Thread.Sleep(250)
+
+                                    FileContents = IO.File.ReadAllText(Current)
+
+                                    For Each AccountFile As String In FileNames
+                                        MainListResults.AddMessage("         Creating: {0}...".FormatWith(AccountFile))
+
+                                        Using writer As New IO.StreamWriter(AccountFile, False)
+                                            writer.WriteLine(FileContents)
+                                        End Using
+                                    Next
+                                End If
                             Next
                         End If
-                    Next
+                    End If
                 End If
             Catch ex As Exception
                 ex.ToLog()
@@ -93,27 +151,59 @@
 
 #Region " Events "
 
+        Private Sub BjornButton_Click(sender As Object, e As EventArgs) Handles BjornButton.Click
+            Enabled = False
+
+            _Folders.Clear()
+            _Folders.Add("D:\Games\Activision\World of Warcraft\_retail_\WTF\Account\POESBOI\", "E:\GoogleDrive\BackUps\Templates\Bjorn\")
+
+            If IncludeTemplatesCheckBox.Checked Then
+                _IncludeTemplates = True
+                _IncludeSavedVariables = SavedVariablesCheckBox.Checked
+            Else
+                _IncludeTemplates = False
+                _IncludeSavedVariables = False
+            End If
+
+            MainBackgroundWorker.RunWorkerAsync()
+        End Sub
+
+        Private Sub BothButton_Click(sender As Object, e As EventArgs) Handles BothButton.Click
+            Enabled = False
+
+            _Folders.Clear()
+            _Folders.Add("D:\Games\Activision\World of Warcraft\_retail_\WTF\Account\POESBOI\", "E:\GoogleDrive\BackUps\Templates\Bjorn\")
+            _Folders.Add("\\Study21R1\World of Warcraft\_retail_\WTF\Account\POESBOI2\", "E:\GoogleDrive\BackUps\Templates\Nix\")
+
+            If IncludeTemplatesCheckBox.Checked Then
+                _IncludeTemplates = True
+                _IncludeSavedVariables = SavedVariablesCheckBox.Checked
+            Else
+                _IncludeTemplates = False
+                _IncludeSavedVariables = False
+            End If
+
+            MainBackgroundWorker.RunWorkerAsync()
+        End Sub
+
         Private Sub ClearButton_Click(sender As Object, e As EventArgs) Handles ClearButton.Click
             MainListResults.ClearResults()
         End Sub
 
+        Private Sub IncludeTemplatesCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles IncludeTemplatesCheckBox.CheckedChanged
+            SavedVariablesCheckBox.Enabled = IncludeTemplatesCheckBox.Checked
+        End Sub
+
         Private Sub MainBackgroundWorker_DoWork(sender As Object, e As ComponentModel.DoWorkEventArgs) Handles MainBackgroundWorker.DoWork
             Try
-                Dim AccountFolderBjorn As String = "D:\Games\Activision\World of Warcraft\_retail_\WTF\Account\POESBOI\"
-                Dim TemplateFolderBjorn As String = "E:\GoogleDrive\BackUps\Templates\Bjorn\"
+                For Each Current In _Folders
+                    If Not IO.Directory.Exists(Current.Key) Then
+                        Continue For
+                    End If
 
-                Dim AccountFolderNix As String = "\\Study21R1\World of Warcraft\_retail_\WTF\Account\POESBOI2\"
-                Dim TemplateFolderNix As String = "E:\GoogleDrive\BackUps\Templates\Nix\"
-
-                If IO.Directory.Exists(AccountFolderBjorn) Then
-                    MainListResults.AddMessage("Checking Profiles - Bjorn...")
-                    CheckProfiles(AccountFolderBjorn, True, TemplateFolderBjorn)
-                End If
-
-                If IO.Directory.Exists(AccountFolderNix) Then
-                    MainListResults.AddMessage("Checking Profiles - Nix...")
-                    CheckProfiles(AccountFolderNix, False, TemplateFolderNix)
-                End If
+                    MainListResults.AddMessage($"Checking Profiles - {Current.Key}...")
+                    CheckProfiles(Current.Key, Current.Value)
+                Next
             Catch ex As Exception
                 ex.ToLog()
             End Try
@@ -125,8 +215,19 @@
             Enabled = True
         End Sub
 
-        Private Sub ProcessButton_Click(sender As Object, e As EventArgs) Handles ProcessButton.Click
+        Private Sub NixButton_Click(sender As Object, e As EventArgs) Handles NixButton.Click
             Enabled = False
+
+            _Folders.Clear()
+            _Folders.Add("\\Study21R1\World of Warcraft\_retail_\WTF\Account\POESBOI2\", "E:\GoogleDrive\BackUps\Templates\Nix\")
+
+            If IncludeTemplatesCheckBox.Checked Then
+                _IncludeTemplates = True
+                _IncludeSavedVariables = SavedVariablesCheckBox.Checked
+            Else
+                _IncludeTemplates = False
+                _IncludeSavedVariables = False
+            End If
 
             MainBackgroundWorker.RunWorkerAsync()
         End Sub
@@ -192,6 +293,8 @@
                     Case "auctionlite_auctionlitedb"
                         Return "Poesboi"
                     Case "auditor3_auditor2db"
+                        Return "Poesboi"
+                    Case "autolooter_autolooterdb"
                         Return "Poesboi"
                     Case "azeritetooltip_azeritetooltipdb"
                         Return "Poesboi"
@@ -311,6 +414,8 @@
                         Return "Poesboi"
                     Case "handynotes_mailboxes_handynotes_mailboxesdb"
                         Return "Poesboi"
+                    Case "handynotes_mistsofpandariatreasures_handynotes_mistsofpandariatreasuresdb"
+                        Return "Poesboi"
                     Case "handynotes_shadowlands_handynotes_shadowlandsdb"
                         Return "Poesboi"
                     Case "handynotes_summerfestival_handynotes_summerfestivaldb"
@@ -425,7 +530,7 @@
                         Return "Poesboi"
 
                     Case Else
-                        System_String.ToLog("frmMain->GetProfileName_Shared, new Key found: {0}, Filename: {1}".FormatWith(keyName, fileName), True)
+                        System_String.ToLog($"Case ""{keyName}""", True)
                 End Select
             Catch ex As Exception
                 ex.ToLog()

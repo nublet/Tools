@@ -80,13 +80,13 @@
                     conn.Open()
 
                     For Each TableRow As DataRowView In conn.GetOleDbSchemaTable(OleDb.OleDbSchemaGuid.Tables, New Object() {Nothing, Nothing, Nothing, "TABLE"}).DefaultView
-                        Dim TableName As String = CommonRoutines.Type.ToStringDB(TableRow("TABLE_NAME"))
+                        Dim TableName As String = Aprotec.ToStringDB(TableRow("TABLE_NAME"))
 
                         Dim TableInfo As New Models.TableInformation("", TableName)
 
                         Dim PrimaryKeys As New Dictionary(Of String, String)
                         For Each Current As DataRowView In conn.GetOleDbSchemaTable(OleDb.OleDbSchemaGuid.Primary_Keys, New Object() {Nothing, Nothing, TableName}).DefaultView
-                            Dim ColumnName As String = CommonRoutines.Type.ToStringDB(Current("COLUMN_NAME"))
+                            Dim ColumnName As String = Aprotec.ToStringDB(Current("COLUMN_NAME"))
 
                             If ColumnName.IsNotSet() Then
                                 Continue For
@@ -129,10 +129,10 @@
 
             Public Sub New(tableName As String, ByRef dataRowView As DataRowView)
                 _TABLE_NAME = tableName
-                _COLUMN_NAME = CommonRoutines.Type.ToStringDB(dataRowView("COLUMN_NAME"))
-                _ORDINAL_POSITION = CommonRoutines.Type.ToIntegerDB(dataRowView("ORDINAL_POSITION"))
-                _DATA_TYPE = CommonRoutines.Type.ToStringDB(dataRowView("DATA_TYPE"))
-                _IDENTITY = (CommonRoutines.Type.ToStringDB(dataRowView("COLUMN_FLAGS")) = "90") AndAlso (CommonRoutines.Type.ToStringDB(dataRowView("DATA_TYPE")) = "3")
+                _COLUMN_NAME = Aprotec.ToStringDB(dataRowView("COLUMN_NAME"))
+                _ORDINAL_POSITION = Aprotec.ToIntegerDB(dataRowView("ORDINAL_POSITION"))
+                _DATA_TYPE = Aprotec.ToStringDB(dataRowView("DATA_TYPE"))
+                _IDENTITY = (Aprotec.ToStringDB(dataRowView("COLUMN_FLAGS")) = "90") AndAlso (Aprotec.ToStringDB(dataRowView("DATA_TYPE")) = "3")
             End Sub
 
             Public Function GetColumnInformation() As Models.ColumnInformation

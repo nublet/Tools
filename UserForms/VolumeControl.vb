@@ -26,11 +26,11 @@
 
                 TopMost = True
 
-                Dim WindowLong = CommonRoutines.NativeRoutines.GetWindowLong(Handle, -20)
-                WindowLong = WindowLong Or CommonRoutines.NativeRoutines.WS_EX_LAYERED Or CommonRoutines.NativeRoutines.WS_EX_TRANSPARENT
+                Dim WindowLong = Aprotec.NativeRoutines.GetWindowLong(Handle, -20)
+                WindowLong = WindowLong Or Aprotec.NativeRoutines.WS_EX_LAYERED Or Aprotec.NativeRoutines.WS_EX_TRANSPARENT
 
-                Dim ExitCode = CommonRoutines.NativeRoutines.SetWindowLong(Handle, -20, WindowLong)
-                CommonRoutines.NativeRoutines.SetLayeredWindowAttributes(Handle, Color.White.ToArgb(), 128, CommonRoutines.NativeRoutines.LWA_COLORKEY Or CommonRoutines.NativeRoutines.LWA_ALPHA)
+                Dim ExitCode = Aprotec.NativeRoutines.SetWindowLong(Handle, -20, WindowLong)
+                Aprotec.NativeRoutines.SetLayeredWindowAttributes(Handle, Color.White.ToArgb(), 128, Aprotec.NativeRoutines.LWA_COLORKEY Or Aprotec.NativeRoutines.LWA_ALPHA)
 
                 Dim DeviceEnumerator = New CoreAudio.MMDeviceEnumerator(Guid.NewGuid())
                 _Device = DeviceEnumerator.GetDefaultAudioEndpoint(CoreAudio.DataFlow.Render, CoreAudio.Role.Multimedia)
@@ -119,8 +119,8 @@
         End Sub
 
         Private Sub Me_MouseDown(sender As Object, e As MouseEventArgs) Handles Me.MouseDown, CurrentVolumeLabel.MouseDown
-            CommonRoutines.NativeRoutines.ReleaseCapture()
-            CommonRoutines.NativeRoutines.SendMessage(Handle, CommonRoutines.NativeRoutines.WM_SYSCOMMAND, &HF012, IntPtr.Zero)
+            Aprotec.NativeRoutines.ReleaseCapture()
+            Aprotec.NativeRoutines.SendMessage(Handle, Aprotec.NativeRoutines.WM_SYSCOMMAND, &HF012, IntPtr.Zero)
         End Sub
 
         Private Sub Set10Button_Click(sender As Object, e As EventArgs) Handles Set10Button.Click

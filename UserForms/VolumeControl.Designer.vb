@@ -107,8 +107,7 @@
             ' 
             ' VolumeControl
             ' 
-            AutoScaleDimensions = New SizeF(6F, 13F)
-            AutoScaleMode = AutoScaleMode.Font
+            AutoScaleMode = AutoScaleMode.None
             BackColor = Color.FromArgb(CByte(24), CByte(28), CByte(63))
             ClientSize = New Size(185, 30)
             Controls.Add(Set40Button)

@@ -24,112 +24,189 @@
         'Do not modify it using the code editor.
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
-            Me.StatusLabel = New System.Windows.Forms.Label()
-            Me.MainListResults = New CommonRoutines.UserControls.ListResults()
-            Me.MainBackgroundWorker = New System.ComponentModel.BackgroundWorker()
-            Me.ClearButton = New CommonRoutines.UserControls.Button()
-            Me.ProcessButton = New CommonRoutines.UserControls.Button()
-            Me.SuspendLayout()
-            '
-            'StatusLabel
-            '
-            Me.StatusLabel.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            Me.StatusLabel.Cursor = System.Windows.Forms.Cursors.Default
-            Me.StatusLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-            Me.StatusLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(124, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(181, Byte), Integer))
-            Me.StatusLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.StatusLabel.Location = New System.Drawing.Point(5, 5)
-            Me.StatusLabel.Margin = New System.Windows.Forms.Padding(0, 0, 5, 5)
-            Me.StatusLabel.Name = "StatusLabel"
-            Me.StatusLabel.Size = New System.Drawing.Size(749, 28)
-            Me.StatusLabel.TabIndex = 44
-            Me.StatusLabel.Text = "Status"
-            Me.StatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-            '
-            'MainListResults
-            '
-            Me.MainListResults.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            Me.MainListResults.BackColor = System.Drawing.SystemColors.Window
-            Me.MainListResults.BorderColor = System.Drawing.Color.MediumSlateBlue
-            Me.MainListResults.BorderFocusColor = System.Drawing.Color.HotPink
-            Me.MainListResults.BorderRadius = 0
-            Me.MainListResults.BorderSize = 2
-            Me.MainListResults.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.MainListResults.ForeColor = System.Drawing.Color.DimGray
-            Me.MainListResults.Indent = 0
-            Me.MainListResults.Location = New System.Drawing.Point(8, 38)
-            Me.MainListResults.Margin = New System.Windows.Forms.Padding(0, 0, 5, 5)
-            Me.MainListResults.Name = "MainListResults"
-            Me.MainListResults.Padding = New System.Windows.Forms.Padding(10, 7, 10, 7)
-            Me.MainListResults.Size = New System.Drawing.Size(746, 813)
-            Me.MainListResults.TabIndex = 45
-            Me.MainListResults.UnderlinedStyle = False
-            '
-            'MainBackgroundWorker
-            '
-            '
-            'ClearButton
-            '
-            Me.ClearButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            Me.ClearButton.BackColor = System.Drawing.Color.MediumSlateBlue
-            Me.ClearButton.BorderColor = System.Drawing.Color.PaleVioletRed
-            Me.ClearButton.BorderRadius = 0
-            Me.ClearButton.BorderSize = 1
-            Me.ClearButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(107, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(255, Byte), Integer))
-            Me.ClearButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-            Me.ClearButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-            Me.ClearButton.ForeColor = System.Drawing.Color.FromArgb(CType(CType(124, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(181, Byte), Integer))
-            Me.ClearButton.Location = New System.Drawing.Point(674, 856)
-            Me.ClearButton.Margin = New System.Windows.Forms.Padding(0, 0, 5, 5)
-            Me.ClearButton.Name = "ClearButton"
-            Me.ClearButton.Size = New System.Drawing.Size(80, 30)
-            Me.ClearButton.TabIndex = 46
-            Me.ClearButton.Text = "Clear"
-            Me.ClearButton.UseVisualStyleBackColor = True
-            '
-            'ProcessButton
-            '
-            Me.ProcessButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-            Me.ProcessButton.BackColor = System.Drawing.Color.MediumSlateBlue
-            Me.ProcessButton.BorderColor = System.Drawing.Color.PaleVioletRed
-            Me.ProcessButton.BorderRadius = 0
-            Me.ProcessButton.BorderSize = 1
-            Me.ProcessButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(107, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(255, Byte), Integer))
-            Me.ProcessButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-            Me.ProcessButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-            Me.ProcessButton.ForeColor = System.Drawing.Color.FromArgb(CType(CType(124, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(181, Byte), Integer))
-            Me.ProcessButton.Location = New System.Drawing.Point(8, 856)
-            Me.ProcessButton.Margin = New System.Windows.Forms.Padding(0, 0, 5, 5)
-            Me.ProcessButton.Name = "ProcessButton"
-            Me.ProcessButton.Size = New System.Drawing.Size(80, 30)
-            Me.ProcessButton.TabIndex = 47
-            Me.ProcessButton.Text = "Process"
-            Me.ProcessButton.UseVisualStyleBackColor = True
-            '
-            'WoWProfileChecker
-            '
-            Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-            Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-            Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(42, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(86, Byte), Integer))
-            Me.Controls.Add(Me.ProcessButton)
-            Me.Controls.Add(Me.ClearButton)
-            Me.Controls.Add(Me.MainListResults)
-            Me.Controls.Add(Me.StatusLabel)
-            Me.DoubleBuffered = True
-            Me.Margin = New System.Windows.Forms.Padding(0)
-            Me.Name = "WoWProfileChecker"
-            Me.Size = New System.Drawing.Size(759, 891)
-            Me.ResumeLayout(False)
+            StatusLabel = New Label()
+            MainListResults = New Aprotec.UserControls.ListResultsBorder()
+            MainBackgroundWorker = New ComponentModel.BackgroundWorker()
+            ClearButton = New Aprotec.UserControls.Button()
+            BjornButton = New Aprotec.UserControls.Button()
+            NixButton = New Aprotec.UserControls.Button()
+            BothButton = New Aprotec.UserControls.Button()
+            SavedVariablesCheckBox = New Aprotec.UserControls.CheckBox()
+            IncludeTemplatesCheckBox = New Aprotec.UserControls.CheckBox()
+            SuspendLayout()
+            ' 
+            ' StatusLabel
+            ' 
+            StatusLabel.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
+            StatusLabel.Font = New Font("Microsoft Sans Serif", 11F)
+            StatusLabel.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
+            StatusLabel.ImageAlign = ContentAlignment.MiddleLeft
+            StatusLabel.Location = New Point(0, 0)
+            StatusLabel.Margin = New Padding(0, 0, 0, 5)
+            StatusLabel.Name = "StatusLabel"
+            StatusLabel.Size = New Size(1026, 23)
+            StatusLabel.TabIndex = 44
+            StatusLabel.Text = "Status"
+            StatusLabel.TextAlign = ContentAlignment.MiddleCenter
+            ' 
+            ' MainListResults
+            ' 
+            MainListResults.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+            MainListResults.BackColor = SystemColors.Window
+            MainListResults.BorderColor = Color.MediumSlateBlue
+            MainListResults.BorderFocusColor = Color.HotPink
+            MainListResults.BorderRadius = 0
+            MainListResults.BorderSize = 2
+            MainListResults.Font = New Font("Microsoft Sans Serif", 9.5F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+            MainListResults.ForeColor = Color.DimGray
+            MainListResults.Indent = 0
+            MainListResults.Location = New Point(0, 28)
+            MainListResults.Margin = New Padding(0, 0, 0, 5)
+            MainListResults.Name = "MainListResults"
+            MainListResults.Padding = New Padding(12, 8, 12, 8)
+            MainListResults.Size = New Size(1026, 399)
+            MainListResults.TabIndex = 45
+            MainListResults.UnderlinedStyle = False
+            ' 
+            ' MainBackgroundWorker
+            ' 
+            ' 
+            ' ClearButton
+            ' 
+            ClearButton.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
+            ClearButton.BackColor = Color.MediumSlateBlue
+            ClearButton.BorderColor = Color.PaleVioletRed
+            ClearButton.BorderRadius = 0
+            ClearButton.BorderSize = 1
+            ClearButton.FlatAppearance.BorderColor = Color.FromArgb(CByte(107), CByte(83), CByte(255))
+            ClearButton.FlatStyle = FlatStyle.Flat
+            ClearButton.Font = New Font("Microsoft Sans Serif", 11F)
+            ClearButton.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
+            ClearButton.Location = New Point(946, 432)
+            ClearButton.Margin = New Padding(0)
+            ClearButton.Name = "ClearButton"
+            ClearButton.Size = New Size(80, 30)
+            ClearButton.TabIndex = 46
+            ClearButton.Text = "Clear"
+            ClearButton.UseVisualStyleBackColor = True
+            ' 
+            ' BjornButton
+            ' 
+            BjornButton.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
+            BjornButton.BackColor = Color.MediumSlateBlue
+            BjornButton.BorderColor = Color.PaleVioletRed
+            BjornButton.BorderRadius = 0
+            BjornButton.BorderSize = 1
+            BjornButton.FlatAppearance.BorderColor = Color.FromArgb(CByte(107), CByte(83), CByte(255))
+            BjornButton.FlatStyle = FlatStyle.Flat
+            BjornButton.Font = New Font("Microsoft Sans Serif", 11F)
+            BjornButton.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
+            BjornButton.Location = New Point(0, 432)
+            BjornButton.Margin = New Padding(0, 0, 5, 0)
+            BjornButton.Name = "BjornButton"
+            BjornButton.Size = New Size(80, 30)
+            BjornButton.TabIndex = 47
+            BjornButton.Text = "Bjorn"
+            BjornButton.UseVisualStyleBackColor = True
+            ' 
+            ' NixButton
+            ' 
+            NixButton.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
+            NixButton.BackColor = Color.MediumSlateBlue
+            NixButton.BorderColor = Color.PaleVioletRed
+            NixButton.BorderRadius = 0
+            NixButton.BorderSize = 1
+            NixButton.FlatAppearance.BorderColor = Color.FromArgb(CByte(107), CByte(83), CByte(255))
+            NixButton.FlatStyle = FlatStyle.Flat
+            NixButton.Font = New Font("Microsoft Sans Serif", 11F)
+            NixButton.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
+            NixButton.Location = New Point(85, 432)
+            NixButton.Margin = New Padding(0, 0, 5, 0)
+            NixButton.Name = "NixButton"
+            NixButton.Size = New Size(80, 30)
+            NixButton.TabIndex = 48
+            NixButton.Text = "Nix"
+            NixButton.UseVisualStyleBackColor = True
+            ' 
+            ' BothButton
+            ' 
+            BothButton.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
+            BothButton.BackColor = Color.MediumSlateBlue
+            BothButton.BorderColor = Color.PaleVioletRed
+            BothButton.BorderRadius = 0
+            BothButton.BorderSize = 1
+            BothButton.FlatAppearance.BorderColor = Color.FromArgb(CByte(107), CByte(83), CByte(255))
+            BothButton.FlatStyle = FlatStyle.Flat
+            BothButton.Font = New Font("Microsoft Sans Serif", 11F)
+            BothButton.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
+            BothButton.Location = New Point(170, 432)
+            BothButton.Margin = New Padding(0, 0, 5, 0)
+            BothButton.Name = "BothButton"
+            BothButton.Size = New Size(80, 30)
+            BothButton.TabIndex = 49
+            BothButton.Text = "Both"
+            BothButton.UseVisualStyleBackColor = True
+            ' 
+            ' SavedVariablesCheckBox
+            ' 
+            SavedVariablesCheckBox.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+            SavedVariablesCheckBox.CheckedColor = Color.MediumSlateBlue
+            SavedVariablesCheckBox.Location = New Point(405, 432)
+            SavedVariablesCheckBox.Margin = New Padding(0, 0, 5, 0)
+            SavedVariablesCheckBox.MinimumSize = New Size(0, 21)
+            SavedVariablesCheckBox.Name = "SavedVariablesCheckBox"
+            SavedVariablesCheckBox.Padding = New Padding(10, 0, 0, 0)
+            SavedVariablesCheckBox.Size = New Size(536, 30)
+            SavedVariablesCheckBox.TabIndex = 50
+            SavedVariablesCheckBox.Text = "Include Saved Variables"
+            SavedVariablesCheckBox.UncheckedColor = Color.Gray
+            SavedVariablesCheckBox.UseTick = False
+            SavedVariablesCheckBox.UseVisualStyleBackColor = True
+            ' 
+            ' IncludeTemplatesCheckBox
+            ' 
+            IncludeTemplatesCheckBox.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
+            IncludeTemplatesCheckBox.CheckedColor = Color.MediumSlateBlue
+            IncludeTemplatesCheckBox.Location = New Point(255, 432)
+            IncludeTemplatesCheckBox.Margin = New Padding(0, 0, 5, 0)
+            IncludeTemplatesCheckBox.MinimumSize = New Size(0, 21)
+            IncludeTemplatesCheckBox.Name = "IncludeTemplatesCheckBox"
+            IncludeTemplatesCheckBox.Padding = New Padding(10, 0, 0, 0)
+            IncludeTemplatesCheckBox.Size = New Size(145, 30)
+            IncludeTemplatesCheckBox.TabIndex = 51
+            IncludeTemplatesCheckBox.Text = "Include Templates"
+            IncludeTemplatesCheckBox.UncheckedColor = Color.Gray
+            IncludeTemplatesCheckBox.UseTick = False
+            IncludeTemplatesCheckBox.UseVisualStyleBackColor = True
+            ' 
+            ' WoWProfileChecker
+            ' 
+            AutoScaleMode = AutoScaleMode.None
+            BackColor = Color.FromArgb(CByte(42), CByte(45), CByte(86))
+            Controls.Add(IncludeTemplatesCheckBox)
+            Controls.Add(SavedVariablesCheckBox)
+            Controls.Add(BothButton)
+            Controls.Add(NixButton)
+            Controls.Add(BjornButton)
+            Controls.Add(ClearButton)
+            Controls.Add(MainListResults)
+            Controls.Add(StatusLabel)
+            DoubleBuffered = True
+            Margin = New Padding(0)
+            Name = "WoWProfileChecker"
+            Size = New Size(1026, 462)
+            ResumeLayout(False)
 
         End Sub
         Private StatusLabel As Label
-        Private WithEvents MainListResults As CommonRoutines.UserControls.ListResults
+        Private WithEvents MainListResults As Aprotec.UserControls.ListResultsBorder
         Private WithEvents MainBackgroundWorker As System.ComponentModel.BackgroundWorker
-        Private WithEvents ClearButton As CommonRoutines.UserControls.Button
-        Private WithEvents ProcessButton As CommonRoutines.UserControls.Button
+        Private WithEvents ClearButton As Aprotec.UserControls.Button
+        Private WithEvents BjornButton As Aprotec.UserControls.Button
+        Private WithEvents NixButton As Aprotec.UserControls.Button
+        Private WithEvents BothButton As Aprotec.UserControls.Button
+        Friend WithEvents SavedVariablesCheckBox As Aprotec.UserControls.CheckBox
+        Friend WithEvents IncludeTemplatesCheckBox As Aprotec.UserControls.CheckBox
     End Class
 
 End Namespace

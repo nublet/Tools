@@ -25,17 +25,17 @@
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
             Me.MainBackgroundWorker = New System.ComponentModel.BackgroundWorker()
-            Me.ClearButton = New CommonRoutines.UserControls.Button()
-            Me.ProcessButton = New CommonRoutines.UserControls.Button()
-            Me.FolderNameButton = New CommonRoutines.UserControls.Button()
-            Me.FolderNameTextBox = New CommonRoutines.UserControls.TextBox()
-            Me.ArchiveNameTextBox = New CommonRoutines.UserControls.TextBox()
-            Me.ArchiveNameButton = New CommonRoutines.UserControls.Button()
+            Me.ClearButton = New Aprotec.UserControls.Button()
+            Me.ProcessButton = New Aprotec.UserControls.Button()
+            Me.FolderNameButton = New Aprotec.UserControls.Button()
+            Me.FolderNameTextBox = New Aprotec.UserControls.TextBox()
+            Me.ArchiveNameTextBox = New Aprotec.UserControls.TextBox()
+            Me.ArchiveNameButton = New Aprotec.UserControls.Button()
             Me.FolderNameLabel = New System.Windows.Forms.Label()
             Me.ArchiveNameLabel = New System.Windows.Forms.Label()
-            Me.MainListResults = New CommonRoutines.UserControls.ListResults()
-            Me.BackupAddonsButton = New CommonRoutines.UserControls.Button()
-            Me.BackupWTFButton = New CommonRoutines.UserControls.Button()
+            Me.MainListResults = New Aprotec.UserControls.ListResultsBorder()
+            Me.BackupAddonsButton = New Aprotec.UserControls.Button()
+            Me.BackupWTFButton = New Aprotec.UserControls.Button()
             Me.SuspendLayout()
             '
             'MainBackgroundWorker
@@ -250,8 +250,7 @@
             '
             'ArchiveFolder
             '
-            Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-            Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+            Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
             Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(42, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(86, Byte), Integer))
             Me.Controls.Add(Me.BackupWTFButton)
             Me.Controls.Add(Me.BackupAddonsButton)
@@ -272,17 +271,17 @@
 
         End Sub
         Private WithEvents MainBackgroundWorker As System.ComponentModel.BackgroundWorker
-        Private WithEvents ClearButton As CommonRoutines.UserControls.Button
-        Private WithEvents ProcessButton As CommonRoutines.UserControls.Button
-        Private WithEvents FolderNameButton As CommonRoutines.UserControls.Button
-        Friend WithEvents FolderNameTextBox As CommonRoutines.UserControls.TextBox
-        Friend WithEvents ArchiveNameTextBox As CommonRoutines.UserControls.TextBox
-        Private WithEvents ArchiveNameButton As CommonRoutines.UserControls.Button
+        Private WithEvents ClearButton As Aprotec.UserControls.Button
+        Private WithEvents ProcessButton As Aprotec.UserControls.Button
+        Private WithEvents FolderNameButton As Aprotec.UserControls.Button
+        Friend WithEvents FolderNameTextBox As Aprotec.UserControls.TextBox
+        Friend WithEvents ArchiveNameTextBox As Aprotec.UserControls.TextBox
+        Private WithEvents ArchiveNameButton As Aprotec.UserControls.Button
         Private WithEvents FolderNameLabel As Label
         Private WithEvents ArchiveNameLabel As Label
-        Private WithEvents MainListResults As CommonRoutines.UserControls.ListResults
-        Private WithEvents BackupAddonsButton As CommonRoutines.UserControls.Button
-        Private WithEvents BackupWTFButton As CommonRoutines.UserControls.Button
+        Private WithEvents MainListResults As Aprotec.UserControls.ListResultsBorder
+        Private WithEvents BackupAddonsButton As Aprotec.UserControls.Button
+        Private WithEvents BackupWTFButton As Aprotec.UserControls.Button
     End Class
 
 End Namespace

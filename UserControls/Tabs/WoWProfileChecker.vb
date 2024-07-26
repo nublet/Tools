@@ -1,7 +1,7 @@
 ﻿Namespace UserControls.Tabs
 
     Public Class WoWProfileChecker
-        Inherits CommonRoutines.UserControls.TabBase
+        Inherits Aprotec.UserControls.TabBase
 
         Private ReadOnly _View As Views.WoWProfileChecker = Nothing
 

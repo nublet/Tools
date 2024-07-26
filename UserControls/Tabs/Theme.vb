@@ -1,9 +1,9 @@
 ﻿Namespace UserControls.Tabs
 
     Public Class Theme
-        Inherits CommonRoutines.UserControls.TabBase
+        Inherits Aprotec.UserControls.TabBase
 
-        Private ReadOnly _View As CommonRoutines.UITheme.Editor = Nothing
+        Private ReadOnly _View As Aprotec.UITheme.Editor = Nothing
 
         Public Sub New()
             Try
@@ -12,7 +12,7 @@
 
                 CreateItems()
 
-                _View = New CommonRoutines.UITheme.Editor(New CommonRoutines.UITheme.ThemeValueChangedEventHandler(AddressOf ThemeValue_Changed))
+                _View = New Aprotec.UITheme.Editor(New Aprotec.UITheme.ThemeValueChangedEventHandler(AddressOf ThemeValue_Changed))
             Catch ex As Exception
                 ex.ToLog()
             End Try

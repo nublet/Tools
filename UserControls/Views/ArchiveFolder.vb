@@ -24,8 +24,6 @@
             _Timer = New Timers.Timer(1 * 60 * 60 * 1000)
             AddHandler _Timer.Elapsed, AddressOf Timer_Elapsed
             _Timer.Start()
-
-            SevenZip.SevenZipBase.SetLibraryPath("D:\Projects\_Binaries\7za.dll")
         End Sub
 
         Private Function GetNumberToThreeSig(value As Double) As String
@@ -75,8 +73,8 @@
         End Function
 
         Public Sub StartTimer()
-            _ArchiveName = CommonRoutines.Settings.Get(Of String)("ArchiveFolder.ArchiveName")
-            _FolderName = CommonRoutines.Settings.Get(Of String)("ArchiveFolder.FolderName")
+            _ArchiveName = Aprotec.LocalSettings.Get(Of String)("ArchiveFolder.ArchiveName")
+            _FolderName = Aprotec.LocalSettings.Get(Of String)("ArchiveFolder.FolderName")
 
             ArchiveNameTextBox.Text = _ArchiveName
             FolderNameTextBox.Text = _FolderName
@@ -91,7 +89,7 @@
         Private Sub BackupAddonsButtonButton_Click(sender As Object, e As EventArgs) Handles BackupAddonsButton.Click
             Enabled = False
 
-            _ArchiveName = "Z:\BackUps\AddOns_{0}.7z".FormatWith(CommonRoutines.GetCurrentDate().GetSQLString("yyyy_MM_dd_HH_mm"))
+            _ArchiveName = "Z:\BackUps\AddOns_{0}.7z".FormatWith(Aprotec.GetCurrentDate("yyyy_MM_dd_HH_mm"))
             _FolderName = "D:\Games\Activision\World of Warcraft\_retail_\Interface\AddOns"
 
             MainBackgroundWorker.RunWorkerAsync()
@@ -100,7 +98,7 @@
         Private Sub BackupWTFButton_Click(sender As Object, e As EventArgs) Handles BackupWTFButton.Click
             Enabled = False
 
-            _ArchiveName = "Z:\BackUps\POESBOI_{0}.7z".FormatWith(CommonRoutines.GetCurrentDate().GetSQLString("yyyy_MM_dd_HH_mm"))
+            _ArchiveName = "Z:\BackUps\POESBOI_{0}.7z".FormatWith(Aprotec.GetCurrentDate("yyyy_MM_dd_HH_mm"))
             _FolderName = "D:\Games\Activision\World of Warcraft\_retail_\WTF\Account\POESBOI"
 
             MainBackgroundWorker.RunWorkerAsync()
@@ -184,8 +182,8 @@
             _ArchiveName = ArchiveNameTextBox.Text
             _FolderName = FolderNameTextBox.Text
 
-            CommonRoutines.Settings.Set("ArchiveFolder.ArchiveName", _ArchiveName)
-            CommonRoutines.Settings.Set("ArchiveFolder.FolderName", _FolderName)
+            Aprotec.LocalSettings.Set("ArchiveFolder.ArchiveName", _ArchiveName)
+            Aprotec.LocalSettings.Set("ArchiveFolder.FolderName", _FolderName)
 
             MainBackgroundWorker.RunWorkerAsync()
         End Sub
@@ -195,7 +193,7 @@
 
             MainListResults.AddMessage("Checking Daily WTF Backup...")
 
-            _ArchiveName = "Z:\BackUps\POESBOI_{0}.7z".FormatWith(CommonRoutines.GetCurrentDate().GetSQLString("yyyy_MM_dd"))
+            _ArchiveName = "Z:\BackUps\POESBOI_{0}.7z".FormatWith(Aprotec.GetCurrentDate("yyyy_MM_dd"))
             _FolderName = "D:\Games\Activision\World of Warcraft\_retail_\WTF\Account\POESBOI"
 
             If Not _ArchiveName.FileExists() Then

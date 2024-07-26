@@ -24,77 +24,73 @@
         'Do not modify it using the code editor.
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
-            Me.components = New System.ComponentModel.Container()
+            components = New ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Main))
-            Me.ControlsPanel = New System.Windows.Forms.Panel()
-            Me.ButtonsPanel = New System.Windows.Forms.Panel()
-            Me.MainNotifyIcon = New System.Windows.Forms.NotifyIcon(Me.components)
-            Me.MainContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
-            Me.SolutionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-            Me.MainContextMenuStrip.SuspendLayout()
-            Me.SuspendLayout()
-            '
-            'ControlsPanel
-            '
-            Me.ControlsPanel.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            Me.ControlsPanel.Location = New System.Drawing.Point(174, 14)
-            Me.ControlsPanel.Margin = New System.Windows.Forms.Padding(5)
-            Me.ControlsPanel.Name = "ControlsPanel"
-            Me.ControlsPanel.Size = New System.Drawing.Size(612, 422)
-            Me.ControlsPanel.TabIndex = 0
-            '
-            'ButtonsPanel
-            '
-            Me.ButtonsPanel.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-            Me.ButtonsPanel.AutoScroll = True
-            Me.ButtonsPanel.Location = New System.Drawing.Point(14, 14)
-            Me.ButtonsPanel.Margin = New System.Windows.Forms.Padding(5)
-            Me.ButtonsPanel.Name = "ButtonsPanel"
-            Me.ButtonsPanel.Size = New System.Drawing.Size(150, 422)
-            Me.ButtonsPanel.TabIndex = 1
-            '
-            'MainNotifyIcon
-            '
-            Me.MainNotifyIcon.ContextMenuStrip = Me.MainContextMenuStrip
-            Me.MainNotifyIcon.Icon = CType(resources.GetObject("MainNotifyIcon.Icon"), System.Drawing.Icon)
-            Me.MainNotifyIcon.Visible = True
-            '
-            'MainContextMenuStrip
-            '
-            Me.MainContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SolutionsToolStripMenuItem, Me.ExitToolStripMenuItem})
-            Me.MainContextMenuStrip.Name = "MainContextMenuStrip"
-            Me.MainContextMenuStrip.Size = New System.Drawing.Size(124, 48)
-            '
-            'SolutionsToolStripMenuItem
-            '
-            Me.SolutionsToolStripMenuItem.Name = "SolutionsToolStripMenuItem"
-            Me.SolutionsToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
-            Me.SolutionsToolStripMenuItem.Text = "Solutions"
-            '
-            'ExitToolStripMenuItem
-            '
-            Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-            Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
-            Me.ExitToolStripMenuItem.Text = "Exit"
-            '
-            'Main
-            '
-            Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-            Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-            Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(28, Byte), Integer), CType(CType(63, Byte), Integer))
-            Me.ClientSize = New System.Drawing.Size(800, 450)
-            Me.Controls.Add(Me.ButtonsPanel)
-            Me.Controls.Add(Me.ControlsPanel)
-            Me.DoubleBuffered = True
-            Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.Name = "Main"
-            Me.Text = "Main"
-            Me.MainContextMenuStrip.ResumeLayout(False)
-            Me.ResumeLayout(False)
+            ControlsPanel = New Panel()
+            ButtonsPanel = New Panel()
+            MainNotifyIcon = New NotifyIcon(components)
+            MainContextMenuStrip = New ContextMenuStrip(components)
+            SolutionsToolStripMenuItem = New ToolStripMenuItem()
+            ExitToolStripMenuItem = New ToolStripMenuItem()
+            MainContextMenuStrip.SuspendLayout()
+            SuspendLayout()
+            ' 
+            ' ControlsPanel
+            ' 
+            ControlsPanel.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+            ControlsPanel.Location = New Point(214, 9)
+            ControlsPanel.Margin = New Padding(0)
+            ControlsPanel.Name = "ControlsPanel"
+            ControlsPanel.Size = New Size(577, 432)
+            ControlsPanel.TabIndex = 0
+            ' 
+            ' ButtonsPanel
+            ' 
+            ButtonsPanel.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left
+            ButtonsPanel.AutoScroll = True
+            ButtonsPanel.Location = New Point(9, 9)
+            ButtonsPanel.Margin = New Padding(0, 0, 5, 0)
+            ButtonsPanel.Name = "ButtonsPanel"
+            ButtonsPanel.Size = New Size(200, 432)
+            ButtonsPanel.TabIndex = 1
+            ' 
+            ' MainNotifyIcon
+            ' 
+            MainNotifyIcon.ContextMenuStrip = MainContextMenuStrip
+            MainNotifyIcon.Icon = CType(resources.GetObject("MainNotifyIcon.Icon"), Icon)
+            MainNotifyIcon.Visible = True
+            ' 
+            ' MainContextMenuStrip
+            ' 
+            MainContextMenuStrip.Items.AddRange(New ToolStripItem() {SolutionsToolStripMenuItem, ExitToolStripMenuItem})
+            MainContextMenuStrip.Name = "MainContextMenuStrip"
+            MainContextMenuStrip.Size = New Size(124, 48)
+            ' 
+            ' SolutionsToolStripMenuItem
+            ' 
+            SolutionsToolStripMenuItem.Name = "SolutionsToolStripMenuItem"
+            SolutionsToolStripMenuItem.Size = New Size(123, 22)
+            SolutionsToolStripMenuItem.Text = "Solutions"
+            ' 
+            ' ExitToolStripMenuItem
+            ' 
+            ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
+            ExitToolStripMenuItem.Size = New Size(123, 22)
+            ExitToolStripMenuItem.Text = "Exit"
+            ' 
+            ' Main
+            ' 
+            AutoScaleMode = AutoScaleMode.None
+            BackColor = Color.FromArgb(CByte(24), CByte(28), CByte(63))
+            ClientSize = New Size(800, 450)
+            Controls.Add(ButtonsPanel)
+            Controls.Add(ControlsPanel)
+            DoubleBuffered = True
+            Font = New Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+            Name = "Main"
+            Text = "Main"
+            MainContextMenuStrip.ResumeLayout(False)
+            ResumeLayout(False)
 
         End Sub
 
