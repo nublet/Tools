@@ -128,24 +128,32 @@
             End Try
         End Sub
 
+        Private Sub ClearFolder(folderPath As String)
+            Try
+                If Not IO.Directory.Exists(folderPath) Then
+                    Return
+                End If
+
+                For Each Current In IO.Directory.GetFiles(folderPath, "*.*")
+                    Try
+                        MainListResults.AddMessage("   Deleting: {0}".FormatWith(Current))
+                        IO.File.Delete(Current)
+                    Catch exInner As Exception
+                        MainListResults.AddMessage("   ERROR: {0}".FormatWith(exInner.Message))
+                    End Try
+                Next
+            Catch ex As Exception
+                MainListResults.AddMessage("   ERROR: {0}".FormatWith(ex.Message))
+            End Try
+        End Sub
+
         Public Sub StartTimer()
-            MainListResults.AddMessage("Clearing Screenshots...")
-            For Each Current In IO.Directory.GetFiles("C:\Users\Poesboi\Pictures\Screenshots", "*.*")
-                Try
-                    MainListResults.AddMessage("   Deleting: {0}".FormatWith(Current))
-                    IO.File.Delete(Current)
-                Catch ex As Exception
-                    MainListResults.AddMessage("   ERROR: {0}".FormatWith(ex.Message))
-                End Try
+            MainListResults.AddMessage("Clearing Folders...")
+
+            For Each Current In {"C:\Users\Poesboi\Pictures\Screenshots", "D:\Games\Activision\World of Warcraft\_retail_\Screenshots", "D:\Games\Activision\World of Warcraft\_retail_\Logs\BlizzardBrowser", "D:\Games\Activision\World of Warcraft\_retail_\Logs", "D:\Games\Activision\World of Warcraft\_retail_\Cache\WDB\enUS", "D:\Projects\Videos"}
+                ClearFolder(Current)
             Next
-            For Each Current In IO.Directory.GetFiles("D:\Games\Activision\World of Warcraft\_retail_\Screenshots", "*.*")
-                Try
-                    MainListResults.AddMessage("   Deleting: {0}".FormatWith(Current))
-                    IO.File.Delete(Current)
-                Catch ex As Exception
-                    MainListResults.AddMessage("   ERROR: {0}".FormatWith(ex.Message))
-                End Try
-            Next
+
             MainListResults.AddMessage("Complete.")
         End Sub
 
@@ -272,11 +280,17 @@
 
         Private Function GetProfileName_Shared(fileName As String, keyName As String) As String
             Try
+                If keyName.StartsWith("HandyNotes", StringComparison.CurrentCultureIgnoreCase) Then
+                    Return "Poesboi"
+                End If
+
                 Select Case keyName
                     Case "mogit_mogitwishlist"
                         Return "Default"
 
                     Case "actionbarprofiles_actionbarprofilesdbv3"
+                        Return "Poesboi"
+                    Case "acu_addoncpuusagedb"
                         Return "Poesboi"
                     Case "adibags_adibagsdb"
                         Return "Poesboi"
@@ -377,56 +391,6 @@
                     Case "gathermate2_gathermate2db"
                         Return "Poesboi"
                     Case "gladiatorlossa2_gladiatorlossadb"
-                        Return "Poesboi"
-                    Case "handynotes_handynotesdb"
-                        Return "Poesboi"
-                    Case "handynotes_handynotes_handynotesdb"
-                        Return "Poesboi"
-                    Case "handynotes_arathi_handynotesarathidb"
-                        Return "Poesboi"
-                    Case "handynotes_argus_handynotesargusdb", "handynotes_argus_handynotes_argusdb"
-                        Return "Poesboi"
-                    Case "handynotes_battleforazerothtreasures_handynotes_battleforazerothtreasuresdb", "handynotes_battleforazeroth_handynotes_battleforazerothdb"
-                        Return "Poesboi"
-                    Case "handynotes_brokenshore_handynotes_brokenshoredb"
-                        Return "Poesboi"
-                    Case "handynotes_draenor_handynotesdraenordb", "handynotes_draenortreasures_draenortreasuresdb"
-                        Return "Poesboi"
-                    Case "handynotes_dragonflighttreasures_handynotes_dragonflighttreasuresdb", ""
-                        Return "Poesboi"
-                    Case "handynotes_dragonflight_handynotes_dragonflightdb"
-                        Return "Poesboi"
-                    Case "handynotes_dragonglyphs_handynotes_dragonglyphsdb"
-                        Return "Poesboi"
-                    Case "handynotes_dungeonlocations_handynotes_dungeonlocationsdb"
-                        Return "Poesboi"
-                    Case "handynotes_hallowsend_handynotes_hallowsenddb"
-                        Return "Poesboi"
-                    Case "handynotes_legioninstanceworldquests_handynotes_legioninstanceworldquestsdb"
-                        Return "Poesboi"
-                    Case "handynotes_legionrarestreasures_legionrarestreasuresdb"
-                        Return "Poesboi"
-                    Case "handynotes_legiontreasures_handynotes_legiontreasuresdb"
-                        Return "Poesboi"
-                    Case "handynotes_longforgottenhippogryph_handynotes_longforgottenhippogryphdb"
-                        Return "Poesboi"
-                    Case "handynotes_lunarfestival_handynotes_lunarfestivaldb"
-                        Return "Poesboi"
-                    Case "handynotes_mailboxes_handynotes_mailboxesdb"
-                        Return "Poesboi"
-                    Case "handynotes_mistsofpandariatreasures_handynotes_mistsofpandariatreasuresdb"
-                        Return "Poesboi"
-                    Case "handynotes_shadowlands_handynotes_shadowlandsdb"
-                        Return "Poesboi"
-                    Case "handynotes_summerfestival_handynotes_summerfestivaldb"
-                        Return "Poesboi"
-                    Case "handynotes_suramartelemancy_handynotes_suramartelemancydb"
-                        Return "Poesboi"
-                    Case "handynotes_treasurehunter_handynotes_treasurehunterdb"
-                        Return "Poesboi"
-                    Case "handynotes_visionsofnzoth_handynotes_visionsofnzothdb"
-                        Return "Poesboi"
-                    Case "handynotes_warfrontrares_handynotesarathidb"
                         Return "Poesboi"
                     Case "healthbarcolor_healthbarcolordb"
                         Return "Poesboi"
