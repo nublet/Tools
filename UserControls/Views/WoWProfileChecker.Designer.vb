@@ -33,6 +33,7 @@
             BothButton = New Aprotec.UserControls.Button()
             SavedVariablesCheckBox = New Aprotec.UserControls.CheckBox()
             IncludeTemplatesCheckBox = New Aprotec.UserControls.CheckBox()
+            FontsButton = New Aprotec.UserControls.Button()
             SuspendLayout()
             ' 
             ' StatusLabel
@@ -149,14 +150,15 @@
             ' 
             ' SavedVariablesCheckBox
             ' 
-            SavedVariablesCheckBox.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+            SavedVariablesCheckBox.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
+            SavedVariablesCheckBox.AutoSize = True
             SavedVariablesCheckBox.CheckedColor = Color.MediumSlateBlue
-            SavedVariablesCheckBox.Location = New Point(405, 432)
+            SavedVariablesCheckBox.Location = New Point(391, 439)
             SavedVariablesCheckBox.Margin = New Padding(0, 0, 5, 0)
             SavedVariablesCheckBox.MinimumSize = New Size(0, 21)
             SavedVariablesCheckBox.Name = "SavedVariablesCheckBox"
             SavedVariablesCheckBox.Padding = New Padding(10, 0, 0, 0)
-            SavedVariablesCheckBox.Size = New Size(536, 30)
+            SavedVariablesCheckBox.Size = New Size(158, 21)
             SavedVariablesCheckBox.TabIndex = 50
             SavedVariablesCheckBox.Text = "Include Saved Variables"
             SavedVariablesCheckBox.UncheckedColor = Color.Gray
@@ -166,23 +168,44 @@
             ' IncludeTemplatesCheckBox
             ' 
             IncludeTemplatesCheckBox.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
+            IncludeTemplatesCheckBox.AutoSize = True
             IncludeTemplatesCheckBox.CheckedColor = Color.MediumSlateBlue
-            IncludeTemplatesCheckBox.Location = New Point(255, 432)
+            IncludeTemplatesCheckBox.Location = New Point(255, 439)
             IncludeTemplatesCheckBox.Margin = New Padding(0, 0, 5, 0)
             IncludeTemplatesCheckBox.MinimumSize = New Size(0, 21)
             IncludeTemplatesCheckBox.Name = "IncludeTemplatesCheckBox"
             IncludeTemplatesCheckBox.Padding = New Padding(10, 0, 0, 0)
-            IncludeTemplatesCheckBox.Size = New Size(145, 30)
+            IncludeTemplatesCheckBox.Size = New Size(131, 21)
             IncludeTemplatesCheckBox.TabIndex = 51
             IncludeTemplatesCheckBox.Text = "Include Templates"
             IncludeTemplatesCheckBox.UncheckedColor = Color.Gray
             IncludeTemplatesCheckBox.UseTick = False
             IncludeTemplatesCheckBox.UseVisualStyleBackColor = True
             ' 
+            ' FontsButton
+            ' 
+            FontsButton.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
+            FontsButton.BackColor = Color.MediumSlateBlue
+            FontsButton.BorderColor = Color.PaleVioletRed
+            FontsButton.BorderRadius = 0
+            FontsButton.BorderSize = 1
+            FontsButton.FlatAppearance.BorderColor = Color.FromArgb(CByte(107), CByte(83), CByte(255))
+            FontsButton.FlatStyle = FlatStyle.Flat
+            FontsButton.Font = New Font("Microsoft Sans Serif", 11F)
+            FontsButton.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
+            FontsButton.Location = New Point(554, 432)
+            FontsButton.Margin = New Padding(0, 0, 5, 0)
+            FontsButton.Name = "FontsButton"
+            FontsButton.Size = New Size(80, 30)
+            FontsButton.TabIndex = 52
+            FontsButton.Text = "Fonts"
+            FontsButton.UseVisualStyleBackColor = True
+            ' 
             ' WoWProfileChecker
             ' 
             AutoScaleMode = AutoScaleMode.None
             BackColor = Color.FromArgb(CByte(42), CByte(45), CByte(86))
+            Controls.Add(FontsButton)
             Controls.Add(IncludeTemplatesCheckBox)
             Controls.Add(SavedVariablesCheckBox)
             Controls.Add(BothButton)
@@ -196,6 +219,7 @@
             Name = "WoWProfileChecker"
             Size = New Size(1026, 462)
             ResumeLayout(False)
+            PerformLayout()
 
         End Sub
         Private StatusLabel As Label
@@ -207,6 +231,7 @@
         Private WithEvents BothButton As Aprotec.UserControls.Button
         Friend WithEvents SavedVariablesCheckBox As Aprotec.UserControls.CheckBox
         Friend WithEvents IncludeTemplatesCheckBox As Aprotec.UserControls.CheckBox
+        Private WithEvents FontsButton As Aprotec.UserControls.Button
     End Class
 
 End Namespace

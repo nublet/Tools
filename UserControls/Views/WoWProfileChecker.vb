@@ -4,6 +4,7 @@
 
         Private _IncludeTemplates As Boolean = False
         Private _IncludeSavedVariables As Boolean = False
+        Private _UpdateFonts As Boolean = False
 
         Private ReadOnly _Folders As New Dictionary(Of String, String)
 
@@ -149,11 +150,13 @@
 
         Public Sub StartTimer()
             MainListResults.AddMessage("Clearing Folders...")
-
             For Each Current In {"C:\Users\Poesboi\Pictures\Screenshots", "D:\Games\Activision\World of Warcraft\_retail_\Screenshots", "D:\Games\Activision\World of Warcraft\_retail_\Logs\BlizzardBrowser", "D:\Games\Activision\World of Warcraft\_retail_\Logs", "D:\Games\Activision\World of Warcraft\_retail_\Cache\WDB\enUS", "D:\Projects\Videos"}
                 ClearFolder(Current)
             Next
+            MainListResults.AddMessage("Complete.")
 
+            MainListResults.AddMessage("Updating Fonts...")
+            CheckFonts("D:\Games\Activision\World of Warcraft\_retail_\WTF\Account\POESBOI\SavedVariables\WeakAuras.lua")
             MainListResults.AddMessage("Complete.")
         End Sub
 
@@ -173,6 +176,8 @@
                 _IncludeSavedVariables = False
             End If
 
+            _UpdateFonts = False
+
             MainBackgroundWorker.RunWorkerAsync()
         End Sub
 
@@ -191,11 +196,26 @@
                 _IncludeSavedVariables = False
             End If
 
+            _UpdateFonts = False
+
             MainBackgroundWorker.RunWorkerAsync()
         End Sub
 
         Private Sub ClearButton_Click(sender As Object, e As EventArgs) Handles ClearButton.Click
             MainListResults.ClearResults()
+        End Sub
+
+        Private Sub FontsButton_Click(sender As Object, e As EventArgs) Handles FontsButton.Click
+            Enabled = False
+
+            MainListResults.ClearResults()
+
+            _Folders.Clear()
+            _IncludeTemplates = False
+            _IncludeSavedVariables = False
+            _UpdateFonts = True
+
+            MainBackgroundWorker.RunWorkerAsync()
         End Sub
 
         Private Sub IncludeTemplatesCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles IncludeTemplatesCheckBox.CheckedChanged
@@ -204,14 +224,20 @@
 
         Private Sub MainBackgroundWorker_DoWork(sender As Object, e As ComponentModel.DoWorkEventArgs) Handles MainBackgroundWorker.DoWork
             Try
-                For Each Current In _Folders
-                    If Not IO.Directory.Exists(Current.Key) Then
-                        Continue For
-                    End If
+                If _UpdateFonts Then
+                    MainListResults.AddMessage("Updating Fonts...")
 
-                    MainListResults.AddMessage($"Checking Profiles - {Current.Key}...")
-                    CheckProfiles(Current.Key, Current.Value)
-                Next
+                    CheckFonts("D:\Games\Activision\World of Warcraft\_retail_\WTF\Account\POESBOI\SavedVariables\WeakAuras.lua")
+                Else
+                    For Each Current In _Folders
+                        If Not IO.Directory.Exists(Current.Key) Then
+                            Continue For
+                        End If
+
+                        MainListResults.AddMessage($"Checking Profiles - {Current.Key}...")
+                        CheckProfiles(Current.Key, Current.Value)
+                    Next
+                End If
             Catch ex As Exception
                 ex.ToLog()
             End Try
@@ -237,7 +263,47 @@
                 _IncludeSavedVariables = False
             End If
 
+            _UpdateFonts = False
+
             MainBackgroundWorker.RunWorkerAsync()
+        End Sub
+
+#End Region
+
+#Region " Fonts "
+
+        Private Sub CheckFonts(fileName As String)
+            Try
+                Dim AddonName As String = IO.Path.GetFileNameWithoutExtension(fileName)
+                Dim HasChanged As Boolean = False
+                Dim InProfileKeys As Boolean = False
+                Dim LastTable As String = ""
+                Dim ProfileName As String = ""
+                Dim StringBuilder As New Text.StringBuilder()
+
+                MainListResults.AddMessage($"   Checking File: {fileName}...")
+                For Each CurrentLine As String In IO.File.ReadLines(fileName)
+                    If CurrentLine.IsNotSet() Then
+                        StringBuilder.AppendLine(CurrentLine)
+                        Continue For
+                    End If
+
+                    If CurrentLine.StartsWith("[""text_font""] = """, StringComparison.CurrentCultureIgnoreCase) AndAlso Not CurrentLine.EndsWith("""Naowh"",", StringComparison.CurrentCultureIgnoreCase) Then
+                        MainListResults.AddMessage($"      Replaced: {CurrentLine}")
+                        CurrentLine = "[""text_font""] = ""Naowh"","
+                        HasChanged = True
+                    End If
+
+                    StringBuilder.AppendLine(CurrentLine)
+                Next
+
+                If HasChanged Then
+                    IO.File.WriteAllText(fileName, StringBuilder.ToString())
+                    MainListResults.AddMessage("   Updated.")
+                End If
+            Catch ex As Exception
+                ex.ToLog()
+            End Try
         End Sub
 
 #End Region
@@ -279,228 +345,11 @@
         End Function
 
         Private Function GetProfileName_Shared(fileName As String, keyName As String) As String
-            Try
-                If keyName.StartsWith("HandyNotes", StringComparison.CurrentCultureIgnoreCase) Then
-                    Return "Poesboi"
-                End If
+            If keyName.IsEqualTo("mogit_mogitwishlist") Then
+                Return "Default"
+            End If
 
-                Select Case keyName
-                    Case "mogit_mogitwishlist"
-                        Return "Default"
-
-                    Case "actionbarprofiles_actionbarprofilesdbv3"
-                        Return "Poesboi"
-                    Case "acu_addoncpuusagedb"
-                        Return "Poesboi"
-                    Case "adibags_adibagsdb"
-                        Return "Poesboi"
-                    Case "addonskins_addonskinsdb"
-                        Return "Poesboi"
-                    Case "altoholic_altoholicdb"
-                        Return "Poesboi"
-                    Case "announcerare_announceraredb"
-                        Return "Poesboi"
-                    Case "askmrrobot_askmrrobotdb4"
-                        Return "Poesboi"
-                    Case "astralkeys_astralminimap"
-                        Return "Poesboi"
-                    Case "auctionlite_auctionlitedb"
-                        Return "Poesboi"
-                    Case "auditor3_auditor2db"
-                        Return "Poesboi"
-                    Case "autolooter_autolooterdb"
-                        Return "Poesboi"
-                    Case "azeritetooltip_azeritetooltipdb"
-                        Return "Poesboi"
-                    Case "battlegroundenemies_battlegroundenemiesdb"
-                        Return "Poesboi"
-                    Case "bestinslotredux_bestinslotdb"
-                        Return "Poesboi"
-                    Case "bigwigs_bigwigs3db"
-                        Return "Poesboi"
-                    Case "bigwigs_recordkills_rkdatabase"
-                        Return "Poesboi"
-                    Case "bonusrollfilter_brf_data"
-                        Return "Poesboi"
-                    Case "broker_auditor_brokerauditordb"
-                        Return "Poesboi"
-                    Case "canimogit_canimogitdatabase"
-                        Return "Poesboi"
-                    Case "capping_cappingsettings"
-                        Return "Poesboi"
-                    Case "choretracker_choretrackerdb"
-                        Return "Poesboi"
-                    Case "cooldowntimeline2_cdtl2db"
-                        Return "Poesboi"
-                    Case "corruptiontooltips_corruptiontooltipsdb"
-                        Return "Poesboi"
-                    Case "craftsim_craftsimcustomerhistory"
-                        Return "Poesboi"
-                    Case "crossrealmassist_crossrealmassistdb"
-                        Return "Poesboi"
-                    Case "datastore_datastoredb"
-                        Return "Poesboi"
-                    Case "datastore_achievements_datastore_achievementsdb"
-                        Return "Poesboi"
-                    Case "datastore_agenda_datastore_agendadb"
-                        Return "Poesboi"
-                    Case "datastore_auctions_datastore_auctionsdb"
-                        Return "Poesboi"
-                    Case "datastore_characters_datastore_charactersdb"
-                        Return "Poesboi"
-                    Case "datastore_containers_datastore_containersdb"
-                        Return "Poesboi"
-                    Case "datastore_crafts_datastore_craftsdb"
-                        Return "Poesboi"
-                    Case "datastore_crafts_datastore_craftsrefdb"
-                        Return "Poesboi"
-                    Case "datastore_covenants_datastore_covenantsdb"
-                        Return "Poesboi"
-                    Case "datastore_currencies_datastore_currenciesdb"
-                        Return "Poesboi"
-                    Case "datastore_garrisons_datastore_garrisonsdb"
-                        Return "Poesboi"
-                    Case "datastore_inventory_datastore_inventorydb"
-                        Return "Poesboi"
-                    Case "datastore_keystones_datastore_keystonesdb"
-                        Return "Poesboi"
-                    Case "datastore_keystones_datastore_keystonesrefdb"
-                        Return "Poesboi"
-                    Case "datastore_mails_datastore_mailsdb"
-                        Return "Poesboi"
-                    Case "datastore_pets_datastore_petsdb"
-                        Return "Poesboi"
-                    Case "datastore_quests_datastore_questsdb"
-                        Return "Poesboi"
-                    Case "datastore_rares_datastore_raresdb"
-                        Return "Poesboi"
-                    Case "datastore_reputations_datastore_reputationsdb"
-                        Return "Poesboi"
-                    Case "datastore_spells_datastore_spellsdb"
-                        Return "Poesboi"
-                    Case "datastore_stats_datastore_statsdb"
-                        Return "Poesboi"
-                    Case "datastore_talents_datastore_talentsdb"
-                        Return "Poesboi"
-                    Case "datastore_talents_datastore_talentsrefdb"
-                        Return "Poesboi"
-                    Case "epgp_lootmaster_epgplootmaster"
-                        Return "Poesboi"
-                    Case "enemygrid_enemygriddb"
-                        Return "Poesboi"
-                    Case "gathermate2_gathermate2db"
-                        Return "Poesboi"
-                    Case "gladiatorlossa2_gladiatorlossadb"
-                        Return "Poesboi"
-                    Case "healthbarcolor_healthbarcolordb"
-                        Return "Poesboi"
-                    Case "hekili_hekilidb"
-                        Return "Poesboi"
-                    Case "iskarassist_iskarassistdb"
-                        Return "Poesboi"
-                    Case "iskarassist_radatabase"
-                        Return "Poesboi"
-                    Case "!kalielstracker_kalielstrackerdb"
-                        Return "Poesboi"
-                    Case "loggerhead_loggerheaddb"
-                        Return "Poesboi"
-                    Case "krowi_extendedvendorui_krowievu_filters", "krowi_achievementfilter_krowiaf_options", "krowi_achievementfilter_krowiaf_filters", "krowi_achievementfilter_krowiaf_searchoptions", "krowi_extendedvendorui_krowievu_options"
-                        Return "Poesboi"
-                    Case "macrotoolkit_macrotoolkitdb"
-                        Return "Poesboi"
-                    Case "methoddungeontools_methoddungeontoolsdb"
-                        Return "Poesboi"
-                    Case "mogit_mogitdb"
-                        Return "Poesboi"
-                    Case "mountfarmhelper_mountfarmhelperdb"
-                        Return "Poesboi"
-                    Case "mouseoveractionbars_mouseoveractionbarsdb"
-                        Return "Poesboi"
-                    Case "mythicdungeontools_mythicdungeontoolsdb"
-                        Return "Poesboi"
-                    Case "nameplateauras_nameplateaurasacedb"
-                        Return "Poesboi"
-                    Case "nameplatesct_nameplatesctdb"
-                        Return "Poesboi"
-                    Case "naowhui_naowhdb"
-                        Return "Poesboi"
-                    Case "nop_newopenablesprofile"
-                        Return "Poesboi"
-                    Case "npcscan_npcscandb"
-                        Return "Poesboi"
-                    Case "omnicd_omnicddb"
-                        Return "Poesboi"
-                    Case "paste_pastedb"
-                        Return "Poesboi"
-                    Case "personalloottrader_pltraderdb"
-                        Return "Poesboi"
-                    Case "petbattleteams_petbattleteamsdb"
-                        Return "Poesboi"
-                    Case "petjournalenhanced_petjournalenhanceddb"
-                        Return "Poesboi"
-                    Case "plater_platerdb"
-                        Return "Poesboi"
-                    Case "postal_postal3db"
-                        Return "Poesboi"
-                    Case "pvptimer_ptdb"
-                        Return "Poesboi"
-                    Case "quickquest_quickquestdb2"
-                        Return "Poesboi"
-                    Case "randomhearthtoy_randomhearthtoydb"
-                        Return "Poesboi"
-                    Case "rarescanner_rarescannerdb"
-                        Return "Poesboi"
-                    Case "rarity_raritydb"
-                        Return "Poesboi"
-                    Case "relicinspector_relicinspectordb"
-                        Return "Poesboi"
-                    Case "routes_routesdb"
-                        Return "Poesboi"
-                    Case "sexycooldown_sexycooldowndb"
-                        Return "Poesboi"
-                    Case "silverdragon_silverdragon3db"
-                        Return "Poesboi"
-                    Case "simulationcraft_simulationcraftdb"
-                        Return "Poesboi"
-                    Case "sptimers_sptimersdb"
-                        Return "Poesboi"
-                    Case "tdbattlepetscript_td_db_battlepetscript_global"
-                        Return "Poesboi"
-                    Case "tldrmissions_tldrmissionsprofiles"
-                        Return "Poesboi"
-                    Case "tomtom_tomtomdb"
-                        Return "Poesboi"
-                    Case "tomtom_tomtomwaypointsm"
-                        Return "Poesboi"
-                    Case "toyboxq_toyboxqdb"
-                        Return "Poesboi"
-                    Case "truestatvalues_tsv_db"
-                        Return "Poesboi"
-                    Case "ultrasquirt_ultrasquirtsettingsdb"
-                        Return "Poesboi"
-                    Case "vanaskos_vanaskosdb"
-                        Return "Poesboi"
-                    Case "warpdeplete_warpdepletedb"
-                        Return "Poesboi"
-                    Case "worldbosstimers_worldbosstimersdb"
-                        Return "Poesboi"
-                    Case "worldquesttracker_wqtrackerdb"
-                        Return "Poesboi"
-                    Case "wowgatheringnodes_wowgatheringnodesconfig"
-                        Return "Poesboi"
-                    Case "xentitargetsdr_xentitargetsdb"
-                        Return "Poesboi"
-                    Case "_npcscan__npcscanprofiles"
-                        Return "Poesboi"
-
-                    Case Else
-                        System_String.ToLog($"Case ""{keyName}""", True)
-                End Select
-            Catch ex As Exception
-                ex.ToLog()
-            End Try
-
-            Return "Default"
+            Return "Poesboi"
         End Function
 
         Private Function GetProfileName(fileName As String, isBjorn As Boolean, keyName As String) As String
