@@ -34,6 +34,7 @@
             SavedVariablesCheckBox = New Aprotec.UserControls.CheckBox()
             IncludeTemplatesCheckBox = New Aprotec.UserControls.CheckBox()
             FontsButton = New Aprotec.UserControls.Button()
+            FailedButton = New Aprotec.UserControls.Button()
             SuspendLayout()
             ' 
             ' StatusLabel
@@ -201,10 +202,30 @@
             FontsButton.Text = "Fonts"
             FontsButton.UseVisualStyleBackColor = True
             ' 
+            ' FailedButton
+            ' 
+            FailedButton.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
+            FailedButton.BackColor = Color.MediumSlateBlue
+            FailedButton.BorderColor = Color.PaleVioletRed
+            FailedButton.BorderRadius = 0
+            FailedButton.BorderSize = 1
+            FailedButton.FlatAppearance.BorderColor = Color.FromArgb(CByte(107), CByte(83), CByte(255))
+            FailedButton.FlatStyle = FlatStyle.Flat
+            FailedButton.Font = New Font("Microsoft Sans Serif", 11F)
+            FailedButton.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
+            FailedButton.Location = New Point(639, 432)
+            FailedButton.Margin = New Padding(0, 0, 5, 0)
+            FailedButton.Name = "FailedButton"
+            FailedButton.Size = New Size(80, 30)
+            FailedButton.TabIndex = 53
+            FailedButton.Text = "Failed"
+            FailedButton.UseVisualStyleBackColor = True
+            ' 
             ' WoWProfileChecker
             ' 
             AutoScaleMode = AutoScaleMode.None
             BackColor = Color.FromArgb(CByte(42), CByte(45), CByte(86))
+            Controls.Add(FailedButton)
             Controls.Add(FontsButton)
             Controls.Add(IncludeTemplatesCheckBox)
             Controls.Add(SavedVariablesCheckBox)
@@ -232,6 +253,7 @@
         Friend WithEvents SavedVariablesCheckBox As Aprotec.UserControls.CheckBox
         Friend WithEvents IncludeTemplatesCheckBox As Aprotec.UserControls.CheckBox
         Private WithEvents FontsButton As Aprotec.UserControls.Button
+        Private WithEvents FailedButton As Aprotec.UserControls.Button
     End Class
 
 End Namespace
