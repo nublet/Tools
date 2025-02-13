@@ -25,28 +25,28 @@
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
             StatusLabel = New Label()
-            MainListResults = New Aprotec.UserControls.ListResultsBorder()
+            MainListResults = New PoesShared.UserControls.ListResults()
             MainBackgroundWorker = New ComponentModel.BackgroundWorker()
-            ClearButton = New Aprotec.UserControls.Button()
-            BjornButton = New Aprotec.UserControls.Button()
-            NixButton = New Aprotec.UserControls.Button()
-            BothButton = New Aprotec.UserControls.Button()
-            SavedVariablesCheckBox = New Aprotec.UserControls.CheckBox()
-            IncludeTemplatesCheckBox = New Aprotec.UserControls.CheckBox()
-            FontsButton = New Aprotec.UserControls.Button()
-            FailedButton = New Aprotec.UserControls.Button()
+            ClearButton = New Button()
+            BjornButton = New Button()
+            NixButton = New Button()
+            BothButton = New Button()
+            SavedVariablesCheckBox = New CheckBox()
+            IncludeTemplatesCheckBox = New CheckBox()
+            FontsButton = New Button()
+            FailedButton = New Button()
             SuspendLayout()
             ' 
             ' StatusLabel
             ' 
             StatusLabel.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
-            StatusLabel.Font = New Font("Microsoft Sans Serif", 11F)
+            StatusLabel.Font = New Font("Tahoma", 8.25F)
             StatusLabel.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
             StatusLabel.ImageAlign = ContentAlignment.MiddleLeft
-            StatusLabel.Location = New Point(0, 0)
-            StatusLabel.Margin = New Padding(0, 0, 0, 5)
+            StatusLabel.Location = New Point(5, 5)
+            StatusLabel.Margin = New Padding(5)
             StatusLabel.Name = "StatusLabel"
-            StatusLabel.Size = New Size(1026, 23)
+            StatusLabel.Size = New Size(1016, 23)
             StatusLabel.TabIndex = 44
             StatusLabel.Text = "Status"
             StatusLabel.TextAlign = ContentAlignment.MiddleCenter
@@ -56,19 +56,15 @@
             MainListResults.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
             MainListResults.BackColor = SystemColors.Window
             MainListResults.BorderColor = Color.MediumSlateBlue
-            MainListResults.BorderFocusColor = Color.HotPink
-            MainListResults.BorderRadius = 0
-            MainListResults.BorderSize = 2
-            MainListResults.Font = New Font("Microsoft Sans Serif", 9.5F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-            MainListResults.ForeColor = Color.DimGray
+            MainListResults.BorderSize = New Padding(2)
+            MainListResults.Font = New Font("Tahoma", 8.25F)
             MainListResults.Indent = 0
-            MainListResults.Location = New Point(0, 28)
-            MainListResults.Margin = New Padding(0, 0, 0, 5)
+            MainListResults.Location = New Point(5, 33)
+            MainListResults.Margin = New Padding(5, 0, 5, 5)
             MainListResults.Name = "MainListResults"
-            MainListResults.Padding = New Padding(12, 8, 12, 8)
-            MainListResults.Size = New Size(1026, 399)
-            MainListResults.TabIndex = 45
-            MainListResults.UnderlinedStyle = False
+            MainListResults.Padding = New Padding(2)
+            MainListResults.Size = New Size(1016, 396)
+            MainListResults.TabIndex = 0
             ' 
             ' MainBackgroundWorker
             ' 
@@ -77,18 +73,15 @@
             ' 
             ClearButton.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
             ClearButton.BackColor = Color.MediumSlateBlue
-            ClearButton.BorderColor = Color.PaleVioletRed
-            ClearButton.BorderRadius = 0
-            ClearButton.BorderSize = 1
             ClearButton.FlatAppearance.BorderColor = Color.FromArgb(CByte(107), CByte(83), CByte(255))
             ClearButton.FlatStyle = FlatStyle.Flat
-            ClearButton.Font = New Font("Microsoft Sans Serif", 11F)
+            ClearButton.Font = New Font("Tahoma", 8.25F)
             ClearButton.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
-            ClearButton.Location = New Point(946, 432)
-            ClearButton.Margin = New Padding(0)
+            ClearButton.Location = New Point(941, 434)
+            ClearButton.Margin = New Padding(0, 0, 5, 5)
             ClearButton.Name = "ClearButton"
-            ClearButton.Size = New Size(80, 30)
-            ClearButton.TabIndex = 46
+            ClearButton.Size = New Size(80, 23)
+            ClearButton.TabIndex = 8
             ClearButton.Text = "Clear"
             ClearButton.UseVisualStyleBackColor = True
             ' 
@@ -96,18 +89,15 @@
             ' 
             BjornButton.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
             BjornButton.BackColor = Color.MediumSlateBlue
-            BjornButton.BorderColor = Color.PaleVioletRed
-            BjornButton.BorderRadius = 0
-            BjornButton.BorderSize = 1
             BjornButton.FlatAppearance.BorderColor = Color.FromArgb(CByte(107), CByte(83), CByte(255))
             BjornButton.FlatStyle = FlatStyle.Flat
-            BjornButton.Font = New Font("Microsoft Sans Serif", 11F)
+            BjornButton.Font = New Font("Tahoma", 8.25F)
             BjornButton.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
-            BjornButton.Location = New Point(0, 432)
-            BjornButton.Margin = New Padding(0, 0, 5, 0)
+            BjornButton.Location = New Point(5, 434)
+            BjornButton.Margin = New Padding(5, 0, 5, 5)
             BjornButton.Name = "BjornButton"
-            BjornButton.Size = New Size(80, 30)
-            BjornButton.TabIndex = 47
+            BjornButton.Size = New Size(80, 23)
+            BjornButton.TabIndex = 1
             BjornButton.Text = "Bjorn"
             BjornButton.UseVisualStyleBackColor = True
             ' 
@@ -115,18 +105,15 @@
             ' 
             NixButton.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
             NixButton.BackColor = Color.MediumSlateBlue
-            NixButton.BorderColor = Color.PaleVioletRed
-            NixButton.BorderRadius = 0
-            NixButton.BorderSize = 1
             NixButton.FlatAppearance.BorderColor = Color.FromArgb(CByte(107), CByte(83), CByte(255))
             NixButton.FlatStyle = FlatStyle.Flat
-            NixButton.Font = New Font("Microsoft Sans Serif", 11F)
+            NixButton.Font = New Font("Tahoma", 8.25F)
             NixButton.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
-            NixButton.Location = New Point(85, 432)
-            NixButton.Margin = New Padding(0, 0, 5, 0)
+            NixButton.Location = New Point(90, 434)
+            NixButton.Margin = New Padding(0, 0, 5, 5)
             NixButton.Name = "NixButton"
-            NixButton.Size = New Size(80, 30)
-            NixButton.TabIndex = 48
+            NixButton.Size = New Size(80, 23)
+            NixButton.TabIndex = 2
             NixButton.Text = "Nix"
             NixButton.UseVisualStyleBackColor = True
             ' 
@@ -134,71 +121,59 @@
             ' 
             BothButton.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
             BothButton.BackColor = Color.MediumSlateBlue
-            BothButton.BorderColor = Color.PaleVioletRed
-            BothButton.BorderRadius = 0
-            BothButton.BorderSize = 1
             BothButton.FlatAppearance.BorderColor = Color.FromArgb(CByte(107), CByte(83), CByte(255))
             BothButton.FlatStyle = FlatStyle.Flat
-            BothButton.Font = New Font("Microsoft Sans Serif", 11F)
+            BothButton.Font = New Font("Tahoma", 8.25F)
             BothButton.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
-            BothButton.Location = New Point(170, 432)
-            BothButton.Margin = New Padding(0, 0, 5, 0)
+            BothButton.Location = New Point(175, 434)
+            BothButton.Margin = New Padding(0, 0, 5, 5)
             BothButton.Name = "BothButton"
-            BothButton.Size = New Size(80, 30)
-            BothButton.TabIndex = 49
+            BothButton.Size = New Size(80, 23)
+            BothButton.TabIndex = 3
             BothButton.Text = "Both"
             BothButton.UseVisualStyleBackColor = True
             ' 
             ' SavedVariablesCheckBox
             ' 
             SavedVariablesCheckBox.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
-            SavedVariablesCheckBox.AutoSize = True
-            SavedVariablesCheckBox.CheckedColor = Color.MediumSlateBlue
-            SavedVariablesCheckBox.Location = New Point(391, 439)
-            SavedVariablesCheckBox.Margin = New Padding(0, 0, 5, 0)
+            SavedVariablesCheckBox.Font = New Font("Tahoma", 8.25F)
+            SavedVariablesCheckBox.Location = New Point(395, 434)
+            SavedVariablesCheckBox.Margin = New Padding(0, 0, 5, 5)
             SavedVariablesCheckBox.MinimumSize = New Size(0, 21)
             SavedVariablesCheckBox.Name = "SavedVariablesCheckBox"
             SavedVariablesCheckBox.Padding = New Padding(10, 0, 0, 0)
-            SavedVariablesCheckBox.Size = New Size(158, 21)
-            SavedVariablesCheckBox.TabIndex = 50
+            SavedVariablesCheckBox.Size = New Size(160, 23)
+            SavedVariablesCheckBox.TabIndex = 5
             SavedVariablesCheckBox.Text = "Include Saved Variables"
-            SavedVariablesCheckBox.UncheckedColor = Color.Gray
-            SavedVariablesCheckBox.UseTick = False
             SavedVariablesCheckBox.UseVisualStyleBackColor = True
             ' 
             ' IncludeTemplatesCheckBox
             ' 
             IncludeTemplatesCheckBox.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
-            IncludeTemplatesCheckBox.AutoSize = True
-            IncludeTemplatesCheckBox.CheckedColor = Color.MediumSlateBlue
-            IncludeTemplatesCheckBox.Location = New Point(255, 439)
-            IncludeTemplatesCheckBox.Margin = New Padding(0, 0, 5, 0)
+            IncludeTemplatesCheckBox.Font = New Font("Tahoma", 8.25F)
+            IncludeTemplatesCheckBox.Location = New Point(260, 434)
+            IncludeTemplatesCheckBox.Margin = New Padding(0, 0, 5, 5)
             IncludeTemplatesCheckBox.MinimumSize = New Size(0, 21)
             IncludeTemplatesCheckBox.Name = "IncludeTemplatesCheckBox"
             IncludeTemplatesCheckBox.Padding = New Padding(10, 0, 0, 0)
-            IncludeTemplatesCheckBox.Size = New Size(131, 21)
-            IncludeTemplatesCheckBox.TabIndex = 51
+            IncludeTemplatesCheckBox.Size = New Size(130, 23)
+            IncludeTemplatesCheckBox.TabIndex = 4
             IncludeTemplatesCheckBox.Text = "Include Templates"
-            IncludeTemplatesCheckBox.UncheckedColor = Color.Gray
-            IncludeTemplatesCheckBox.UseTick = False
             IncludeTemplatesCheckBox.UseVisualStyleBackColor = True
             ' 
             ' FontsButton
             ' 
             FontsButton.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
             FontsButton.BackColor = Color.MediumSlateBlue
-            FontsButton.BorderColor = Color.PaleVioletRed
-            FontsButton.BorderRadius = 0
-            FontsButton.BorderSize = 1
             FontsButton.FlatAppearance.BorderColor = Color.FromArgb(CByte(107), CByte(83), CByte(255))
             FontsButton.FlatStyle = FlatStyle.Flat
-            FontsButton.Font = New Font("Microsoft Sans Serif", 11F)
+            FontsButton.Font = New Font("Tahoma", 8.25F)
             FontsButton.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
-            FontsButton.Location = New Point(554, 432)
-            FontsButton.Margin = New Padding(0, 0, 5, 0)
+            FontsButton.Location = New Point(560, 434)
+            FontsButton.Margin = New Padding(0, 0, 5, 5)
             FontsButton.Name = "FontsButton"
-            FontsButton.Size = New Size(80, 30)
-            FontsButton.TabIndex = 52
+            FontsButton.Size = New Size(80, 23)
+            FontsButton.TabIndex = 6
             FontsButton.Text = "Fonts"
             FontsButton.UseVisualStyleBackColor = True
             ' 
@@ -206,18 +181,15 @@
             ' 
             FailedButton.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
             FailedButton.BackColor = Color.MediumSlateBlue
-            FailedButton.BorderColor = Color.PaleVioletRed
-            FailedButton.BorderRadius = 0
-            FailedButton.BorderSize = 1
             FailedButton.FlatAppearance.BorderColor = Color.FromArgb(CByte(107), CByte(83), CByte(255))
             FailedButton.FlatStyle = FlatStyle.Flat
-            FailedButton.Font = New Font("Microsoft Sans Serif", 11F)
+            FailedButton.Font = New Font("Tahoma", 8.25F)
             FailedButton.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
-            FailedButton.Location = New Point(639, 432)
-            FailedButton.Margin = New Padding(0, 0, 5, 0)
+            FailedButton.Location = New Point(645, 434)
+            FailedButton.Margin = New Padding(0, 0, 5, 5)
             FailedButton.Name = "FailedButton"
-            FailedButton.Size = New Size(80, 30)
-            FailedButton.TabIndex = 53
+            FailedButton.Size = New Size(80, 23)
+            FailedButton.TabIndex = 7
             FailedButton.Text = "Failed"
             FailedButton.UseVisualStyleBackColor = True
             ' 
@@ -236,24 +208,24 @@
             Controls.Add(MainListResults)
             Controls.Add(StatusLabel)
             DoubleBuffered = True
+            Font = New Font("Tahoma", 8.25F)
             Margin = New Padding(0)
             Name = "WoWProfileChecker"
             Size = New Size(1026, 462)
             ResumeLayout(False)
-            PerformLayout()
 
         End Sub
         Private StatusLabel As Label
-        Private WithEvents MainListResults As Aprotec.UserControls.ListResultsBorder
+        Private WithEvents MainListResults As PoesShared.UserControls.ListResults
         Private WithEvents MainBackgroundWorker As System.ComponentModel.BackgroundWorker
-        Private WithEvents ClearButton As Aprotec.UserControls.Button
-        Private WithEvents BjornButton As Aprotec.UserControls.Button
-        Private WithEvents NixButton As Aprotec.UserControls.Button
-        Private WithEvents BothButton As Aprotec.UserControls.Button
-        Friend WithEvents SavedVariablesCheckBox As Aprotec.UserControls.CheckBox
-        Friend WithEvents IncludeTemplatesCheckBox As Aprotec.UserControls.CheckBox
-        Private WithEvents FontsButton As Aprotec.UserControls.Button
-        Private WithEvents FailedButton As Aprotec.UserControls.Button
+        Private WithEvents ClearButton As Button
+        Private WithEvents BjornButton As Button
+        Private WithEvents NixButton As Button
+        Private WithEvents BothButton As Button
+        Private WithEvents FontsButton As Button
+        Private WithEvents FailedButton As Button
+        Private WithEvents SavedVariablesCheckBox As CheckBox
+        Private WithEvents IncludeTemplatesCheckBox As CheckBox
     End Class
 
 End Namespace

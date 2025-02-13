@@ -24,264 +24,218 @@
         'Do not modify it using the code editor.
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
-            Me.MainBackgroundWorker = New System.ComponentModel.BackgroundWorker()
-            Me.ClearButton = New Aprotec.UserControls.Button()
-            Me.ProcessButton = New Aprotec.UserControls.Button()
-            Me.FolderNameButton = New Aprotec.UserControls.Button()
-            Me.FolderNameTextBox = New Aprotec.UserControls.TextBox()
-            Me.ArchiveNameTextBox = New Aprotec.UserControls.TextBox()
-            Me.ArchiveNameButton = New Aprotec.UserControls.Button()
-            Me.FolderNameLabel = New System.Windows.Forms.Label()
-            Me.ArchiveNameLabel = New System.Windows.Forms.Label()
-            Me.MainListResults = New Aprotec.UserControls.ListResultsBorder()
-            Me.BackupAddonsButton = New Aprotec.UserControls.Button()
-            Me.BackupWTFButton = New Aprotec.UserControls.Button()
-            Me.SuspendLayout()
-            '
-            'MainBackgroundWorker
-            '
-            '
-            'ClearButton
-            '
-            Me.ClearButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            Me.ClearButton.BackColor = System.Drawing.Color.MediumSlateBlue
-            Me.ClearButton.BorderColor = System.Drawing.Color.PaleVioletRed
-            Me.ClearButton.BorderRadius = 0
-            Me.ClearButton.BorderSize = 1
-            Me.ClearButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(107, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(255, Byte), Integer))
-            Me.ClearButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-            Me.ClearButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-            Me.ClearButton.ForeColor = System.Drawing.Color.FromArgb(CType(CType(124, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(181, Byte), Integer))
-            Me.ClearButton.Location = New System.Drawing.Point(674, 856)
-            Me.ClearButton.Margin = New System.Windows.Forms.Padding(0, 0, 5, 5)
-            Me.ClearButton.Name = "ClearButton"
-            Me.ClearButton.Size = New System.Drawing.Size(80, 30)
-            Me.ClearButton.TabIndex = 46
-            Me.ClearButton.Text = "Clear"
-            Me.ClearButton.UseVisualStyleBackColor = True
-            '
-            'ProcessButton
-            '
-            Me.ProcessButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-            Me.ProcessButton.BackColor = System.Drawing.Color.MediumSlateBlue
-            Me.ProcessButton.BorderColor = System.Drawing.Color.PaleVioletRed
-            Me.ProcessButton.BorderRadius = 0
-            Me.ProcessButton.BorderSize = 1
-            Me.ProcessButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(107, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(255, Byte), Integer))
-            Me.ProcessButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-            Me.ProcessButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-            Me.ProcessButton.ForeColor = System.Drawing.Color.FromArgb(CType(CType(124, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(181, Byte), Integer))
-            Me.ProcessButton.Location = New System.Drawing.Point(8, 856)
-            Me.ProcessButton.Margin = New System.Windows.Forms.Padding(0, 0, 5, 5)
-            Me.ProcessButton.Name = "ProcessButton"
-            Me.ProcessButton.Size = New System.Drawing.Size(80, 30)
-            Me.ProcessButton.TabIndex = 47
-            Me.ProcessButton.Text = "Process"
-            Me.ProcessButton.UseVisualStyleBackColor = True
-            '
-            'FolderNameButton
-            '
-            Me.FolderNameButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            Me.FolderNameButton.BackColor = System.Drawing.Color.MediumSlateBlue
-            Me.FolderNameButton.BorderColor = System.Drawing.Color.PaleVioletRed
-            Me.FolderNameButton.BorderRadius = 0
-            Me.FolderNameButton.BorderSize = 1
-            Me.FolderNameButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(107, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(255, Byte), Integer))
-            Me.FolderNameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-            Me.FolderNameButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-            Me.FolderNameButton.ForeColor = System.Drawing.Color.FromArgb(CType(CType(124, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(181, Byte), Integer))
-            Me.FolderNameButton.Location = New System.Drawing.Point(723, 5)
-            Me.FolderNameButton.Margin = New System.Windows.Forms.Padding(0, 0, 5, 5)
-            Me.FolderNameButton.Name = "FolderNameButton"
-            Me.FolderNameButton.Size = New System.Drawing.Size(31, 31)
-            Me.FolderNameButton.TabIndex = 48
-            Me.FolderNameButton.Text = "..."
-            Me.FolderNameButton.UseVisualStyleBackColor = True
-            '
-            'FolderNameTextBox
-            '
-            Me.FolderNameTextBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            Me.FolderNameTextBox.BackColor = System.Drawing.SystemColors.Window
-            Me.FolderNameTextBox.BorderColor = System.Drawing.Color.MediumSlateBlue
-            Me.FolderNameTextBox.BorderFocusColor = System.Drawing.Color.HotPink
-            Me.FolderNameTextBox.BorderRadius = 0
-            Me.FolderNameTextBox.BorderSize = 2
-            Me.FolderNameTextBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.FolderNameTextBox.ForeColor = System.Drawing.Color.DimGray
-            Me.FolderNameTextBox.Location = New System.Drawing.Point(110, 5)
-            Me.FolderNameTextBox.Margin = New System.Windows.Forms.Padding(0, 0, 5, 5)
-            Me.FolderNameTextBox.Multiline = False
-            Me.FolderNameTextBox.Name = "FolderNameTextBox"
-            Me.FolderNameTextBox.Padding = New System.Windows.Forms.Padding(10, 7, 10, 7)
-            Me.FolderNameTextBox.PasswordChar = False
-            Me.FolderNameTextBox.PlaceHolderColor = System.Drawing.Color.DarkGray
-            Me.FolderNameTextBox.PlaceHolderText = ""
-            Me.FolderNameTextBox.Size = New System.Drawing.Size(608, 31)
-            Me.FolderNameTextBox.TabIndex = 49
-            Me.FolderNameTextBox.UnderlinedStyle = False
-            '
-            'ArchiveNameTextBox
-            '
-            Me.ArchiveNameTextBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            Me.ArchiveNameTextBox.BackColor = System.Drawing.SystemColors.Window
-            Me.ArchiveNameTextBox.BorderColor = System.Drawing.Color.MediumSlateBlue
-            Me.ArchiveNameTextBox.BorderFocusColor = System.Drawing.Color.HotPink
-            Me.ArchiveNameTextBox.BorderRadius = 0
-            Me.ArchiveNameTextBox.BorderSize = 2
-            Me.ArchiveNameTextBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.ArchiveNameTextBox.ForeColor = System.Drawing.Color.DimGray
-            Me.ArchiveNameTextBox.Location = New System.Drawing.Point(110, 41)
-            Me.ArchiveNameTextBox.Margin = New System.Windows.Forms.Padding(0, 0, 5, 5)
-            Me.ArchiveNameTextBox.Multiline = False
-            Me.ArchiveNameTextBox.Name = "ArchiveNameTextBox"
-            Me.ArchiveNameTextBox.Padding = New System.Windows.Forms.Padding(10, 7, 10, 7)
-            Me.ArchiveNameTextBox.PasswordChar = False
-            Me.ArchiveNameTextBox.PlaceHolderColor = System.Drawing.Color.DarkGray
-            Me.ArchiveNameTextBox.PlaceHolderText = ""
-            Me.ArchiveNameTextBox.Size = New System.Drawing.Size(608, 31)
-            Me.ArchiveNameTextBox.TabIndex = 51
-            Me.ArchiveNameTextBox.UnderlinedStyle = False
-            '
-            'ArchiveNameButton
-            '
-            Me.ArchiveNameButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            Me.ArchiveNameButton.BackColor = System.Drawing.Color.MediumSlateBlue
-            Me.ArchiveNameButton.BorderColor = System.Drawing.Color.PaleVioletRed
-            Me.ArchiveNameButton.BorderRadius = 0
-            Me.ArchiveNameButton.BorderSize = 1
-            Me.ArchiveNameButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(107, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(255, Byte), Integer))
-            Me.ArchiveNameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-            Me.ArchiveNameButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-            Me.ArchiveNameButton.ForeColor = System.Drawing.Color.FromArgb(CType(CType(124, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(181, Byte), Integer))
-            Me.ArchiveNameButton.Location = New System.Drawing.Point(723, 41)
-            Me.ArchiveNameButton.Margin = New System.Windows.Forms.Padding(0, 0, 5, 5)
-            Me.ArchiveNameButton.Name = "ArchiveNameButton"
-            Me.ArchiveNameButton.Size = New System.Drawing.Size(31, 31)
-            Me.ArchiveNameButton.TabIndex = 50
-            Me.ArchiveNameButton.Text = "..."
-            Me.ArchiveNameButton.UseVisualStyleBackColor = True
-            '
-            'FolderNameLabel
-            '
-            Me.FolderNameLabel.Cursor = System.Windows.Forms.Cursors.Default
-            Me.FolderNameLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-            Me.FolderNameLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(124, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(181, Byte), Integer))
-            Me.FolderNameLabel.Location = New System.Drawing.Point(5, 5)
-            Me.FolderNameLabel.Margin = New System.Windows.Forms.Padding(0, 0, 5, 5)
-            Me.FolderNameLabel.Name = "FolderNameLabel"
-            Me.FolderNameLabel.Size = New System.Drawing.Size(100, 31)
-            Me.FolderNameLabel.TabIndex = 64
-            Me.FolderNameLabel.Text = "Folder Name"
-            Me.FolderNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            '
-            'ArchiveNameLabel
-            '
-            Me.ArchiveNameLabel.Cursor = System.Windows.Forms.Cursors.Default
-            Me.ArchiveNameLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-            Me.ArchiveNameLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(124, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(181, Byte), Integer))
-            Me.ArchiveNameLabel.Location = New System.Drawing.Point(5, 41)
-            Me.ArchiveNameLabel.Margin = New System.Windows.Forms.Padding(0, 0, 5, 5)
-            Me.ArchiveNameLabel.Name = "ArchiveNameLabel"
-            Me.ArchiveNameLabel.Size = New System.Drawing.Size(100, 31)
-            Me.ArchiveNameLabel.TabIndex = 65
-            Me.ArchiveNameLabel.Text = "Archive Name"
-            Me.ArchiveNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            '
-            'MainListResults
-            '
-            Me.MainListResults.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            Me.MainListResults.BackColor = System.Drawing.SystemColors.Window
-            Me.MainListResults.BorderColor = System.Drawing.Color.MediumSlateBlue
-            Me.MainListResults.BorderFocusColor = System.Drawing.Color.HotPink
-            Me.MainListResults.BorderRadius = 0
-            Me.MainListResults.BorderSize = 2
-            Me.MainListResults.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.MainListResults.ForeColor = System.Drawing.Color.DimGray
-            Me.MainListResults.Indent = 0
-            Me.MainListResults.Location = New System.Drawing.Point(8, 77)
-            Me.MainListResults.Margin = New System.Windows.Forms.Padding(0, 0, 5, 5)
-            Me.MainListResults.Name = "MainListResults"
-            Me.MainListResults.Padding = New System.Windows.Forms.Padding(10, 7, 10, 7)
-            Me.MainListResults.Size = New System.Drawing.Size(746, 774)
-            Me.MainListResults.TabIndex = 66
-            Me.MainListResults.UnderlinedStyle = False
-            '
-            'BackupAddonsButton
-            '
-            Me.BackupAddonsButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-            Me.BackupAddonsButton.BackColor = System.Drawing.Color.MediumSlateBlue
-            Me.BackupAddonsButton.BorderColor = System.Drawing.Color.PaleVioletRed
-            Me.BackupAddonsButton.BorderRadius = 0
-            Me.BackupAddonsButton.BorderSize = 1
-            Me.BackupAddonsButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(107, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(255, Byte), Integer))
-            Me.BackupAddonsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-            Me.BackupAddonsButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-            Me.BackupAddonsButton.ForeColor = System.Drawing.Color.FromArgb(CType(CType(124, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(181, Byte), Integer))
-            Me.BackupAddonsButton.Location = New System.Drawing.Point(93, 856)
-            Me.BackupAddonsButton.Margin = New System.Windows.Forms.Padding(0, 0, 5, 5)
-            Me.BackupAddonsButton.Name = "BackupAddonsButton"
-            Me.BackupAddonsButton.Size = New System.Drawing.Size(125, 30)
-            Me.BackupAddonsButton.TabIndex = 67
-            Me.BackupAddonsButton.Text = "Backup Addons"
-            Me.BackupAddonsButton.UseVisualStyleBackColor = True
-            '
-            'BackupWTFButton
-            '
-            Me.BackupWTFButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-            Me.BackupWTFButton.BackColor = System.Drawing.Color.MediumSlateBlue
-            Me.BackupWTFButton.BorderColor = System.Drawing.Color.PaleVioletRed
-            Me.BackupWTFButton.BorderRadius = 0
-            Me.BackupWTFButton.BorderSize = 1
-            Me.BackupWTFButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(107, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(255, Byte), Integer))
-            Me.BackupWTFButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-            Me.BackupWTFButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-            Me.BackupWTFButton.ForeColor = System.Drawing.Color.FromArgb(CType(CType(124, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(181, Byte), Integer))
-            Me.BackupWTFButton.Location = New System.Drawing.Point(223, 856)
-            Me.BackupWTFButton.Margin = New System.Windows.Forms.Padding(0, 0, 5, 5)
-            Me.BackupWTFButton.Name = "BackupWTFButton"
-            Me.BackupWTFButton.Size = New System.Drawing.Size(115, 30)
-            Me.BackupWTFButton.TabIndex = 68
-            Me.BackupWTFButton.Text = "Backup WTF"
-            Me.BackupWTFButton.UseVisualStyleBackColor = True
-            '
-            'ArchiveFolder
-            '
-            Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
-            Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(42, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(86, Byte), Integer))
-            Me.Controls.Add(Me.BackupWTFButton)
-            Me.Controls.Add(Me.BackupAddonsButton)
-            Me.Controls.Add(Me.MainListResults)
-            Me.Controls.Add(Me.ArchiveNameLabel)
-            Me.Controls.Add(Me.FolderNameLabel)
-            Me.Controls.Add(Me.ArchiveNameTextBox)
-            Me.Controls.Add(Me.ArchiveNameButton)
-            Me.Controls.Add(Me.FolderNameTextBox)
-            Me.Controls.Add(Me.FolderNameButton)
-            Me.Controls.Add(Me.ProcessButton)
-            Me.Controls.Add(Me.ClearButton)
-            Me.DoubleBuffered = True
-            Me.Margin = New System.Windows.Forms.Padding(0)
-            Me.Name = "ArchiveFolder"
-            Me.Size = New System.Drawing.Size(759, 891)
-            Me.ResumeLayout(False)
+            MainBackgroundWorker = New ComponentModel.BackgroundWorker()
+            ClearButton = New Button()
+            ProcessButton = New Button()
+            FolderNameButton = New Button()
+            FolderNameTextBox = New TextBox()
+            ArchiveNameTextBox = New TextBox()
+            ArchiveNameButton = New Button()
+            FolderNameLabel = New Label()
+            ArchiveNameLabel = New Label()
+            MainListResults = New PoesShared.UserControls.ListResults()
+            BackupAddonsButton = New Button()
+            BackupWTFButton = New Button()
+            SuspendLayout()
+            ' 
+            ' MainBackgroundWorker
+            ' 
+            ' 
+            ' ClearButton
+            ' 
+            ClearButton.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
+            ClearButton.BackColor = Color.MediumSlateBlue
+            ClearButton.FlatAppearance.BorderColor = Color.FromArgb(CByte(107), CByte(83), CByte(255))
+            ClearButton.FlatStyle = FlatStyle.Flat
+            ClearButton.Font = New Font("Tahoma", 8.25F)
+            ClearButton.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
+            ClearButton.Location = New Point(674, 863)
+            ClearButton.Margin = New Padding(0, 0, 5, 5)
+            ClearButton.Name = "ClearButton"
+            ClearButton.Size = New Size(80, 23)
+            ClearButton.TabIndex = 8
+            ClearButton.Text = "Clear"
+            ClearButton.UseVisualStyleBackColor = True
+            ' 
+            ' ProcessButton
+            ' 
+            ProcessButton.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
+            ProcessButton.BackColor = Color.MediumSlateBlue
+            ProcessButton.FlatAppearance.BorderColor = Color.FromArgb(CByte(107), CByte(83), CByte(255))
+            ProcessButton.FlatStyle = FlatStyle.Flat
+            ProcessButton.Font = New Font("Tahoma", 8.25F)
+            ProcessButton.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
+            ProcessButton.Location = New Point(5, 863)
+            ProcessButton.Margin = New Padding(5, 0, 5, 5)
+            ProcessButton.Name = "ProcessButton"
+            ProcessButton.Size = New Size(80, 23)
+            ProcessButton.TabIndex = 5
+            ProcessButton.Text = "Process"
+            ProcessButton.UseVisualStyleBackColor = True
+            ' 
+            ' FolderNameButton
+            ' 
+            FolderNameButton.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+            FolderNameButton.BackColor = Color.MediumSlateBlue
+            FolderNameButton.FlatAppearance.BorderColor = Color.FromArgb(CByte(107), CByte(83), CByte(255))
+            FolderNameButton.FlatStyle = FlatStyle.Flat
+            FolderNameButton.Font = New Font("Tahoma", 8.25F)
+            FolderNameButton.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
+            FolderNameButton.Location = New Point(724, 5)
+            FolderNameButton.Margin = New Padding(0, 5, 5, 5)
+            FolderNameButton.Name = "FolderNameButton"
+            FolderNameButton.Size = New Size(30, 21)
+            FolderNameButton.TabIndex = 1
+            FolderNameButton.Text = "..."
+            FolderNameButton.UseVisualStyleBackColor = True
+            ' 
+            ' FolderNameTextBox
+            ' 
+            FolderNameTextBox.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
+            FolderNameTextBox.BackColor = SystemColors.Window
+            FolderNameTextBox.Font = New Font("Tahoma", 8.25F)
+            FolderNameTextBox.ForeColor = Color.DimGray
+            FolderNameTextBox.Location = New Point(110, 5)
+            FolderNameTextBox.Margin = New Padding(0, 5, 5, 5)
+            FolderNameTextBox.Name = "FolderNameTextBox"
+            FolderNameTextBox.Size = New Size(609, 21)
+            FolderNameTextBox.TabIndex = 0
+            ' 
+            ' ArchiveNameTextBox
+            ' 
+            ArchiveNameTextBox.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
+            ArchiveNameTextBox.BackColor = SystemColors.Window
+            ArchiveNameTextBox.Font = New Font("Tahoma", 8.25F)
+            ArchiveNameTextBox.ForeColor = Color.DimGray
+            ArchiveNameTextBox.Location = New Point(110, 31)
+            ArchiveNameTextBox.Margin = New Padding(0, 0, 5, 5)
+            ArchiveNameTextBox.Name = "ArchiveNameTextBox"
+            ArchiveNameTextBox.Size = New Size(609, 21)
+            ArchiveNameTextBox.TabIndex = 2
+            ' 
+            ' ArchiveNameButton
+            ' 
+            ArchiveNameButton.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+            ArchiveNameButton.BackColor = Color.MediumSlateBlue
+            ArchiveNameButton.FlatAppearance.BorderColor = Color.FromArgb(CByte(107), CByte(83), CByte(255))
+            ArchiveNameButton.FlatStyle = FlatStyle.Flat
+            ArchiveNameButton.Font = New Font("Tahoma", 8.25F)
+            ArchiveNameButton.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
+            ArchiveNameButton.Location = New Point(724, 31)
+            ArchiveNameButton.Margin = New Padding(0, 0, 5, 5)
+            ArchiveNameButton.Name = "ArchiveNameButton"
+            ArchiveNameButton.Size = New Size(30, 21)
+            ArchiveNameButton.TabIndex = 3
+            ArchiveNameButton.Text = "..."
+            ArchiveNameButton.UseVisualStyleBackColor = True
+            ' 
+            ' FolderNameLabel
+            ' 
+            FolderNameLabel.Font = New Font("Tahoma", 8.25F)
+            FolderNameLabel.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
+            FolderNameLabel.Location = New Point(5, 5)
+            FolderNameLabel.Margin = New Padding(5)
+            FolderNameLabel.Name = "FolderNameLabel"
+            FolderNameLabel.Size = New Size(100, 21)
+            FolderNameLabel.TabIndex = 64
+            FolderNameLabel.Text = "Folder Name"
+            FolderNameLabel.TextAlign = ContentAlignment.MiddleLeft
+            ' 
+            ' ArchiveNameLabel
+            ' 
+            ArchiveNameLabel.Font = New Font("Tahoma", 8.25F)
+            ArchiveNameLabel.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
+            ArchiveNameLabel.Location = New Point(5, 31)
+            ArchiveNameLabel.Margin = New Padding(0, 0, 5, 5)
+            ArchiveNameLabel.Name = "ArchiveNameLabel"
+            ArchiveNameLabel.Size = New Size(100, 21)
+            ArchiveNameLabel.TabIndex = 65
+            ArchiveNameLabel.Text = "Archive Name"
+            ArchiveNameLabel.TextAlign = ContentAlignment.MiddleLeft
+            ' 
+            ' MainListResults
+            ' 
+            MainListResults.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+            MainListResults.BackColor = SystemColors.Window
+            MainListResults.BorderColor = Color.MediumSlateBlue
+            MainListResults.BorderSize = New Padding(2)
+            MainListResults.Font = New Font("Tahoma", 8.25F)
+            MainListResults.Indent = 0
+            MainListResults.Location = New Point(5, 57)
+            MainListResults.Margin = New Padding(5, 0, 5, 5)
+            MainListResults.Name = "MainListResults"
+            MainListResults.Padding = New Padding(2)
+            MainListResults.Size = New Size(749, 801)
+            MainListResults.TabIndex = 4
+            ' 
+            ' BackupAddonsButton
+            ' 
+            BackupAddonsButton.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
+            BackupAddonsButton.BackColor = Color.MediumSlateBlue
+            BackupAddonsButton.FlatAppearance.BorderColor = Color.FromArgb(CByte(107), CByte(83), CByte(255))
+            BackupAddonsButton.FlatStyle = FlatStyle.Flat
+            BackupAddonsButton.Font = New Font("Tahoma", 8.25F)
+            BackupAddonsButton.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
+            BackupAddonsButton.Location = New Point(90, 863)
+            BackupAddonsButton.Margin = New Padding(0, 0, 5, 5)
+            BackupAddonsButton.Name = "BackupAddonsButton"
+            BackupAddonsButton.Size = New Size(125, 23)
+            BackupAddonsButton.TabIndex = 6
+            BackupAddonsButton.Text = "Backup Addons"
+            BackupAddonsButton.UseVisualStyleBackColor = True
+            ' 
+            ' BackupWTFButton
+            ' 
+            BackupWTFButton.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
+            BackupWTFButton.BackColor = Color.MediumSlateBlue
+            BackupWTFButton.FlatAppearance.BorderColor = Color.FromArgb(CByte(107), CByte(83), CByte(255))
+            BackupWTFButton.FlatStyle = FlatStyle.Flat
+            BackupWTFButton.Font = New Font("Tahoma", 8.25F)
+            BackupWTFButton.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
+            BackupWTFButton.Location = New Point(220, 863)
+            BackupWTFButton.Margin = New Padding(0, 0, 5, 5)
+            BackupWTFButton.Name = "BackupWTFButton"
+            BackupWTFButton.Size = New Size(115, 23)
+            BackupWTFButton.TabIndex = 7
+            BackupWTFButton.Text = "Backup WTF"
+            BackupWTFButton.UseVisualStyleBackColor = True
+            ' 
+            ' ArchiveFolder
+            ' 
+            AutoScaleMode = AutoScaleMode.None
+            BackColor = Color.FromArgb(CByte(42), CByte(45), CByte(86))
+            Controls.Add(BackupWTFButton)
+            Controls.Add(BackupAddonsButton)
+            Controls.Add(MainListResults)
+            Controls.Add(ArchiveNameLabel)
+            Controls.Add(FolderNameLabel)
+            Controls.Add(ArchiveNameTextBox)
+            Controls.Add(ArchiveNameButton)
+            Controls.Add(FolderNameTextBox)
+            Controls.Add(FolderNameButton)
+            Controls.Add(ProcessButton)
+            Controls.Add(ClearButton)
+            DoubleBuffered = True
+            Font = New Font("Tahoma", 8.25F)
+            Margin = New Padding(0)
+            Name = "ArchiveFolder"
+            Size = New Size(759, 891)
+            ResumeLayout(False)
+            PerformLayout()
 
         End Sub
         Private WithEvents MainBackgroundWorker As System.ComponentModel.BackgroundWorker
-        Private WithEvents ClearButton As Aprotec.UserControls.Button
-        Private WithEvents ProcessButton As Aprotec.UserControls.Button
-        Private WithEvents FolderNameButton As Aprotec.UserControls.Button
-        Friend WithEvents FolderNameTextBox As Aprotec.UserControls.TextBox
-        Friend WithEvents ArchiveNameTextBox As Aprotec.UserControls.TextBox
-        Private WithEvents ArchiveNameButton As Aprotec.UserControls.Button
+        Private WithEvents ClearButton As Button
+        Private WithEvents ProcessButton As Button
+        Private WithEvents FolderNameButton As Button
+        Private WithEvents ArchiveNameButton As Button
         Private WithEvents FolderNameLabel As Label
         Private WithEvents ArchiveNameLabel As Label
-        Private WithEvents MainListResults As Aprotec.UserControls.ListResultsBorder
-        Private WithEvents BackupAddonsButton As Aprotec.UserControls.Button
-        Private WithEvents BackupWTFButton As Aprotec.UserControls.Button
+        Private WithEvents MainListResults As PoesShared.UserControls.ListResults
+        Private WithEvents BackupAddonsButton As Button
+        Private WithEvents BackupWTFButton As Button
+        Private WithEvents FolderNameTextBox As TextBox
+        Private WithEvents ArchiveNameTextBox As TextBox
     End Class
 
 End Namespace

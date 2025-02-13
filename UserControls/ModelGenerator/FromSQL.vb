@@ -1,4 +1,6 @@
-﻿Namespace UserControls.ModelGenerator
+﻿Imports System.ComponentModel
+
+Namespace UserControls.ModelGenerator
 
     Public Class FromSQL
         Implements IInterface
@@ -27,21 +29,26 @@
             ServerComboBox.DataSource = _Servers
         End Sub
 
-        Private Sub DatabaseComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DatabaseComboBox.OnSelectedIndexChanged
+        Private Sub DatabaseComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DatabaseComboBox.SelectedIndexChanged
             Try
                 If DatabaseComboBox.SelectedItem Is Nothing Then
                     Return
                 End If
 
-                Dim SelectedItem As DatabaseDetail = DirectCast(DatabaseComboBox.SelectedItem, DatabaseDetail)
+                Dim SelectedDatabase = DirectCast(DatabaseComboBox.SelectedItem, DatabaseDetail)
+                Dim SelectedServer = DirectCast(ServerComboBox.SelectedItem, ServerDetail)
 
-                RaiseEvent DatabaseChanged(SelectedItem.Name.ReplaceInvalidCharacters("_"))
+                Dim DBA As New DBAccess.SQL(SelectedServer.GetConnectionString(SelectedDatabase.Name))
+
+                _ModelDetails = DBA.ConnectionString
+
+                RaiseEvent DatabaseChanged(SelectedDatabase.Name.ReplaceInvalidCharacters("_"))
             Catch ex As Exception
                 ex.ToLog()
             End Try
         End Sub
 
-        Private Sub ServerComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ServerComboBox.OnSelectedIndexChanged
+        Private Sub ServerComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ServerComboBox.SelectedIndexChanged
             Try
                 Enabled = False
 
@@ -51,9 +58,9 @@
                     Return
                 End If
 
-                Dim Item As ServerDetail = DirectCast(ServerComboBox.SelectedItem, ServerDetail)
+                Dim Item = DirectCast(ServerComboBox.SelectedItem, ServerDetail)
 
-                Dim DBA As New Aprotec.DBAccess.SQL(Item.ConnectionString)
+                Dim DBA As New DBAccess.SQL(Item.ConnectionString)
 
                 _Databases.Clear()
                 _Databases.AddRange(DBA.ExecuteReader(Of DatabaseDetail)("SELECT * FROM master.dbo.sysdatabases").OrderBy(Function(o) o.Name))
@@ -72,7 +79,7 @@
 
         Public Event DatabaseChanged(databaseName As String) Implements IInterface.DatabaseChanged
 
-        Public Overloads Property Name As String Implements IInterface.Name
+        <DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)> Public Overloads Property Name As String Implements IInterface.Name
             Get
                 Return MyBase.Name
             End Get
@@ -111,21 +118,17 @@
                     Throw New Exception("No Server has been selected.")
                 End If
 
-                Dim SelectedServer As ServerDetail = DirectCast(ServerComboBox.SelectedItem, ServerDetail)
-                Dim SelectedDatabase As DatabaseDetail = Nothing
-
                 If DatabaseComboBox.SelectedItem Is Nothing Then
                     Throw New Exception("No Database has been selected.")
-                Else
-                    SelectedDatabase = DirectCast(DatabaseComboBox.SelectedItem, DatabaseDetail)
                 End If
 
-                Dim DBA As New Aprotec.DBAccess.SQL(SelectedServer.GetConnectionString(SelectedDatabase.Name))
+                Dim SelectedDatabase = DirectCast(DatabaseComboBox.SelectedItem, DatabaseDetail)
+                Dim SelectedServer = DirectCast(ServerComboBox.SelectedItem, ServerDetail)
 
-                _ModelDetails = DBA.ConnectionString
+                Dim DBA As New DBAccess.SQL(SelectedServer.GetConnectionString(SelectedDatabase.Name))
 
                 Dim ColumnDetails As New List(Of ColumnDetail)
-                For Each Current As ColumnDetail In DBA.ExecuteReader(Of ColumnDetail)("USE [{0}]; SELECT *,COLUMNPROPERTY(OBJECT_ID(TABLE_NAME),COLUMN_NAME,'IsIdentity') AS [IsIdentity] FROM information_schema.columns".FormatWith(SelectedDatabase.Name))
+                For Each Current In DBA.ExecuteReader(Of ColumnDetail)($"USE [{SelectedDatabase.Name}]; SELECT *,COLUMNPROPERTY(OBJECT_ID(TABLE_NAME),COLUMN_NAME,'IsIdentity') AS [IsIdentity] FROM information_schema.columns")
                     Current.CheckDataType()
 
                     If Current.DataType_CLR.IsNotSet() Then
@@ -140,21 +143,21 @@
                 Next
 
                 Dim ConstraintDetails As New List(Of ConstraintDetail)
-                ConstraintDetails.AddRange(DBA.ExecuteReader(Of ConstraintDetail)("USE [{0}]; SELECT KU.TABLE_NAME,KU.COLUMN_NAME FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS AS TC INNER JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE AS KU ON TC.CONSTRAINT_NAME = KU.CONSTRAINT_NAME WHERE TC.CONSTRAINT_TYPE = 'PRIMARY KEY'".FormatWith(SelectedDatabase.Name)))
+                ConstraintDetails.AddRange(DBA.ExecuteReader(Of ConstraintDetail)($"USE [{SelectedDatabase.Name}]; SELECT KU.TABLE_NAME,KU.COLUMN_NAME FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS AS TC INNER JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE AS KU ON TC.CONSTRAINT_NAME = KU.CONSTRAINT_NAME WHERE TC.CONSTRAINT_TYPE = 'PRIMARY KEY'"))
 
-                For Each SchemaName As String In ColumnDetails.Select(Function(o) o.Table_Schema).Distinct().OrderBy(Function(o) o)
-                    For Each TableName As String In ColumnDetails.Where(Function(o) o.Table_Schema.IsEqualTo(SchemaName)).Select(Function(o) o.Table_Name).Distinct().OrderBy(Function(o) o)
+                For Each SchemaName In ColumnDetails.Select(Function(o) o.Table_Schema).Distinct().OrderBy(Function(o) o)
+                    For Each TableName In ColumnDetails.Where(Function(o) o.Table_Schema.IsEqualTo(SchemaName)).Select(Function(o) o.Table_Name).Distinct().OrderBy(Function(o) o)
                         If TableName.IsEqualTo("sysdiagrams") Then
                             Continue For
                         End If
 
                         Dim TableInfo As New Models.TableInformation(SchemaName, TableName)
 
-                        For Each cd As ColumnDetail In ColumnDetails.Where(Function(o) o.Table_Name.IsEqualTo(TableName)).OrderBy(Function(o) o.Ordinal_Position)
-                            If ConstraintDetails.Where(Function(o) o.Table_Name.IsEqualTo(TableName)).Where(Function(o) o.Column_Name.IsEqualTo(cd.Column_Name)).Any() Then
-                                TableInfo.Columns.Add(New Models.ColumnInformation(cd.Column_Name, cd.DataType_DB, cd.DataType_CLR, cd.DefaultValue, cd.IsIdentity.IsEqualTo(1), True, cd.Ordinal_Position - 1))
+                        For Each ColumnDetail In ColumnDetails.Where(Function(o) o.Table_Name.IsEqualTo(TableName)).OrderBy(Function(o) o.Ordinal_Position)
+                            If ConstraintDetails.Where(Function(o) o.Table_Name.IsEqualTo(TableName)).Where(Function(o) o.Column_Name.IsEqualTo(ColumnDetail.Column_Name)).Any() Then
+                                TableInfo.Columns.Add(New Models.ColumnInformation(ColumnDetail.Column_Name, ColumnDetail.DataType_DB, ColumnDetail.DataType_CLR, ColumnDetail.DefaultValue, ColumnDetail.IsIdentity.IsEqualTo(1), True, ColumnDetail.Ordinal_Position - 1))
                             Else
-                                TableInfo.Columns.Add(New Models.ColumnInformation(cd.Column_Name, cd.DataType_DB, cd.DataType_CLR, cd.DefaultValue, cd.IsIdentity.IsEqualTo(1), False, cd.Ordinal_Position - 1))
+                                TableInfo.Columns.Add(New Models.ColumnInformation(ColumnDetail.Column_Name, ColumnDetail.DataType_DB, ColumnDetail.DataType_CLR, ColumnDetail.DefaultValue, ColumnDetail.IsIdentity.IsEqualTo(1), False, ColumnDetail.Ordinal_Position - 1))
                             End If
                         Next
 
@@ -242,9 +245,9 @@
                     Case "nvarchar", "varchar", "nchar"
                         _DataType_CLR = "String"
                         If Character_Maximum_Length < 0 Then
-                            _DataType_DB = "[{0}](MAX)".FormatWith(Data_Type)
+                            _DataType_DB = $"[{Data_Type}](MAX)"
                         Else
-                            _DataType_DB = "[{0}]({1})".FormatWith(Data_Type, Character_Maximum_Length)
+                            _DataType_DB = $"[{Data_Type}]({Character_Maximum_Length})"
                         End If
                         _DefaultValue = """"""
                     Case "bit"
@@ -274,17 +277,17 @@
                     Case "varbinary"
                         _DataType_CLR = "Byte()"
                         If Character_Maximum_Length < 0 Then
-                            _DataType_DB = "[{0}](MAX)".FormatWith(Data_Type)
+                            _DataType_DB = $"[{Data_Type}](MAX)"
                         Else
-                            _DataType_DB = "[{0}]({1})".FormatWith(Data_Type, Character_Maximum_Length)
+                            _DataType_DB = $"[{Data_Type}]({Character_Maximum_Length})"
                         End If
                         _DefaultValue = "{}"
                     Case "decimal"
                         _DataType_CLR = "Double"
                         If Numeric_Precision > 0 Then
-                            _DataType_DB = "[{0}]({1},{2})".FormatWith(Data_Type, Numeric_Precision, Numeric_Scale)
+                            _DataType_DB = $"[{Data_Type}]({Numeric_Precision},{Numeric_Scale})"
                         Else
-                            _DataType_DB = "[{0}]".FormatWith(Data_Type)
+                            _DataType_DB = $"[{Data_Type}]"
                         End If
                         _DefaultValue = "0.0!"
 
@@ -294,12 +297,10 @@
                             _DataType_DB = ""
                             _DefaultValue = ""
                         Else
-                            Dim Message As String = "Unhandled Data Type: {0}, Table: {1}, Column: {2}".FormatWith(_Data_Type.ToLower(), _Table_Name, _Column_Name)
-                            Message.ToLog()
+                            System_String.ToLog($"Unhandled Data Type: {_Data_Type}, Table: {_Table_Name}, Column: {_Column_Name}")
                         End If
                     Case Else
-                        Dim Message As String = "Unhandled Data Type: {0}, Table: {1}, Column: {2}".FormatWith(_Data_Type.ToLower(), _Table_Name, _Column_Name)
-                        Message.ToLog()
+                        System_String.ToLog($"Unhandled Data Type: {_Data_Type}, Table: {_Table_Name}, Column: {_Column_Name}")
                 End Select
             End Sub
 
@@ -351,15 +352,15 @@
 
             Public Sub New(description As String, instanceName As String, password As String, serverName As String, userName As String)
                 _Password = password
-                _ServerName = "{0}\{1}".FormatWith(serverName, instanceName)
+                _ServerName = $"{serverName}\{instanceName}"
                 _UserName = userName
 
                 _ConnectionString = GetConnectionString("master")
                 _Description = description
             End Sub
 
-            Public Function GetConnectionString(tableName As String) As String
-                Return Aprotec.DBAccess.GetSQLConnectionString("master", _ServerName, _UserName, _Password)
+            Public Function GetConnectionString(databaseName As String) As String
+                Return DBAccess.GetSQLConnectionString(databaseName, _ServerName, _UserName, _Password)
             End Function
 
         End Class

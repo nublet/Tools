@@ -12,19 +12,11 @@
             InitializeComponent()
 
             ' Add any initialization after the InitializeComponent() call.
-            Try
-                Aprotec.MainFormInstance = Me
-
-                Enabled = False
-                Opacity = 0
-                SuspendLayout()
-            Catch ex As Exception
-                ex.ToLog()
-            End Try
+            Opacity = 0
         End Sub
 
         Private Sub Me_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-            ShutDown("")
+            ShutDown()
 
             If Not _ShouldExit Then
                 Hide()
@@ -36,78 +28,44 @@
 
             _VolumeControl.Close()
 
-            Aprotec.SingleInstanceApplication.Close()
+            PoesShared.Models.SingleInstanceApplication.Close()
 
             Dim ScreenName = Screen.FromControl(Me).DeviceName
             If ScreenName.Contains(Chr(0)) Then
                 ScreenName = ScreenName.Substring(0, ScreenName.IndexOf(Chr(0)))
             End If
-            Aprotec.LocalSettings.DefaultScreenName = ScreenName
-            Aprotec.LocalSettings.SaveCache()
-        End Sub
 
-        Private Sub Me_Load(sender As Object, e As EventArgs) Handles Me.Load
-            Try
-                Net.ServicePointManager.SecurityProtocol = Net.SecurityProtocolType.SystemDefault Or Net.SecurityProtocolType.Tls Or Net.SecurityProtocolType.Tls11 Or Net.SecurityProtocolType.Tls12
-
-                _Tabs.Clear()
-                _Tabs.AddRange(Aprotec.TypeHelper.GetInstances(Of Aprotec.UserControls.ITab))
-
-                Dim IsFirst As Boolean = True
-                Dim LastY As Integer = 1
-
-                For Each Current As Aprotec.UserControls.ITab In _Tabs.OrderBy(Function(o) o.OrderButton).ThenBy(Function(o) o.Text)
-                    ControlsPanel.Controls.Add(Current.UserControl)
-
-                    ButtonsPanel.Controls.Add(Current.Button)
-
-                    If IsFirst Then
-                        Current.Button.Location = New Point(1, 1)
-
-                        IsFirst = False
-                    Else
-                        Current.Button.Location = New Point(1, LastY + Current.Button.Height - 1)
-
-                        Do While Current.Button.Location.X.IsNotEqualTo(1)
-                            Current.Button.Location = New Point(1, LastY + Current.Button.Height - 1)
-                        Loop
-
-                        LastY = Current.Button.Location.Y
-                    End If
-
-                    AddHandler Current.Button.Click, AddressOf Button_Click
-                Next
-            Catch ex As Exception
-                ex.ToLog()
-            End Try
+            Settings.LastScreenName = ScreenName
         End Sub
 
         Private Sub Me_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
             Try
+                Text = $"{Settings.ProductName} v{Settings.ProductVersion}"
+
                 Dim Solutions As New List(Of Models.SolutionInformation)
 
                 For Each Current As String In IO.Directory.GetFiles("D:\Projects\", "*.sln", IO.SearchOption.AllDirectories)
                     Solutions.Add(New Models.SolutionInformation(Current))
                 Next
 
-                For Each GroupName As String In Solutions.Select(Function(o) o.Group).Distinct().OrderBy(Function(o) o)
+                For Each GroupName In Solutions.Select(Function(o) o.Group).Distinct().OrderBy(Function(o) o)
                     If GroupName.IsNotSet() Then
                         Continue For
                     End If
 
                     Dim GroupItem As New ToolStripMenuItem() With {
-                                .Name = "Solutions_{0}ToolStripMenuItem".FormatWith(GroupName).Replace(" ", ""),
-                                .Size = New Size(180, 22),
-                                .Text = GroupName
-                            }
+                        .Name = $"Solutions_{GroupName}ToolStripMenuItem".Replace(" "c, String.Empty),
+                        .Size = New Size(180, 22),
+                        .Text = GroupName
+                    }
 
-                    For Each Current As Models.SolutionInformation In Solutions.Where(Function(o) o.Group.IsEqualTo(GroupName)).OrderBy(Function(o) o.Name)
+                    For Each Current In Solutions.Where(Function(o) o.Group.IsEqualTo(GroupName)).OrderBy(Function(o) o.Name)
                         Dim SolutionItem As New ToolStripMenuItem() With {
-                                        .Name = "Solutions_{0}_{1}ToolStripMenuItem".FormatWith(GroupName, Current.Name).Replace(" ", ""),
-                                        .Size = New Size(180, 22),
-                                        .Tag = Current,
-                                        .Text = Current.Name
-                                    }
+                            .Name = $"Solutions_{GroupName}_{Current.Name}ToolStripMenuItem".Replace(" "c, String.Empty),
+                            .Size = New Size(180, 22),
+                            .Tag = Current,
+                            .Text = Current.Name
+                        }
 
                         AddHandler SolutionItem.Click, AddressOf SolutionItem_Click
 
@@ -117,28 +75,37 @@
                     SolutionsToolStripMenuItem.DropDownItems.Add(GroupItem)
                 Next
 
+                _Tabs.Clear()
+                _Tabs.AddRange(TypeHelper.GetInstances(Of PoesShared.Models.ITab))
+
+                For Each Current In _Tabs.OrderBy(Function(o) o.OrderButton).ThenBy(Function(o) o.Text)
+                    ControlsPanel.Controls.Add(Current.UserControl)
+                    Current.UserControl.DockAndBringToFront()
+
+                    ButtonsPanel.Controls.Add(Current.Button)
+                    Current.Button.Dock = DockStyle.Top
+                    Current.Button.BringToFront()
+
+                    AddHandler Current.Button.Click, AddressOf Button_Click
+                Next
+
                 _VolumeControl = New VolumeControl()
                 _VolumeControl.Show()
             Catch ex As Exception
                 ex.ToLog()
             Finally
                 Try
-                    If IsDisposed OrElse Disposing Then
-                    Else
-                        Enabled = True
+                    Enabled = True
 
-                        ResumeLayout(False)
+                    StartUp()
 
-                        StartUp("")
+                    SetTheme()
 
-                        SetTheme()
+                    For Each Current In _Tabs.OrderBy(Function(o) o.OrderButton).ThenBy(Function(o) o.Text)
+                        SetButtons(Current.Button)
 
-                        For Each Current As Aprotec.UserControls.ITab In _Tabs.OrderBy(Function(o) o.OrderButton).ThenBy(Function(o) o.Text)
-                            SetButtons(Current.Button)
-
-                            Exit For
-                        Next
-                    End If
+                        Exit For
+                    Next
                 Catch ex As Exception
                     ex.ToLog()
                 End Try
@@ -147,15 +114,19 @@
 
 #End Region
 
+        Private Sub Button_Click(sender As Object, e As EventArgs)
+            SetButtons(DirectCast(sender, Button))
+        End Sub
+
         Private Sub SetButtons(currentButton As Button)
             Try
                 Opacity = 0.75
 
-                For Each Current As Aprotec.UserControls.ITab In _Tabs
+                For Each Current In _Tabs
                     Current.IsSelected = False
                 Next
 
-                Dim Tab As Aprotec.UserControls.ITab = _Tabs.Where(Function(o) o.Button.Name.IsEqualTo(currentButton.Name)).FirstOrDefault()
+                Dim Tab = _Tabs.Where(Function(o) o.Button.Name.IsEqualTo(currentButton.Name)).FirstOrDefault()
 
                 If Tab Is Nothing Then
                     Return
@@ -173,13 +144,23 @@
             End Try
         End Sub
 
-        Private Sub Button_Click(sender As Object, e As EventArgs)
-            SetButtons(DirectCast(sender, Button))
+        Public Sub NewInstanceMessage(sender As Object, message As Object)
+            Try
+                If Not Visible Then
+                    Show()
+                End If
+
+                TopMost = True
+                BringToFront()
+                TopMost = False
+            Catch ex As Exception
+                ex.ToLog(True)
+            End Try
         End Sub
 
 #Region " Shared "
 
-        Private Shared ReadOnly _Tabs As New List(Of Aprotec.UserControls.ITab)
+        Private Shared ReadOnly _Tabs As New List(Of PoesShared.Models.ITab)
 
         Private Shared Sub Application_ThreadException(sender As Object, e As Threading.ThreadExceptionEventArgs)
             Try
@@ -211,50 +192,21 @@
             End Try
         End Sub
 
-        Private Shared Sub LogError(silent As Boolean, errorInformation As Aprotec.Models.Error)
-            errorInformation.WriteToFile(Aprotec.Errors.Filename)
+        Private Shared Sub LogError(errorInformation As PoesShared.Models.ErrorInformation, silent As Boolean)
+            errorInformation.WriteToFile(Errors.Filename)
 
             If Not silent Then
-                If Aprotec.MainFormInstance IsNot Nothing AndAlso Aprotec.MainFormInstance.IsHandleCreated Then
-                    Try
-                        Aprotec.MainFormInstance.Invoke(Sub()
-                                                            Aprotec.UserMessage.Show(True, errorInformation.Message, "Error...", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                                                        End Sub)
-                    Catch
-                    End Try
-                End If
+                UserMessage.Show(True, errorInformation.Message, "Error...", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
-        End Sub
-
-        Private Shared Sub SIA_NewInstanceMessage(sender As Object, message As Object)
-            BringForward()
-        End Sub
-
-        Public Shared Sub BringForward()
-            Try
-                If Aprotec.MainFormInstance Is Nothing Then
-                    Return
-                End If
-
-                If Not Aprotec.MainFormInstance.Visible Then
-                    Aprotec.MainFormInstance.Show()
-                End If
-
-                Aprotec.MainFormInstance.TopMost = True
-                Aprotec.MainFormInstance.BringToFront()
-                Aprotec.MainFormInstance.TopMost = False
-            Catch ex As Exception
-                ex.ToLog(True)
-            End Try
         End Sub
 
         Public Shared Sub Main(args As String())
             Try
-                If Aprotec.SingleInstanceApplication.NotifyExistingInstance(String.Empty, WindowCaption) Then
+                If PoesShared.Models.SingleInstanceApplication.NotifyExistingInstance(String.Empty, WindowCaption) Then
                     Application.Exit()
                     Return
                 End If
-            Catch ex As Exception
+            Catch
             End Try
 
             Try
@@ -264,29 +216,26 @@
                 Application.EnableVisualStyles()
                 Application.SetCompatibleTextRenderingDefault(False)
                 Application.SetDefaultFont(New Font("Tahoma", 8.25!, FontStyle.Regular, GraphicsUnit.Point))
+                Application.SetHighDpiMode(HighDpiMode.PerMonitorV2)
                 Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException)
 
-                Aprotec.FormIcon = My.Resources.App
-                Aprotec.Settings.DebugLogging = False
-                Aprotec.Settings.DebugLoggingDatabase = False
-                Aprotec.Settings.ProductName = "Tools"
-                Aprotec.Settings.ProductVersion = My.Application.Info.Version.GetVersionString()
+                Settings.FormIcon = My.Resources.App
+                Settings.ProductName = "Tools"
+                Settings.ProductVersion = My.Application.Info.Version.GetVersionString()
 
-                Aprotec.Errors.Filename = "\\192.168.50.246\Projects\Errors.txt"
-                Aprotec.LocalSettings.CacheLocation = $"\\192.168.50.246\Projects\{Aprotec.Settings.ProductName}_LocalSettings.JSON"
-                Aprotec.Performance.Filename = String.Empty
+                Dim MainForm As New Main()
 
-                Aprotec.Errors.Handlers.Clear()
-                Aprotec.Errors.Handlers.Add(New Aprotec.AddErrorLogEventHandler(AddressOf LogError))
+                Errors.Handlers.Clear()
+                Errors.Handlers.Add(New AddErrorLogEventHandler(AddressOf LogError))
 
-                Aprotec.Performance.Handlers.Clear()
+                DBCache.LoadCache(Settings.ProductName)
+                UITheme.Load("Bjorn", MainForm)
 
-                Aprotec.LocalSettings.LoadCache()
-
-                Aprotec.SingleInstanceApplication.Initialize(WindowCaption, New Aprotec.SingleInstanceApplication.NewInstanceMessageHandler(AddressOf SIA_NewInstanceMessage))
                 SevenZip.SevenZipBase.SetLibraryPath("D:\Projects\_Binaries\7za.dll")
 
-                Application.Run(New Main())
+                PoesShared.Models.SingleInstanceApplication.Initialize(WindowCaption, New PoesShared.Models.SingleInstanceApplication.NewInstanceMessageHandler(AddressOf MainForm.NewInstanceMessage))
+
+                Application.Run(MainForm)
             Catch ex As Exception
                 ex.ToLog()
 
@@ -294,31 +243,11 @@
             End Try
         End Sub
 
-        Public Shared Sub UpdateTheme()
-            Try
-                If Aprotec.MainFormInstance Is Nothing Then
-                    Return
-                End If
-
-                Aprotec.MainFormInstance.SetTheme()
-
-                Dim Tab As Aprotec.UserControls.ITab = _Tabs.Where(Function(o) o.IsSelected).FirstOrDefault()
-                If Tab Is Nothing Then
-                    Return
-                End If
-
-                Tab.IsSelected = False
-                Tab.IsSelected = True
-            Catch ex As Exception
-                ex.ToLog(True)
-            End Try
-        End Sub
-
 #Region " NotifyIcon "
 
         Private Sub MainNotifyIcon_MouseClick(sender As Object, e As MouseEventArgs) Handles MainNotifyIcon.MouseClick
             If e.Button = MouseButtons.Left Then
-                BringForward()
+                BringToFront()
             End If
         End Sub
 

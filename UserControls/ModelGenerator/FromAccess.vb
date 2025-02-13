@@ -1,4 +1,6 @@
-﻿Namespace UserControls.ModelGenerator
+﻿Imports System.ComponentModel
+
+Namespace UserControls.ModelGenerator
 
     Public Class FromAccess
         Implements IInterface
@@ -25,7 +27,7 @@
 
         Public Event DatabaseChanged(databaseName As String) Implements IInterface.DatabaseChanged
 
-        Public Overloads Property Name As String Implements IInterface.Name
+        <DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)> Public Overloads Property Name As String Implements IInterface.Name
             Get
                 Return MyBase.Name
             End Get
@@ -66,27 +68,19 @@
                     Throw New Exception("No Database has been selected.")
                 End If
 
-                'Dim CSBuilder As New OleDb.OleDbConnectionStringBuilder With {
-                '    .Provider = "Provider=Microsoft.Jet.OLEDB.4.0;",
-                '    .DataSource = DBFileName
-                '}
-
-                '_ModelDetails = CSBuilder.ToString()
-
-                '_ModelDetails = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source={0}".FormatWith(DBFileName)
-                _ModelDetails = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0}".FormatWith(DBFileName)
+                _ModelDetails = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={DBFileName}"
 
                 Using conn As New OleDb.OleDbConnection(_ModelDetails)
                     conn.Open()
 
                     For Each TableRow As DataRowView In conn.GetOleDbSchemaTable(OleDb.OleDbSchemaGuid.Tables, New Object() {Nothing, Nothing, Nothing, "TABLE"}).DefaultView
-                        Dim TableName As String = Aprotec.ToStringDB(TableRow("TABLE_NAME"))
+                        Dim TableName = ToStringDB(TableRow("TABLE_NAME"))
 
                         Dim TableInfo As New Models.TableInformation("", TableName)
 
                         Dim PrimaryKeys As New Dictionary(Of String, String)
                         For Each Current As DataRowView In conn.GetOleDbSchemaTable(OleDb.OleDbSchemaGuid.Primary_Keys, New Object() {Nothing, Nothing, TableName}).DefaultView
-                            Dim ColumnName As String = Aprotec.ToStringDB(Current("COLUMN_NAME"))
+                            Dim ColumnName = ToStringDB(Current("COLUMN_NAME"))
 
                             If ColumnName.IsNotSet() Then
                                 Continue For
@@ -129,10 +123,10 @@
 
             Public Sub New(tableName As String, ByRef dataRowView As DataRowView)
                 _TABLE_NAME = tableName
-                _COLUMN_NAME = Aprotec.ToStringDB(dataRowView("COLUMN_NAME"))
-                _ORDINAL_POSITION = Aprotec.ToIntegerDB(dataRowView("ORDINAL_POSITION"))
-                _DATA_TYPE = Aprotec.ToStringDB(dataRowView("DATA_TYPE"))
-                _IDENTITY = (Aprotec.ToStringDB(dataRowView("COLUMN_FLAGS")) = "90") AndAlso (Aprotec.ToStringDB(dataRowView("DATA_TYPE")) = "3")
+                _COLUMN_NAME = ToStringDB(dataRowView("COLUMN_NAME"))
+                _ORDINAL_POSITION = ToIntegerDB(dataRowView("ORDINAL_POSITION"))
+                _DATA_TYPE = ToStringDB(dataRowView("DATA_TYPE"))
+                _IDENTITY = (ToStringDB(dataRowView("COLUMN_FLAGS")) = "90") AndAlso (ToStringDB(dataRowView("DATA_TYPE")) = "3")
             End Sub
 
             Public Function GetColumnInformation() As Models.ColumnInformation
@@ -192,7 +186,7 @@
                         CLRDataType = "TimeSpan"
                         DefaultValue = "Nothing"
                     Case Else
-                        Dim Message As String = "Unhandled Data Type: {0}, Table: {1}, Column: {2}".FormatWith(_DATA_TYPE.ToLower, _TABLE_NAME, _COLUMN_NAME)
+                        Dim Message As String = $"Unhandled Data Type: {_DATA_TYPE}, Table: {_TABLE_NAME}, Column: {_COLUMN_NAME}"
                         Message.ToLog()
                 End Select
 
@@ -201,6 +195,9 @@
 
         End Class
 
+        Private Sub DatabaseLabel_Click(sender As Object, e As EventArgs) Handles DatabaseLabel.Click
+
+        End Sub
     End Class
 
 End Namespace

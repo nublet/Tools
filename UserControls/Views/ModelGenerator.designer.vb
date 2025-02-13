@@ -24,249 +24,207 @@
         'Do not modify it using the code editor.
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
-            Me.GeneratorLabel = New System.Windows.Forms.Label()
-            Me.OutputDirectoryLabel = New System.Windows.Forms.Label()
-            Me.NamespaceLabel = New System.Windows.Forms.Label()
-            Me.MainPanel = New System.Windows.Forms.Panel()
-            Me.OpenOutputButton = New Aprotec.UserControls.Button()
-            Me.GenerateButton = New Aprotec.UserControls.Button()
-            Me.MainListResults = New Aprotec.UserControls.ListResultsBorder()
-            Me.GeneratorComboBox = New Aprotec.UserControls.ComboBox()
-            Me.OutputDirectoryButton = New Aprotec.UserControls.Button()
-            Me.OutputDirectoryTextBox = New Aprotec.UserControls.TextBox()
-            Me.NamespaceTextBox = New Aprotec.UserControls.TextBox()
-            Me.SuspendLayout()
-            '
-            'GeneratorLabel
-            '
-            Me.GeneratorLabel.Cursor = System.Windows.Forms.Cursors.Hand
-            Me.GeneratorLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-            Me.GeneratorLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(124, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(181, Byte), Integer))
-            Me.GeneratorLabel.Location = New System.Drawing.Point(5, 5)
-            Me.GeneratorLabel.Margin = New System.Windows.Forms.Padding(5)
-            Me.GeneratorLabel.Name = "GeneratorLabel"
-            Me.GeneratorLabel.Size = New System.Drawing.Size(125, 33)
-            Me.GeneratorLabel.TabIndex = 27
-            Me.GeneratorLabel.Text = "Generator"
-            Me.GeneratorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            '
-            'OutputDirectoryLabel
-            '
-            Me.OutputDirectoryLabel.Cursor = System.Windows.Forms.Cursors.Hand
-            Me.OutputDirectoryLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-            Me.OutputDirectoryLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(124, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(181, Byte), Integer))
-            Me.OutputDirectoryLabel.Location = New System.Drawing.Point(5, 48)
-            Me.OutputDirectoryLabel.Margin = New System.Windows.Forms.Padding(5)
-            Me.OutputDirectoryLabel.Name = "OutputDirectoryLabel"
-            Me.OutputDirectoryLabel.Size = New System.Drawing.Size(125, 33)
-            Me.OutputDirectoryLabel.TabIndex = 26
-            Me.OutputDirectoryLabel.Text = "Output Directory"
-            Me.OutputDirectoryLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            '
-            'NamespaceLabel
-            '
-            Me.NamespaceLabel.Cursor = System.Windows.Forms.Cursors.Hand
-            Me.NamespaceLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-            Me.NamespaceLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(124, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(181, Byte), Integer))
-            Me.NamespaceLabel.Location = New System.Drawing.Point(5, 91)
-            Me.NamespaceLabel.Margin = New System.Windows.Forms.Padding(5)
-            Me.NamespaceLabel.Name = "NamespaceLabel"
-            Me.NamespaceLabel.Size = New System.Drawing.Size(125, 33)
-            Me.NamespaceLabel.TabIndex = 25
-            Me.NamespaceLabel.Text = "Namespace"
-            Me.NamespaceLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            '
-            'MainPanel
-            '
-            Me.MainPanel.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            Me.MainPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.MainPanel.Location = New System.Drawing.Point(5, 134)
-            Me.MainPanel.Margin = New System.Windows.Forms.Padding(5)
-            Me.MainPanel.Name = "MainPanel"
-            Me.MainPanel.Size = New System.Drawing.Size(682, 220)
-            Me.MainPanel.TabIndex = 35
-            '
-            'OpenOutputButton
-            '
-            Me.OpenOutputButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-            Me.OpenOutputButton.BackColor = System.Drawing.Color.MediumSlateBlue
-            Me.OpenOutputButton.BorderColor = System.Drawing.Color.PaleVioletRed
-            Me.OpenOutputButton.BorderRadius = 0
-            Me.OpenOutputButton.BorderSize = 1
-            Me.OpenOutputButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(107, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(255, Byte), Integer))
-            Me.OpenOutputButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-            Me.OpenOutputButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-            Me.OpenOutputButton.ForeColor = System.Drawing.Color.FromArgb(CType(CType(124, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(181, Byte), Integer))
-            Me.OpenOutputButton.Location = New System.Drawing.Point(5, 531)
-            Me.OpenOutputButton.Margin = New System.Windows.Forms.Padding(5)
-            Me.OpenOutputButton.Name = "OpenOutputButton"
-            Me.OpenOutputButton.Size = New System.Drawing.Size(110, 30)
-            Me.OpenOutputButton.TabIndex = 38
-            Me.OpenOutputButton.Text = "Open Output"
-            Me.OpenOutputButton.UseVisualStyleBackColor = True
-            '
-            'GenerateButton
-            '
-            Me.GenerateButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            Me.GenerateButton.BackColor = System.Drawing.Color.MediumSlateBlue
-            Me.GenerateButton.BorderColor = System.Drawing.Color.PaleVioletRed
-            Me.GenerateButton.BorderRadius = 0
-            Me.GenerateButton.BorderSize = 1
-            Me.GenerateButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(107, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(255, Byte), Integer))
-            Me.GenerateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-            Me.GenerateButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-            Me.GenerateButton.ForeColor = System.Drawing.Color.FromArgb(CType(CType(124, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(181, Byte), Integer))
-            Me.GenerateButton.Location = New System.Drawing.Point(607, 531)
-            Me.GenerateButton.Margin = New System.Windows.Forms.Padding(5)
-            Me.GenerateButton.Name = "GenerateButton"
-            Me.GenerateButton.Size = New System.Drawing.Size(80, 30)
-            Me.GenerateButton.TabIndex = 37
-            Me.GenerateButton.Text = "Generate"
-            Me.GenerateButton.UseVisualStyleBackColor = True
-            '
-            'MainListResults
-            '
-            Me.MainListResults.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            Me.MainListResults.BackColor = System.Drawing.SystemColors.Window
-            Me.MainListResults.BorderColor = System.Drawing.Color.MediumSlateBlue
-            Me.MainListResults.BorderFocusColor = System.Drawing.Color.HotPink
-            Me.MainListResults.BorderRadius = 0
-            Me.MainListResults.BorderSize = 1
-            Me.MainListResults.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.MainListResults.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.MainListResults.ForeColor = System.Drawing.Color.DimGray
-            Me.MainListResults.Indent = 0
-            Me.MainListResults.Location = New System.Drawing.Point(5, 364)
-            Me.MainListResults.Margin = New System.Windows.Forms.Padding(5)
-            Me.MainListResults.Name = "MainListResults"
-            Me.MainListResults.Padding = New System.Windows.Forms.Padding(10, 7, 10, 7)
-            Me.MainListResults.Size = New System.Drawing.Size(682, 157)
-            Me.MainListResults.TabIndex = 36
-            Me.MainListResults.UnderlinedStyle = False
-            '
-            'GeneratorComboBox
-            '
-            Me.GeneratorComboBox.BackColor = System.Drawing.Color.MediumSlateBlue
-            Me.GeneratorComboBox.BorderColor = System.Drawing.Color.MediumSlateBlue
-            Me.GeneratorComboBox.BorderSize = 1
-            Me.GeneratorComboBox.DataSource = Nothing
-            Me.GeneratorComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-            Me.GeneratorComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.GeneratorComboBox.ForeColor = System.Drawing.Color.FromArgb(CType(CType(124, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(181, Byte), Integer))
-            Me.GeneratorComboBox.FormattingEnabled = True
-            Me.GeneratorComboBox.IconColor = System.Drawing.Color.Crimson
-            Me.GeneratorComboBox.ListBackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(228, Byte), Integer), CType(CType(245, Byte), Integer))
-            Me.GeneratorComboBox.ListForeColor = System.Drawing.Color.DimGray
-            Me.GeneratorComboBox.Location = New System.Drawing.Point(140, 5)
-            Me.GeneratorComboBox.Margin = New System.Windows.Forms.Padding(5)
-            Me.GeneratorComboBox.Name = "GeneratorComboBox"
-            Me.GeneratorComboBox.Padding = New System.Windows.Forms.Padding(1)
-            Me.GeneratorComboBox.Size = New System.Drawing.Size(200, 33)
-            Me.GeneratorComboBox.TabIndex = 32
-            '
-            'OutputDirectoryButton
-            '
-            Me.OutputDirectoryButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            Me.OutputDirectoryButton.BackColor = System.Drawing.Color.MediumSlateBlue
-            Me.OutputDirectoryButton.BorderColor = System.Drawing.Color.PaleVioletRed
-            Me.OutputDirectoryButton.BorderRadius = 0
-            Me.OutputDirectoryButton.BorderSize = 1
-            Me.OutputDirectoryButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(107, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(255, Byte), Integer))
-            Me.OutputDirectoryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-            Me.OutputDirectoryButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-            Me.OutputDirectoryButton.ForeColor = System.Drawing.Color.FromArgb(CType(CType(124, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(181, Byte), Integer))
-            Me.OutputDirectoryButton.Location = New System.Drawing.Point(654, 48)
-            Me.OutputDirectoryButton.Margin = New System.Windows.Forms.Padding(5)
-            Me.OutputDirectoryButton.Name = "OutputDirectoryButton"
-            Me.OutputDirectoryButton.Size = New System.Drawing.Size(33, 33)
-            Me.OutputDirectoryButton.TabIndex = 28
-            Me.OutputDirectoryButton.Text = "..."
-            Me.OutputDirectoryButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-            Me.OutputDirectoryButton.UseVisualStyleBackColor = True
-            '
-            'OutputDirectoryTextBox
-            '
-            Me.OutputDirectoryTextBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            Me.OutputDirectoryTextBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(42, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(86, Byte), Integer))
-            Me.OutputDirectoryTextBox.BorderColor = System.Drawing.Color.MediumSlateBlue
-            Me.OutputDirectoryTextBox.BorderFocusColor = System.Drawing.Color.HotPink
-            Me.OutputDirectoryTextBox.BorderRadius = 0
-            Me.OutputDirectoryTextBox.BorderSize = 1
-            Me.OutputDirectoryTextBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.OutputDirectoryTextBox.ForeColor = System.Drawing.Color.FromArgb(CType(CType(124, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(181, Byte), Integer))
-            Me.OutputDirectoryTextBox.Location = New System.Drawing.Point(140, 48)
-            Me.OutputDirectoryTextBox.Margin = New System.Windows.Forms.Padding(5)
-            Me.OutputDirectoryTextBox.Multiline = False
-            Me.OutputDirectoryTextBox.Name = "OutputDirectoryTextBox"
-            Me.OutputDirectoryTextBox.Padding = New System.Windows.Forms.Padding(10, 7, 10, 7)
-            Me.OutputDirectoryTextBox.PasswordChar = False
-            Me.OutputDirectoryTextBox.PlaceHolderColor = System.Drawing.Color.DarkGray
-            Me.OutputDirectoryTextBox.PlaceHolderText = ""
-            Me.OutputDirectoryTextBox.Size = New System.Drawing.Size(547, 33)
-            Me.OutputDirectoryTextBox.TabIndex = 29
-            Me.OutputDirectoryTextBox.UnderlinedStyle = False
-            '
-            'NamespaceTextBox
-            '
-            Me.NamespaceTextBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            Me.NamespaceTextBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(42, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(86, Byte), Integer))
-            Me.NamespaceTextBox.BorderColor = System.Drawing.Color.MediumSlateBlue
-            Me.NamespaceTextBox.BorderFocusColor = System.Drawing.Color.HotPink
-            Me.NamespaceTextBox.BorderRadius = 0
-            Me.NamespaceTextBox.BorderSize = 1
-            Me.NamespaceTextBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.NamespaceTextBox.ForeColor = System.Drawing.Color.FromArgb(CType(CType(124, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(181, Byte), Integer))
-            Me.NamespaceTextBox.Location = New System.Drawing.Point(140, 91)
-            Me.NamespaceTextBox.Margin = New System.Windows.Forms.Padding(5)
-            Me.NamespaceTextBox.Multiline = False
-            Me.NamespaceTextBox.Name = "NamespaceTextBox"
-            Me.NamespaceTextBox.Padding = New System.Windows.Forms.Padding(10, 7, 10, 7)
-            Me.NamespaceTextBox.PasswordChar = False
-            Me.NamespaceTextBox.PlaceHolderColor = System.Drawing.Color.DarkGray
-            Me.NamespaceTextBox.PlaceHolderText = ""
-            Me.NamespaceTextBox.Size = New System.Drawing.Size(547, 33)
-            Me.NamespaceTextBox.TabIndex = 30
-            Me.NamespaceTextBox.UnderlinedStyle = False
-            '
-            'ModelGenerator
-            '
-            Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
-            Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(42, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(86, Byte), Integer))
-            Me.Controls.Add(Me.OpenOutputButton)
-            Me.Controls.Add(Me.GenerateButton)
-            Me.Controls.Add(Me.MainListResults)
-            Me.Controls.Add(Me.MainPanel)
-            Me.Controls.Add(Me.GeneratorComboBox)
-            Me.Controls.Add(Me.OutputDirectoryButton)
-            Me.Controls.Add(Me.OutputDirectoryTextBox)
-            Me.Controls.Add(Me.NamespaceTextBox)
-            Me.Controls.Add(Me.GeneratorLabel)
-            Me.Controls.Add(Me.OutputDirectoryLabel)
-            Me.Controls.Add(Me.NamespaceLabel)
-            Me.DoubleBuffered = True
-            Me.Margin = New System.Windows.Forms.Padding(0)
-            Me.Name = "ModelGenerator"
-            Me.Size = New System.Drawing.Size(692, 566)
-            Me.ResumeLayout(False)
+            GeneratorLabel = New Label()
+            OutputDirectoryLabel = New Label()
+            NamespaceLabel = New Label()
+            MainPanel = New Panel()
+            OpenOutputButton = New Button()
+            GenerateButton = New Button()
+            MainListResults = New PoesShared.UserControls.ListResults()
+            GeneratorComboBox = New ComboBox()
+            OutputDirectoryButton = New Button()
+            OutputDirectoryTextBox = New TextBox()
+            NamespaceTextBox = New TextBox()
+            SuspendLayout()
+            ' 
+            ' GeneratorLabel
+            ' 
+            GeneratorLabel.Cursor = Cursors.Hand
+            GeneratorLabel.Font = New Font("Tahoma", 8.25F)
+            GeneratorLabel.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
+            GeneratorLabel.Location = New Point(5, 5)
+            GeneratorLabel.Margin = New Padding(5)
+            GeneratorLabel.Name = "GeneratorLabel"
+            GeneratorLabel.Size = New Size(125, 21)
+            GeneratorLabel.TabIndex = 27
+            GeneratorLabel.Text = "Generator"
+            GeneratorLabel.TextAlign = ContentAlignment.MiddleLeft
+            ' 
+            ' OutputDirectoryLabel
+            ' 
+            OutputDirectoryLabel.Cursor = Cursors.Hand
+            OutputDirectoryLabel.Font = New Font("Tahoma", 8.25F)
+            OutputDirectoryLabel.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
+            OutputDirectoryLabel.Location = New Point(5, 31)
+            OutputDirectoryLabel.Margin = New Padding(5, 0, 5, 5)
+            OutputDirectoryLabel.Name = "OutputDirectoryLabel"
+            OutputDirectoryLabel.Size = New Size(125, 21)
+            OutputDirectoryLabel.TabIndex = 26
+            OutputDirectoryLabel.Text = "Output Directory"
+            OutputDirectoryLabel.TextAlign = ContentAlignment.MiddleLeft
+            ' 
+            ' NamespaceLabel
+            ' 
+            NamespaceLabel.Cursor = Cursors.Hand
+            NamespaceLabel.Font = New Font("Tahoma", 8.25F)
+            NamespaceLabel.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
+            NamespaceLabel.Location = New Point(5, 57)
+            NamespaceLabel.Margin = New Padding(5, 0, 5, 5)
+            NamespaceLabel.Name = "NamespaceLabel"
+            NamespaceLabel.Size = New Size(125, 21)
+            NamespaceLabel.TabIndex = 25
+            NamespaceLabel.Text = "Namespace"
+            NamespaceLabel.TextAlign = ContentAlignment.MiddleLeft
+            ' 
+            ' MainPanel
+            ' 
+            MainPanel.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
+            MainPanel.BorderStyle = BorderStyle.FixedSingle
+            MainPanel.Font = New Font("Tahoma", 8.25F)
+            MainPanel.Location = New Point(5, 83)
+            MainPanel.Margin = New Padding(5, 0, 5, 5)
+            MainPanel.Name = "MainPanel"
+            MainPanel.Size = New Size(682, 220)
+            MainPanel.TabIndex = 4
+            ' 
+            ' OpenOutputButton
+            ' 
+            OpenOutputButton.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
+            OpenOutputButton.BackColor = Color.MediumSlateBlue
+            OpenOutputButton.FlatAppearance.BorderColor = Color.FromArgb(CByte(107), CByte(83), CByte(255))
+            OpenOutputButton.FlatStyle = FlatStyle.Flat
+            OpenOutputButton.Font = New Font("Tahoma", 8.25F)
+            OpenOutputButton.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
+            OpenOutputButton.Location = New Point(5, 538)
+            OpenOutputButton.Margin = New Padding(5, 0, 5, 5)
+            OpenOutputButton.Name = "OpenOutputButton"
+            OpenOutputButton.Size = New Size(110, 23)
+            OpenOutputButton.TabIndex = 6
+            OpenOutputButton.Text = "Open Output"
+            OpenOutputButton.UseVisualStyleBackColor = True
+            ' 
+            ' GenerateButton
+            ' 
+            GenerateButton.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
+            GenerateButton.BackColor = Color.MediumSlateBlue
+            GenerateButton.FlatAppearance.BorderColor = Color.FromArgb(CByte(107), CByte(83), CByte(255))
+            GenerateButton.FlatStyle = FlatStyle.Flat
+            GenerateButton.Font = New Font("Tahoma", 8.25F)
+            GenerateButton.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
+            GenerateButton.Location = New Point(607, 538)
+            GenerateButton.Margin = New Padding(5, 0, 5, 5)
+            GenerateButton.Name = "GenerateButton"
+            GenerateButton.Size = New Size(80, 23)
+            GenerateButton.TabIndex = 7
+            GenerateButton.Text = "Generate"
+            GenerateButton.UseVisualStyleBackColor = True
+            ' 
+            ' MainListResults
+            ' 
+            MainListResults.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+            MainListResults.BackColor = SystemColors.Window
+            MainListResults.BorderColor = Color.MediumSlateBlue
+            MainListResults.BorderSize = New Padding(2)
+            MainListResults.BorderStyle = BorderStyle.FixedSingle
+            MainListResults.Font = New Font("Tahoma", 8.25F)
+            MainListResults.Indent = 0
+            MainListResults.Location = New Point(5, 308)
+            MainListResults.Margin = New Padding(5, 0, 5, 5)
+            MainListResults.Name = "MainListResults"
+            MainListResults.Padding = New Padding(2)
+            MainListResults.Size = New Size(682, 225)
+            MainListResults.TabIndex = 5
+            ' 
+            ' GeneratorComboBox
+            ' 
+            GeneratorComboBox.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
+            GeneratorComboBox.BackColor = Color.MediumSlateBlue
+            GeneratorComboBox.DropDownStyle = ComboBoxStyle.DropDownList
+            GeneratorComboBox.Font = New Font("Tahoma", 8.25F)
+            GeneratorComboBox.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
+            GeneratorComboBox.FormattingEnabled = True
+            GeneratorComboBox.Location = New Point(135, 5)
+            GeneratorComboBox.Margin = New Padding(0, 5, 5, 5)
+            GeneratorComboBox.Name = "GeneratorComboBox"
+            GeneratorComboBox.Size = New Size(517, 21)
+            GeneratorComboBox.TabIndex = 0
+            ' 
+            ' OutputDirectoryButton
+            ' 
+            OutputDirectoryButton.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+            OutputDirectoryButton.BackColor = Color.MediumSlateBlue
+            OutputDirectoryButton.FlatAppearance.BorderColor = Color.FromArgb(CByte(107), CByte(83), CByte(255))
+            OutputDirectoryButton.FlatStyle = FlatStyle.Flat
+            OutputDirectoryButton.Font = New Font("Tahoma", 8.25F)
+            OutputDirectoryButton.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
+            OutputDirectoryButton.Location = New Point(657, 31)
+            OutputDirectoryButton.Margin = New Padding(0, 0, 5, 5)
+            OutputDirectoryButton.Name = "OutputDirectoryButton"
+            OutputDirectoryButton.Size = New Size(30, 21)
+            OutputDirectoryButton.TabIndex = 2
+            OutputDirectoryButton.Text = "..."
+            OutputDirectoryButton.UseVisualStyleBackColor = True
+            ' 
+            ' OutputDirectoryTextBox
+            ' 
+            OutputDirectoryTextBox.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
+            OutputDirectoryTextBox.BackColor = Color.FromArgb(CByte(42), CByte(45), CByte(86))
+            OutputDirectoryTextBox.Font = New Font("Tahoma", 8.25F)
+            OutputDirectoryTextBox.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
+            OutputDirectoryTextBox.Location = New Point(135, 31)
+            OutputDirectoryTextBox.Margin = New Padding(0, 0, 5, 5)
+            OutputDirectoryTextBox.Name = "OutputDirectoryTextBox"
+            OutputDirectoryTextBox.Size = New Size(517, 21)
+            OutputDirectoryTextBox.TabIndex = 1
+            ' 
+            ' NamespaceTextBox
+            ' 
+            NamespaceTextBox.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
+            NamespaceTextBox.BackColor = Color.FromArgb(CByte(42), CByte(45), CByte(86))
+            NamespaceTextBox.Font = New Font("Tahoma", 8.25F)
+            NamespaceTextBox.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
+            NamespaceTextBox.Location = New Point(135, 57)
+            NamespaceTextBox.Margin = New Padding(0, 0, 5, 5)
+            NamespaceTextBox.Name = "NamespaceTextBox"
+            NamespaceTextBox.Size = New Size(517, 21)
+            NamespaceTextBox.TabIndex = 3
+            ' 
+            ' ModelGenerator
+            ' 
+            AutoScaleMode = AutoScaleMode.None
+            BackColor = Color.FromArgb(CByte(42), CByte(45), CByte(86))
+            Controls.Add(OpenOutputButton)
+            Controls.Add(GenerateButton)
+            Controls.Add(MainListResults)
+            Controls.Add(MainPanel)
+            Controls.Add(GeneratorComboBox)
+            Controls.Add(OutputDirectoryButton)
+            Controls.Add(OutputDirectoryTextBox)
+            Controls.Add(NamespaceTextBox)
+            Controls.Add(GeneratorLabel)
+            Controls.Add(OutputDirectoryLabel)
+            Controls.Add(NamespaceLabel)
+            DoubleBuffered = True
+            Font = New Font("Tahoma", 8.25F)
+            Margin = New Padding(0)
+            Name = "ModelGenerator"
+            Size = New Size(692, 566)
+            ResumeLayout(False)
+            PerformLayout()
 
         End Sub
 
-        Private WithEvents OutputDirectoryButton As Aprotec.UserControls.Button
+        Private WithEvents OutputDirectoryButton As Button
         Private WithEvents GeneratorLabel As Label
         Private WithEvents OutputDirectoryLabel As Label
         Private WithEvents NamespaceLabel As Label
-        Private WithEvents GeneratorComboBox As Aprotec.UserControls.ComboBox
-        Private WithEvents OutputDirectoryTextBox As Aprotec.UserControls.TextBox
-        Private WithEvents NamespaceTextBox As Aprotec.UserControls.TextBox
+        Private WithEvents GeneratorComboBox As ComboBox
+        Private WithEvents OutputDirectoryTextBox As TextBox
+        Private WithEvents NamespaceTextBox As TextBox
         Private WithEvents MainPanel As Panel
-        Private WithEvents MainListResults As Aprotec.UserControls.ListResultsBorder
-        Private WithEvents GenerateButton As Aprotec.UserControls.Button
-        Private WithEvents OpenOutputButton As Aprotec.UserControls.Button
+        Private WithEvents MainListResults As PoesShared.UserControls.ListResults
+        Private WithEvents GenerateButton As Button
+        Private WithEvents OpenOutputButton As Button
     End Class
 
 End Namespace

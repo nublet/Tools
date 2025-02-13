@@ -26,11 +26,11 @@
 
                 TopMost = True
 
-                Dim WindowLong = Aprotec.NativeRoutines.GetWindowLong(Handle, -20)
-                WindowLong = WindowLong Or Aprotec.NativeRoutines.WS_EX_LAYERED Or Aprotec.NativeRoutines.WS_EX_TRANSPARENT
+                Dim WindowLong = NativeRoutines.PInvoke.GetWindowLong(Handle, -20)
+                WindowLong = WindowLong Or NativeRoutines.WS_EX_LAYERED Or NativeRoutines.WS_EX_TRANSPARENT
 
-                Dim ExitCode = Aprotec.NativeRoutines.SetWindowLong(Handle, -20, WindowLong)
-                Aprotec.NativeRoutines.SetLayeredWindowAttributes(Handle, Color.White.ToArgb(), 128, Aprotec.NativeRoutines.LWA_COLORKEY Or Aprotec.NativeRoutines.LWA_ALPHA)
+                Dim ExitCode = NativeRoutines.PInvoke.SetWindowLong(Handle, -20, WindowLong)
+                NativeRoutines.PInvoke.SetLayeredWindowAttributes(Handle, Color.White.ToArgb(), 128, NativeRoutines.LWA_COLORKEY Or NativeRoutines.LWA_ALPHA)
 
                 Dim DeviceEnumerator = New CoreAudio.MMDeviceEnumerator(Guid.NewGuid())
                 _Device = DeviceEnumerator.GetDefaultAudioEndpoint(CoreAudio.DataFlow.Render, CoreAudio.Role.Multimedia)
@@ -78,7 +78,7 @@
             Try
                 Dim Volume = CInt(_Device.AudioEndpointVolume.MasterVolumeLevelScalar * 100)
 
-                CurrentVolumeLabel.Text = "{0}%".FormatWith(Volume)
+                CurrentVolumeLabel.Text = $"{Volume}%"
 
                 Set10Button.BackColor = _NormalBackColor
                 Set10Button.ForeColor = _NormalForeColor
@@ -119,8 +119,8 @@
         End Sub
 
         Private Sub Me_MouseDown(sender As Object, e As MouseEventArgs) Handles Me.MouseDown, CurrentVolumeLabel.MouseDown
-            Aprotec.NativeRoutines.ReleaseCapture()
-            Aprotec.NativeRoutines.SendMessage(Handle, Aprotec.NativeRoutines.WM_SYSCOMMAND, &HF012, IntPtr.Zero)
+            NativeRoutines.PInvoke.ReleaseCapture()
+            NativeRoutines.PInvoke.SendMessage(Handle, NativeRoutines.WM_SYSCOMMAND, &HF012, IntPtr.Zero)
         End Sub
 
         Private Sub Set10Button_Click(sender As Object, e As EventArgs) Handles Set10Button.Click

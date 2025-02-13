@@ -17,7 +17,7 @@
 
     Friend Function GetSafeName(itemName As String) As String
         If _Keywords.Contains(itemName.ToLower()) Then
-            Return "[{0}]".FormatWith(itemName)
+            Return $"[{itemName}]"
         End If
 
         Return itemName

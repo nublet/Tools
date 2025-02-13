@@ -1,7 +1,7 @@
 ﻿Namespace UserControls.Tabs
 
     Public Class ModelGenerator
-        Inherits Aprotec.UserControls.TabBase
+        Inherits PoesShared.UserControls.TabBase
 
         Private ReadOnly _View As Views.ModelGenerator = Nothing
 

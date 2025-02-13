@@ -1,9 +1,9 @@
 ﻿Namespace UserControls.Tabs
 
     Public Class Theme
-        Inherits Aprotec.UserControls.TabBase
+        Inherits PoesShared.UserControls.TabBase
 
-        Private ReadOnly _View As Aprotec.UITheme.Editor = Nothing
+        Private ReadOnly _View As PoesShared.UserControls.UIThemeEditor = Nothing
 
         Public Sub New()
             Try
@@ -12,14 +12,14 @@
 
                 CreateItems()
 
-                _View = New Aprotec.UITheme.Editor(New Aprotec.UITheme.ThemeValueChangedEventHandler(AddressOf ThemeValue_Changed))
+                _View = New PoesShared.UserControls.UIThemeEditor("Bjorn", New UITheme.ValueChangedEventHandler(AddressOf UITheme_ValueChanged))
             Catch ex As Exception
                 ex.ToLog()
             End Try
         End Sub
 
-        Private Sub ThemeValue_Changed()
-            UserForms.Main.UpdateTheme()
+        Private Sub UITheme_ValueChanged()
+            UITheme.UpdateTheme()
         End Sub
 
 #Region " TabBase "

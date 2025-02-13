@@ -1,15 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows</TargetFramework>
-    <StartupObject>Tools.UserForms.Main</StartupObject>
-    <UseWindowsForms>True</UseWindowsForms>
-    <MyType>WindowsFormsWithCustomSubMain</MyType>
-    <ImportedNamespaces>Aprotec.Extensions=False,System.Data=False,System.Drawing=False,System.Windows.Forms=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,Tools=True</ImportedNamespaces>
-    <ApplicationIcon>App.ico</ApplicationIcon>
-    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net9.0-windows7.0</TargetFramework>
+		<StartupObject>Tools.UserForms.Main</StartupObject>
+		<UseWindowsForms>True</UseWindowsForms>
+		<MyType>WindowsFormsWithCustomSubMain</MyType>
+		<ImportedNamespaces>PoesShared=False,PoesShared.Extensions=False,System.Data=False,System.Drawing=False,System.Windows.Forms=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,Tools=True</ImportedNamespaces>
+		<ApplicationIcon>App.ico</ApplicationIcon>
+		<ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+		<AssemblyVersion>25.0.1.201</AssemblyVersion>
+		<FileVersion>25.0.1.201</FileVersion>
+		<ProductVersion>25.0.1.201</ProductVersion>
+		<Version>25.0.1.201</Version>
+	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
@@ -26,67 +30,58 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Content Include="App.ico" />
+		<Content Include="App.ico" />
 	</ItemGroup>
 
 	<ItemGroup>
-    <Import Include="Aprotec.Extensions" />
-    <Import Include="System.Data" />
-    <Import Include="System.Drawing" />
-    <Import Include="System.Windows.Forms" />
-  </ItemGroup>
-
-	<ItemGroup>
-	  <PackageReference Include="CoreAudio" Version="1.40.0" />
-	  <PackageReference Include="Humanizer.Core" Version="2.14.1" />
-	  <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
-	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-	  <PackageReference Include="Squid-Box.SevenZipSharp" Version="1.6.2.24" />
-	  <PackageReference Include="System.Data.OleDb" Version="9.0.1" />
+		<Import Include="PoesShared" />
+		<Import Include="PoesShared.Extensions" />
+		<Import Include="System.Data" />
+		<Import Include="System.Drawing" />
+		<Import Include="System.Windows.Forms" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Reference Include="Aprotec.Common">
-	    <HintPath>..\..\_Binaries\Aprotec.Common.dll</HintPath>
-	  </Reference>
-	  <Reference Include="Aprotec.CommonControls">
-	    <HintPath>..\..\_Binaries\Aprotec.CommonControls.dll</HintPath>
-	  </Reference>
-	  <Reference Include="Aprotec.CommonForms">
-	    <HintPath>..\..\_Binaries\Aprotec.CommonForms.dll</HintPath>
-	  </Reference>
-	  <Reference Include="Aprotec.NativeRoutines">
-	    <HintPath>..\..\_Binaries\Aprotec.NativeRoutines.dll</HintPath>
-	  </Reference>
+		<PackageReference Include="CoreAudio" Version="1.40.0" />
+		<PackageReference Include="Humanizer.Core" Version="2.14.1" />
+		<PackageReference Include="PoesShared.DAL" Version="25.0.1.282" />
+		<PackageReference Include="PoesShared.Forms" Version="25.0.1.283" GeneratePathProperty="true" />
+		<PackageReference Include="Squid-Box.SevenZipSharp" Version="1.6.2.24" />
 	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="My Project\Application.Designer.vb">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Application.myapp</DependentUpon>
-    </Compile>
-    <Compile Update="My Project\Resources.Designer.vb">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Update="UserForms\VolumeControl.vb" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Update="My Project\Application.Designer.vb">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Application.myapp</DependentUpon>
+		</Compile>
+		<Compile Update="My Project\Resources.Designer.vb">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resources.resx</DependentUpon>
+		</Compile>
+		<Compile Update="UserForms\VolumeControl.vb" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Update="My Project\Resources.resx">
-      <CustomToolNamespace>My.Resources</CustomToolNamespace>
-      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
+	<ItemGroup>
+	  <Content Update="$(PkgPoesShared_Forms)\contentFiles\any\net9.0-windows7.0\Images\**\*">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Update="My Project\Application.myapp">
-      <Generator>MyApplicationCodeGenerator</Generator>
-      <LastGenOutput>Application.Designer.vb</LastGenOutput>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Update="My Project\Resources.resx">
+			<CustomToolNamespace>My.Resources</CustomToolNamespace>
+			<Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resources.Designer.vb</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="My Project\Application.myapp">
+			<Generator>MyApplicationCodeGenerator</Generator>
+			<LastGenOutput>Application.Designer.vb</LastGenOutput>
+		</None>
+	</ItemGroup>
 
 </Project>

@@ -4,6 +4,7 @@
 
         Private _IncludeTemplates As Boolean = False
         Private _IncludeSavedVariables As Boolean = False
+        Private _IsFirst As Boolean = True
         Private _UpdateFonts As Boolean = False
 
         Private ReadOnly _Folders As New Dictionary(Of String, String)
@@ -17,12 +18,12 @@
 
         Private Sub CheckProfiles(accountFolder As String, templateFolder As String)
             Try
-                Dim FileContents As String = ""
+                Dim FileContents = ""
 
                 Dim IsBjorn As Boolean = accountFolder.EndsWith("\POESBOI\")
 
                 MainListResults.AddMessage("   Checking Profile Names...")
-                For Each Current In IO.Directory.GetFiles("{0}SavedVariables\".FormatWith(accountFolder), "*.lua", IO.SearchOption.TopDirectoryOnly).OrderBy(Function(o) o)
+                For Each Current In IO.Directory.GetFiles($"{accountFolder}SavedVariables\", "*.lua", IO.SearchOption.TopDirectoryOnly).OrderBy(Function(o) o)
                     CheckProfileNames(Current, IsBjorn)
                 Next
 
@@ -30,24 +31,24 @@
                     MainListResults.AddMessage("   Checking Template Files...")
                     If IO.Directory.Exists(templateFolder) Then
                         For Each Current In IO.Directory.GetFiles(templateFolder, "*.*", IO.SearchOption.TopDirectoryOnly)
-                            Dim FileName As String = Current.Substring(Current.LastIndexOf("\"c) + 1)
+                            Dim FileName = Current.Substring(Current.LastIndexOf("\"c) + 1)
 
-                            MainListResults.AddMessage("      Checking Files: {0}...".FormatWith(FileName))
+                            MainListResults.AddMessage($"      Checking Files: {FileName}...")
                             Dim FileNames As New List(Of String)
 
                             For Each RealmFolder As String In IO.Directory.GetDirectories(accountFolder, "*.*", IO.SearchOption.TopDirectoryOnly)
-                                Dim RealmName As String = RealmFolder.Substring(RealmFolder.LastIndexOf("\"c) + 1)
+                                Dim RealmName = RealmFolder.Substring(RealmFolder.LastIndexOf("\"c) + 1)
 
                                 If RealmName.IsEqualTo("SavedVariables") Then
                                     Continue For
                                 End If
 
                                 For Each CharacterFolder As String In IO.Directory.GetDirectories(RealmFolder, "*.*", IO.SearchOption.TopDirectoryOnly)
-                                    Dim AccountFile As String = "{0}\{1}".FormatWith(CharacterFolder, FileName)
+                                    Dim AccountFile = $"{CharacterFolder}\{FileName}"
 
                                     If AccountFile.FileExists() Then
                                         Try
-                                            MainListResults.AddMessage("         Deleting: {0}...".FormatWith(AccountFile))
+                                            MainListResults.AddMessage($"         Deleting: {AccountFile}...")
 
                                             IO.File.Delete(AccountFile)
                                         Catch exInner As Exception
@@ -65,7 +66,7 @@
                                 FileContents = IO.File.ReadAllText(Current)
 
                                 For Each AccountFile As String In FileNames
-                                    MainListResults.AddMessage("         Creating: {0}...".FormatWith(AccountFile))
+                                    MainListResults.AddMessage($"         Creating: {AccountFile}...")
 
                                     Using writer As New IO.StreamWriter(AccountFile, False)
                                         writer.WriteLine(FileContents)
@@ -78,24 +79,24 @@
                             Dim TemplateSavedVariables = $"{templateFolder}\SavedVariables"
 
                             For Each Current In IO.Directory.GetFiles(TemplateSavedVariables, "*.*", IO.SearchOption.TopDirectoryOnly)
-                                Dim FileName As String = Current.Substring(Current.LastIndexOf("\"c) + 1)
+                                Dim FileName = Current.Substring(Current.LastIndexOf("\"c) + 1)
 
-                                MainListResults.AddMessage("      Checking Files: {0}...".FormatWith(FileName))
+                                MainListResults.AddMessage($"      Checking Files: {FileName}...")
                                 Dim FileNames As New List(Of String)
 
                                 For Each RealmFolder As String In IO.Directory.GetDirectories(accountFolder, "*.*", IO.SearchOption.TopDirectoryOnly)
-                                    Dim RealmName As String = RealmFolder.Substring(RealmFolder.LastIndexOf("\"c) + 1)
+                                    Dim RealmName = RealmFolder.Substring(RealmFolder.LastIndexOf("\"c) + 1)
 
                                     If RealmName.IsEqualTo("SavedVariables") Then
                                         Continue For
                                     End If
 
                                     For Each CharacterFolder As String In IO.Directory.GetDirectories(RealmFolder, "*.*", IO.SearchOption.TopDirectoryOnly)
-                                        Dim AccountFile As String = "{0}\SavedVariables\{1}".FormatWith(CharacterFolder, FileName)
+                                        Dim AccountFile = $"{CharacterFolder}\SavedVariables\{FileName}"
 
                                         If AccountFile.FileExists() Then
                                             Try
-                                                MainListResults.AddMessage("         Deleting: {0}...".FormatWith(AccountFile))
+                                                MainListResults.AddMessage($"         Deleting: {AccountFile}...")
 
                                                 IO.File.Delete(AccountFile)
                                             Catch exInner As Exception
@@ -113,7 +114,7 @@
                                     FileContents = IO.File.ReadAllText(Current)
 
                                     For Each AccountFile As String In FileNames
-                                        MainListResults.AddMessage("         Creating: {0}...".FormatWith(AccountFile))
+                                        MainListResults.AddMessage($"         Creating: {AccountFile}...")
 
                                         Using writer As New IO.StreamWriter(AccountFile, False)
                                             writer.WriteLine(FileContents)
@@ -137,27 +138,31 @@
 
                 For Each Current In IO.Directory.GetFiles(folderPath, "*.*")
                     Try
-                        MainListResults.AddMessage("   Deleting: {0}".FormatWith(Current))
+                        MainListResults.AddMessage($"   Deleting: {Current}")
                         IO.File.Delete(Current)
                     Catch exInner As Exception
-                        MainListResults.AddMessage("   ERROR: {0}".FormatWith(exInner.Message))
+                        MainListResults.AddMessage($"   ERROR: {exInner.Message}")
                     End Try
                 Next
             Catch ex As Exception
-                MainListResults.AddMessage("   ERROR: {0}".FormatWith(ex.Message))
+                MainListResults.AddMessage($"   ERROR: {ex.Message}")
             End Try
         End Sub
 
         Public Sub StartTimer()
-            MainListResults.AddMessage("Clearing Folders...")
-            For Each Current In {"C:\Users\Poesboi\Pictures\Screenshots", "D:\Games\Activision\World of Warcraft\_retail_\Screenshots", "D:\Games\Activision\World of Warcraft\_retail_\Logs\BlizzardBrowser", "D:\Games\Activision\World of Warcraft\_retail_\Logs", "D:\Games\Activision\World of Warcraft\_retail_\Cache\WDB\enUS", "D:\Projects\Videos"}
-                ClearFolder(Current)
-            Next
-            MainListResults.AddMessage("Complete.")
+            If _IsFirst Then
+                _IsFirst = False
 
-            MainListResults.AddMessage("Updating Fonts...")
-            CheckFonts("D:\Games\Activision\World of Warcraft\_retail_\WTF\Account\POESBOI\SavedVariables\WeakAuras.lua")
-            MainListResults.AddMessage("Complete.")
+                MainListResults.AddMessage("Clearing Folders...")
+                For Each Current In {"C:\Users\Poesboi\Pictures\Screenshots", "D:\Games\Activision\World of Warcraft\_retail_\Screenshots", "D:\Games\Activision\World of Warcraft\_retail_\Logs\BlizzardBrowser", "D:\Games\Activision\World of Warcraft\_retail_\Logs", "D:\Games\Activision\World of Warcraft\_retail_\Cache\WDB\enUS", "D:\Projects\Videos"}
+                    ClearFolder(Current)
+                Next
+                MainListResults.AddMessage("Complete.")
+
+                MainListResults.AddMessage("Updating Fonts...")
+                CheckFonts("D:\Games\Activision\World of Warcraft\_retail_\WTF\Account\POESBOI\SavedVariables\WeakAuras.lua")
+                MainListResults.AddMessage("Complete.")
+            End If
         End Sub
 
 #Region " Events "
@@ -300,11 +305,11 @@
 
         Private Sub CheckFonts(fileName As String)
             Try
-                Dim AddonName As String = IO.Path.GetFileNameWithoutExtension(fileName)
+                Dim AddonName = IO.Path.GetFileNameWithoutExtension(fileName)
                 Dim HasChanged As Boolean = False
                 Dim InProfileKeys As Boolean = False
-                Dim LastTable As String = ""
-                Dim ProfileName As String = ""
+                Dim LastTable = ""
+                Dim ProfileName = ""
                 Dim StringBuilder As New Text.StringBuilder()
 
                 MainListResults.AddMessage($"   Checking File: {fileName}...")
@@ -398,14 +403,14 @@
                     Return
                 End If
 
-                Dim AddonName As String = IO.Path.GetFileNameWithoutExtension(fileName)
+                Dim AddonName = IO.Path.GetFileNameWithoutExtension(fileName)
                 Dim HasChanged As Boolean = False
                 Dim InProfileKeys As Boolean = False
-                Dim LastTable As String = ""
-                Dim ProfileName As String = ""
+                Dim LastTable = ""
+                Dim ProfileName = ""
                 Dim StringBuilder As New Text.StringBuilder()
 
-                MainListResults.AddMessage("         Checking AddOn: {0}...".FormatWith(AddonName))
+                MainListResults.AddMessage($"         Checking AddOn: {AddonName}...")
                 For Each CurrentLine As String In IO.File.ReadLines(fileName)
                     If CurrentLine.IsNotSet() Then
                         StringBuilder.AppendLine(CurrentLine)
@@ -416,7 +421,7 @@
                         If CurrentLine.Trim().Replace("[", "").Replace("""", "").StartsWith("profileKeys]") Then
                             InProfileKeys = True
 
-                            Dim KeyName As String = "{0}_{1}".FormatWith(AddonName, LastTable).ToLower()
+                            Dim KeyName = $"{AddonName}_{LastTable}".ToLower()
 
                             ProfileName = GetProfileName(fileName, isBjorn, KeyName)
                         End If
@@ -430,14 +435,14 @@
                         If CurrentLine.Contains(" = ") Then
                             Dim IndexPosition As Integer = CurrentLine.IndexOf(" = ")
 
-                            Dim Key As String = CurrentLine.Substring(0, IndexPosition)
-                            Dim Value As String = CurrentLine.Substring(IndexPosition + 4)
+                            Dim Key = CurrentLine.Substring(0, IndexPosition)
+                            Dim Value = CurrentLine.Substring(IndexPosition + 4)
                             Value = Value.Substring(0, Value.Length - 2)
 
                             If Value.IsEqualTo(ProfileName) OrElse ProfileName.IsEqualTo("Default") Then
                             Else
                                 HasChanged = True
-                                CurrentLine = "{0} = ""{1}"",".FormatWith(Key, ProfileName)
+                                CurrentLine = $"{Key} = ""{ProfileName}"","
                             End If
                         End If
                     End If
