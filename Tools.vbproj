@@ -60,6 +60,9 @@
 			<AutoGen>True</AutoGen>
 			<DependentUpon>Resources.resx</DependentUpon>
 		</Compile>
+		<Compile Update="UserControls\Views\BuildSoftware.vb">
+		  <SubType>UserControl</SubType>
+		</Compile>
 		<Compile Update="UserForms\VolumeControl.vb" />
 	</ItemGroup>
 

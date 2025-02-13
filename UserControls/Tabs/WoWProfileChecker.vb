@@ -7,7 +7,7 @@
 
         Public Sub New()
             Try
-                _OrderButton = 2
+                _OrderButton = 1
                 _Text = "WoW Profile Checker"
 
                 CreateItems()

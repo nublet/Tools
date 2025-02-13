@@ -7,7 +7,7 @@
 
         Public Sub New()
             Try
-                _OrderButton = 4
+                _OrderButton = 3
                 _Text = "Model Generator"
 
                 CreateItems()

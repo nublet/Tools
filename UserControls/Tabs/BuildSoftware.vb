@@ -1,18 +1,18 @@
 ﻿Namespace UserControls.Tabs
 
-    Public Class ArchiveFolder
+    Public Class BuildSoftware
         Inherits PoesShared.UserControls.TabBase
 
-        Private ReadOnly _View As Views.ArchiveFolder = Nothing
+        Private ReadOnly _View As Views.BuildSoftware = Nothing
 
         Public Sub New()
             Try
-                _OrderButton = 4
-                _Text = "Archive Folder"
+                _OrderButton = 2
+                _Text = "Build Software"
 
                 CreateItems()
 
-                _View = New Views.ArchiveFolder()
+                _View = New Views.BuildSoftware()
             Catch ex As Exception
                 ex.ToLog()
             End Try
