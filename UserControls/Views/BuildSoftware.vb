@@ -148,7 +148,7 @@
             If e.Data.IsSet() Then
                 MainListResults.AddMessage($"      {e.Data}")
             Else
-                MainListResults.AddMessage("      ")
+                MainListResults.AddMessage(String.Empty)
             End If
         End Sub
 
@@ -241,7 +241,7 @@
             _Solutions.Clear()
             _Solutions.Add(New Models.BuildInformation("D:\Projects\GitHub\PoesShared\PoesShared.DAL\bin\Release\net9.0-windows\PoesShared.DAL.dll", False, "D:\Projects\GitHub\PoesShared\PoesShared.DAL\PoesShared.DAL.vbproj", False))
             _Solutions.Add(New Models.BuildInformation("D:\Projects\GitHub\PoesShared\PoesShared.Forms\bin\Release\net9.0-windows\PoesShared.Forms.dll", False, "D:\Projects\GitHub\PoesShared\PoesShared.Forms\PoesShared.Forms.vbproj", False))
-            _Solutions.Add(New Models.BuildInformation("D:\Projects\GitHub\PoesShared\PoesShared.Razor\bin\Release\net9.0-windows\PoesShared.Razor.dll", False, "D:\Projects\GitHub\PoesShared\PoesShared.Razor\PoesShared.Razor.vbproj", False))
+            _Solutions.Add(New Models.BuildInformation("D:\Projects\GitHub\PoesShared\PoesShared.Razor\bin\Release\net9.0-windows\PoesShared.Razor.dll", False, "D:\Projects\GitHub\PoesShared\PoesShared.Razor\PoesShared.Razor.csproj", False))
 
             MainBackgroundWorker.RunWorkerAsync()
         End Sub
