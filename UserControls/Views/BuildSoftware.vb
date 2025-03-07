@@ -19,7 +19,7 @@
 
         Private Function UpdateProjectVersions(ByRef information As Models.BuildInformation) As Boolean
             Try
-                MainListResults.AddMessage($"   Updating {information.SolutionFilename}...")
+                OutputListResults.AddMessage($"   Updating {information.SolutionFilename}...")
 
                 Dim Directory = IO.Path.GetDirectoryName(information.SolutionFilename)
 
@@ -48,9 +48,9 @@
                 Return True
             Catch ex As Exception
                 ex.ToLog()
-                MainListResults.AddMessage($"   ERROR: {ex.Message}")
+                ErrorListResults.AddMessage($"   ERROR: {ex.Message}")
             Finally
-                MainListResults.AddMessage("   Complete.")
+                OutputListResults.AddMessage("   Complete.")
             End Try
 
             Return False
@@ -58,7 +58,7 @@
 
         Private Function BuildSolution(target As String, ByRef information As Models.BuildInformation) As Boolean
             Try
-                MainListResults.AddMessage($"   {target}ing {information.SolutionFilename}...")
+                OutputListResults.AddMessage($"   {target}ing {information.SolutionFilename}...")
 
                 Dim StartInfo As New ProcessStartInfo(_MSBuildLocation) With {
                     .CreateNoWindow = True,
@@ -90,13 +90,13 @@
                     Case 0
                         Return True
                     Case Else
-                        MainListResults.AddMessage($"   ExitCode: {NewProcess.ExitCode}")
+                        OutputListResults.AddMessage($"   ExitCode: {NewProcess.ExitCode}")
                 End Select
             Catch ex As Exception
                 ex.ToLog()
-                MainListResults.AddMessage($"   ERROR: {ex.Message}")
+                ErrorListResults.AddMessage($"   ERROR: {ex.Message}")
             Finally
-                MainListResults.AddMessage("   Complete.")
+                OutputListResults.AddMessage("   Complete.")
             End Try
 
             Return False
@@ -104,7 +104,7 @@
 
         Private Function BuildSolutionCore(target As String, ByRef information As Models.BuildInformation) As Boolean
             Try
-                MainListResults.AddMessage($"   {target}ing {information.SolutionFilename}...")
+                OutputListResults.AddMessage($"   {target}ing {information.SolutionFilename}...")
 
                 Dim OutputFolder = information.OutputFilename.Substring(0, information.OutputFilename.LastIndexOf("\"c))
 
@@ -132,13 +132,13 @@
                     Case 0
                         Return True
                     Case Else
-                        MainListResults.AddMessage($"   ExitCode: {NewProcess.ExitCode}")
+                        OutputListResults.AddMessage($"   ExitCode: {NewProcess.ExitCode}")
                 End Select
             Catch ex As Exception
                 ex.ToLog()
-                MainListResults.AddMessage($"   ERROR: {ex.Message}")
+                ErrorListResults.AddMessage($"   ERROR: {ex.Message}")
             Finally
-                MainListResults.AddMessage("   Complete.")
+                OutputListResults.AddMessage("   Complete.")
             End Try
 
             Return False
@@ -146,14 +146,18 @@
 
         Private Sub Process_ErrorDataReceived(sender As Object, e As DataReceivedEventArgs)
             If e.Data.IsSet() Then
-                MainListResults.AddMessage($"      {e.Data}")
+                ErrorListResults.AddMessage($"      {e.Data}")
             Else
-                MainListResults.AddMessage(String.Empty)
+                ErrorListResults.AddMessage(String.Empty)
             End If
         End Sub
 
         Private Sub Process_OutputDataReceived(sender As Object, e As DataReceivedEventArgs)
-            MainListResults.AddMessage($"      {e.Data}")
+            If e.Data.IsSet() Then
+                OutputListResults.AddMessage($"      {e.Data}")
+            Else
+                OutputListResults.AddMessage(String.Empty)
+            End If
         End Sub
 
         Public Sub StartTimer()
@@ -163,14 +167,15 @@
 #Region " Events "
 
         Private Sub ClearButton_Click(sender As Object, e As EventArgs) Handles ClearButton.Click
-            MainListResults.ClearResults()
+            ErrorListResults.ClearResults()
+            OutputListResults.ClearResults()
         End Sub
 
         Private Sub MainBackgroundWorker_DoWork(sender As Object, e As ComponentModel.DoWorkEventArgs) Handles MainBackgroundWorker.DoWork
             Try
-                MainListResults.AddMessage("Starting...")
-                MainListResults.AddMessage($"   {_DotNetLocation}")
-                MainListResults.AddMessage($"   {_MSBuildLocation}")
+                OutputListResults.AddMessage("Starting...")
+                OutputListResults.AddMessage($"   {_DotNetLocation}")
+                OutputListResults.AddMessage($"   {_MSBuildLocation}")
 
                 Dim Count As Integer = 1
 
@@ -210,7 +215,7 @@
                     End If
 
                     If Not Current.OutputFilename.FileExists() Then
-                        MainListResults.AddMessage("   ERROR: Output File NOT FOUND.")
+                        OutputListResults.AddMessage("   ERROR: Output File NOT FOUND.")
                         Return
                     End If
 
@@ -218,13 +223,13 @@
                 Next
             Catch ex As Exception
                 ex.ToLog()
-                MainListResults.AddMessage($"   ERROR: {ex.Message}")
+                ErrorListResults.AddMessage($"   ERROR: {ex.Message}")
             Finally
                 Invoke(Sub()
                            StatusLabel.Text = String.Empty
                        End Sub)
 
-                MainListResults.AddMessage("Complete.")
+                OutputListResults.AddMessage("Complete.")
             End Try
         End Sub
 

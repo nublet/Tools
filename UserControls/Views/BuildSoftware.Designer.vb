@@ -29,8 +29,11 @@
             ProcessButton = New Button()
             SoftwareVersionTextBox = New TextBox()
             SoftwareVersionLabel = New Label()
-            MainListResults = New PoesShared.UserControls.ListResults()
+            OutputListResults = New PoesShared.UserControls.ListResults()
             StatusLabel = New Label()
+            ErrorListResults = New PoesShared.UserControls.ListResults()
+            OutputLabel = New Label()
+            ErrorsLabel = New Label()
             SuspendLayout()
             ' 
             ' MainBackgroundWorker
@@ -48,7 +51,7 @@
             ClearButton.Margin = New Padding(0, 0, 5, 5)
             ClearButton.Name = "ClearButton"
             ClearButton.Size = New Size(80, 23)
-            ClearButton.TabIndex = 3
+            ClearButton.TabIndex = 4
             ClearButton.Text = "Clear"
             ClearButton.UseVisualStyleBackColor = True
             ' 
@@ -64,7 +67,7 @@
             ProcessButton.Margin = New Padding(5, 0, 5, 5)
             ProcessButton.Name = "ProcessButton"
             ProcessButton.Size = New Size(80, 23)
-            ProcessButton.TabIndex = 2
+            ProcessButton.TabIndex = 3
             ProcessButton.Text = "Process"
             ProcessButton.UseVisualStyleBackColor = True
             ' 
@@ -93,20 +96,20 @@
             SoftwareVersionLabel.Text = "Software Version"
             SoftwareVersionLabel.TextAlign = ContentAlignment.MiddleLeft
             ' 
-            ' MainListResults
+            ' OutputListResults
             ' 
-            MainListResults.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
-            MainListResults.BackColor = SystemColors.Window
-            MainListResults.BorderColor = Color.MediumSlateBlue
-            MainListResults.BorderSize = New Padding(2)
-            MainListResults.Font = New Font("Tahoma", 8.25F)
-            MainListResults.Indent = 0
-            MainListResults.Location = New Point(5, 31)
-            MainListResults.Margin = New Padding(5, 0, 5, 5)
-            MainListResults.Name = "MainListResults"
-            MainListResults.Padding = New Padding(2)
-            MainListResults.Size = New Size(749, 827)
-            MainListResults.TabIndex = 1
+            OutputListResults.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+            OutputListResults.BackColor = SystemColors.Window
+            OutputListResults.BorderColor = Color.MediumSlateBlue
+            OutputListResults.BorderSize = New Padding(2)
+            OutputListResults.Font = New Font("Tahoma", 8.25F)
+            OutputListResults.Indent = 0
+            OutputListResults.Location = New Point(5, 57)
+            OutputListResults.Margin = New Padding(5, 0, 5, 5)
+            OutputListResults.Name = "OutputListResults"
+            OutputListResults.Padding = New Padding(2)
+            OutputListResults.Size = New Size(749, 520)
+            OutputListResults.TabIndex = 1
             ' 
             ' StatusLabel
             ' 
@@ -120,12 +123,56 @@
             StatusLabel.TabIndex = 65
             StatusLabel.TextAlign = ContentAlignment.MiddleCenter
             ' 
+            ' ErrorListResults
+            ' 
+            ErrorListResults.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+            ErrorListResults.BackColor = SystemColors.Window
+            ErrorListResults.BorderColor = Color.MediumSlateBlue
+            ErrorListResults.BorderSize = New Padding(2)
+            ErrorListResults.Font = New Font("Tahoma", 8.25F)
+            ErrorListResults.Indent = 0
+            ErrorListResults.Location = New Point(5, 608)
+            ErrorListResults.Margin = New Padding(5, 0, 5, 5)
+            ErrorListResults.Name = "ErrorListResults"
+            ErrorListResults.Padding = New Padding(2)
+            ErrorListResults.Size = New Size(749, 250)
+            ErrorListResults.TabIndex = 2
+            ' 
+            ' OutputLabel
+            ' 
+            OutputLabel.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
+            OutputLabel.Font = New Font("Tahoma", 8.25F)
+            OutputLabel.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
+            OutputLabel.Location = New Point(5, 31)
+            OutputLabel.Margin = New Padding(5, 0, 5, 5)
+            OutputLabel.Name = "OutputLabel"
+            OutputLabel.Size = New Size(749, 21)
+            OutputLabel.TabIndex = 67
+            OutputLabel.Text = "Output"
+            OutputLabel.TextAlign = ContentAlignment.MiddleLeft
+            ' 
+            ' ErrorsLabel
+            ' 
+            ErrorsLabel.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+            ErrorsLabel.Font = New Font("Tahoma", 8.25F)
+            ErrorsLabel.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
+            ErrorsLabel.Location = New Point(5, 582)
+            ErrorsLabel.Margin = New Padding(5, 0, 5, 5)
+            ErrorsLabel.Name = "ErrorsLabel"
+            ErrorsLabel.Size = New Size(749, 21)
+            ErrorsLabel.TabIndex = 68
+            ErrorsLabel.Text = "Errors"
+            ErrorsLabel.TextAlign = ContentAlignment.MiddleLeft
+            ' 
             ' BuildSoftware
             ' 
             AutoScaleMode = AutoScaleMode.None
             BackColor = Color.FromArgb(CByte(42), CByte(45), CByte(86))
+            Controls.Add(ErrorsLabel)
+            Controls.Add(OutputLabel)
+            Controls.Add(ErrorListResults)
             Controls.Add(StatusLabel)
-            Controls.Add(MainListResults)
+            Controls.Add(OutputListResults)
             Controls.Add(SoftwareVersionLabel)
             Controls.Add(SoftwareVersionTextBox)
             Controls.Add(ProcessButton)
@@ -143,9 +190,12 @@
         Private WithEvents ClearButton As Button
         Private WithEvents ProcessButton As Button
         Private WithEvents SoftwareVersionLabel As Label
-        Private WithEvents MainListResults As PoesShared.UserControls.ListResults
+        Private WithEvents OutputListResults As PoesShared.UserControls.ListResults
         Private WithEvents SoftwareVersionTextBox As TextBox
         Private WithEvents StatusLabel As Label
+        Private WithEvents ErrorListResults As PoesShared.UserControls.ListResults
+        Private WithEvents OutputLabel As Label
+        Private WithEvents ErrorsLabel As Label
     End Class
 
 End Namespace
