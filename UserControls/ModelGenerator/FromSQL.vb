@@ -18,7 +18,7 @@ Namespace UserControls.ModelGenerator
             ServerComboBox.DataSource = Nothing
 
             Dim Servers As New List(Of ServerDetail) From {
-                New ServerDetail("Server 24", "HOME", "", "192.168.50.246", "")
+                New ServerDetail("Server 24", "HOME", "HelloPoesboiIt'sBjorn", "192.168.50.246", "poesServices")
             }
 
             _Servers.Clear()
