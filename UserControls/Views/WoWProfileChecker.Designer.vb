@@ -35,6 +35,7 @@
             IncludeTemplatesCheckBox = New CheckBox()
             FontsButton = New Button()
             FailedButton = New Button()
+            NotFoundButton = New Button()
             SuspendLayout()
             ' 
             ' StatusLabel
@@ -193,10 +194,27 @@
             FailedButton.Text = "Failed"
             FailedButton.UseVisualStyleBackColor = True
             ' 
+            ' NotFoundButton
+            ' 
+            NotFoundButton.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
+            NotFoundButton.BackColor = Color.MediumSlateBlue
+            NotFoundButton.FlatAppearance.BorderColor = Color.FromArgb(CByte(107), CByte(83), CByte(255))
+            NotFoundButton.FlatStyle = FlatStyle.Flat
+            NotFoundButton.Font = New Font("Tahoma", 8.25F)
+            NotFoundButton.ForeColor = Color.FromArgb(CByte(124), CByte(141), CByte(181))
+            NotFoundButton.Location = New Point(730, 434)
+            NotFoundButton.Margin = New Padding(0, 0, 5, 5)
+            NotFoundButton.Name = "NotFoundButton"
+            NotFoundButton.Size = New Size(80, 23)
+            NotFoundButton.TabIndex = 45
+            NotFoundButton.Text = "Not Found"
+            NotFoundButton.UseVisualStyleBackColor = True
+            ' 
             ' WoWProfileChecker
             ' 
             AutoScaleMode = AutoScaleMode.None
             BackColor = Color.FromArgb(CByte(42), CByte(45), CByte(86))
+            Controls.Add(NotFoundButton)
             Controls.Add(FailedButton)
             Controls.Add(FontsButton)
             Controls.Add(IncludeTemplatesCheckBox)
@@ -226,6 +244,7 @@
         Private WithEvents FailedButton As Button
         Private WithEvents SavedVariablesCheckBox As CheckBox
         Private WithEvents IncludeTemplatesCheckBox As CheckBox
+        Private WithEvents NotFoundButton As Button
     End Class
 
 End Namespace

@@ -167,6 +167,58 @@
 
 #Region " Events "
 
+        Private Async Sub FailedButton_Click(sender As Object, e As EventArgs) Handles FailedButton.Click
+            Await Task.Run(Sub()
+                               Try
+                                   Dim CacheFolder = "\\192.168.50.246\Projects\Cache"
+
+                                   MainListResults.AddMessage("Clearing .FAILED...")
+                                   If Not IO.Directory.Exists(CacheFolder) Then
+                                       Return
+                                   End If
+
+                                   For Each Current In IO.Directory.GetFiles(CacheFolder, "*.FAILED", IO.SearchOption.AllDirectories)
+                                       Try
+                                           MainListResults.AddMessage($"   Deleting: {Current}")
+                                           IO.File.Delete(Current)
+                                       Catch exInner As Exception
+                                           MainListResults.AddMessage($"   ERROR: {exInner.Message}")
+                                       End Try
+                                   Next
+                               Catch ex As Exception
+                                   MainListResults.AddMessage($"   ERROR: {ex.Message}")
+                               Finally
+                                   MainListResults.AddMessage("Complete.")
+                               End Try
+                           End Sub)
+        End Sub
+
+        Private Async Sub NotFoundButton_Click(sender As Object, e As EventArgs) Handles NotFoundButton.Click
+            Await Task.Run(Sub()
+                               Try
+                                   Dim CacheFolder = "\\192.168.50.246\Projects\Cache"
+
+                                   MainListResults.AddMessage("Clearing .NOTFOUND...")
+                                   If Not IO.Directory.Exists(CacheFolder) Then
+                                       Return
+                                   End If
+
+                                   For Each Current In IO.Directory.GetFiles(CacheFolder, "*.NOTFOUND", IO.SearchOption.AllDirectories)
+                                       Try
+                                           MainListResults.AddMessage($"   Deleting: {Current}")
+                                           IO.File.Delete(Current)
+                                       Catch exInner As Exception
+                                           MainListResults.AddMessage($"   ERROR: {exInner.Message}")
+                                       End Try
+                                   Next
+                               Catch ex As Exception
+                                   MainListResults.AddMessage($"   ERROR: {ex.Message}")
+                               Finally
+                                   MainListResults.AddMessage("Complete.")
+                               End Try
+                           End Sub)
+        End Sub
+
         Private Sub BjornButton_Click(sender As Object, e As EventArgs) Handles BjornButton.Click
             Enabled = False
 
@@ -208,32 +260,6 @@
 
         Private Sub ClearButton_Click(sender As Object, e As EventArgs) Handles ClearButton.Click
             MainListResults.ClearResults()
-        End Sub
-
-        Private Async Sub FailedButton_Click(sender As Object, e As EventArgs) Handles FailedButton.Click
-            Await Task.Run(Sub()
-                               Try
-                                   Dim CacheFolder = "\\192.168.50.246\Projects\Cache"
-
-                                   MainListResults.AddMessage("Clearing .FAILED...")
-                                   If Not IO.Directory.Exists(CacheFolder) Then
-                                       Return
-                                   End If
-
-                                   For Each Current In IO.Directory.GetFiles(CacheFolder, "*.FAILED", IO.SearchOption.AllDirectories)
-                                       Try
-                                           MainListResults.AddMessage($"   Deleting: {Current}")
-                                           IO.File.Delete(Current)
-                                       Catch exInner As Exception
-                                           MainListResults.AddMessage($"   ERROR: {exInner.Message}")
-                                       End Try
-                                   Next
-                               Catch ex As Exception
-                                   MainListResults.AddMessage($"   ERROR: {ex.Message}")
-                               Finally
-                                   MainListResults.AddMessage("Complete.")
-                               End Try
-                           End Sub)
         End Sub
 
         Private Sub FontsButton_Click(sender As Object, e As EventArgs) Handles FontsButton.Click
