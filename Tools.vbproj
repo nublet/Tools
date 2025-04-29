@@ -44,8 +44,8 @@
 	<ItemGroup>
 		<PackageReference Include="CoreAudio" Version="1.40.0" />
 		<PackageReference Include="Humanizer.Core" Version="2.14.1" />
-		<PackageReference Include="PoesShared.DAL" Version="25.0.4.204" />
-		<PackageReference Include="PoesShared.Forms" Version="25.0.4.204" GeneratePathProperty="true" />
+		<PackageReference Include="PoesShared.DAL" Version="25.0.4.214" />
+		<PackageReference Include="PoesShared.Forms" Version="25.0.4.214" GeneratePathProperty="true" />
 		<PackageReference Include="Squid-Box.SevenZipSharp" Version="1.6.2.24" />
 	</ItemGroup>
 
