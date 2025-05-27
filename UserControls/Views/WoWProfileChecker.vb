@@ -116,6 +116,8 @@
                                     For Each AccountFile As String In FileNames
                                         MainListResults.AddMessage($"         Creating: {AccountFile}...")
 
+                                        CheckFilename(AccountFile)
+
                                         Using writer As New IO.StreamWriter(AccountFile, False)
                                             writer.WriteLine(FileContents)
                                         End Using

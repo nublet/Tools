@@ -147,16 +147,12 @@
         Private Sub Process_ErrorDataReceived(sender As Object, e As DataReceivedEventArgs)
             If e.Data.IsSet() Then
                 ErrorListResults.AddMessage($"      {e.Data}")
-            Else
-                ErrorListResults.AddMessage(String.Empty)
             End If
         End Sub
 
         Private Sub Process_OutputDataReceived(sender As Object, e As DataReceivedEventArgs)
             If e.Data.IsSet() Then
                 OutputListResults.AddMessage($"      {e.Data}")
-            Else
-                OutputListResults.AddMessage(String.Empty)
             End If
         End Sub
 
