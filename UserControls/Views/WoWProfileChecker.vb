@@ -68,7 +68,7 @@
                                 For Each AccountFile As String In FileNames
                                     MainListResults.AddMessage($"         Creating: {AccountFile}...")
 
-                                    Using writer As New IO.StreamWriter(AccountFile, False)
+                                    Using writer As New IO.StreamWriter(AccountFile, False, System.Text.Encoding.UTF8)
                                         writer.WriteLine(FileContents)
                                     End Using
                                 Next
@@ -118,7 +118,7 @@
 
                                         CheckFilename(AccountFile)
 
-                                        Using writer As New IO.StreamWriter(AccountFile, False)
+                                        Using writer As New IO.StreamWriter(AccountFile, False, System.Text.Encoding.UTF8)
                                             writer.WriteLine(FileContents)
                                         End Using
                                     Next

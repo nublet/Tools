@@ -233,7 +233,7 @@
                     ModelStringBuilder.AppendLine("End Namespace")
 
                     MainListResults.AddMessage($"Model File Created: {FileName}")
-                    Using sw As New IO.StreamWriter(FileName, False)
+                    Using sw As New IO.StreamWriter(FileName, False, System.Text.Encoding.UTF8)
                         sw.WriteLine(ModelStringBuilder.ToString())
                     End Using
 
