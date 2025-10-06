@@ -168,6 +168,7 @@
                     Dim InsertOutput = String.Join(",", TI.Columns.Where(Function(o) (o.IsIdentity)).OrderBy(Function(o) o.Position).Select(Function(o) $"[{o.ColumnName}]"))
                     Dim InsertValues = String.Join(",", TI.Columns.Where(Function(o) Not (o.IsIdentity)).OrderBy(Function(o) o.Position).Select(Function(o) $"@{o.ColumnName_Clean}"))
                     Dim InsertValuesMerge = String.Join(",", TI.Columns.Where(Function(o) Not (o.IsIdentity)).OrderBy(Function(o) o.Position).Select(Function(o) $"[Source].[{o.ColumnName}]"))
+                    Dim OrderByPrimary = String.Join(", ", TI.Columns.Where(Function(o) o.IsPrimary).OrderBy(Function(o) o.Position).Select(Function(o) $"[{o.ColumnName}]"))
                     Dim UpdateColumns = String.Join(",", TI.Columns.Where(Function(o) Not (o.IsPrimary OrElse o.IsIdentity)).OrderBy(Function(o) o.Position).Select(Function(o) $"[{o.ColumnName}]=@{o.ColumnName_Clean}"))
                     Dim UpdateColumnsMerge = String.Join(",", TI.Columns.Where(Function(o) Not (o.IsPrimary OrElse o.IsIdentity)).OrderBy(Function(o) o.Position).Select(Function(o) $"[Target].[{o.ColumnName}]=[Source].[{o.ColumnName}]"))
                     Dim WherePrimary = String.Join(" AND ", TI.Columns.Where(Function(o) o.IsPrimary).OrderBy(Function(o) o.Position).Select(Function(o) $"([{o.ColumnName}]=@{o.ColumnName_Clean})"))
@@ -214,6 +215,7 @@
                     Else
                         ModelStringBuilder.AppendLine($"        Public Const QueryMerge = ""MERGE INTO [{TI.TableName}] As [Target] USING #{TI.TableName} As [Source] ON {WhereMerge} WHEN NOT MATCHED THEN INSERT ({InsertFields}) VALUES ({InsertValuesMerge});""")
                     End If
+                    ModelStringBuilder.AppendLine($"        Public Const QueryOrderBy = ""{OrderByPrimary}""")
                     ModelStringBuilder.AppendLine($"        Public Const QuerySelectAll = ""SELECT {AllFields} FROM [{TI.TableName}]""")
                     ModelStringBuilder.AppendLine($"        Public Const QueryUpdate = ""UPDATE [{TI.TableName}] SET {UpdateColumns} WHERE ({WherePrimary})""")
 
