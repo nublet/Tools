@@ -225,7 +225,7 @@
             Enabled = False
 
             _Folders.Clear()
-            _Folders.Add("D:\Games\Activision\World of Warcraft\_retail_\WTF\Account\POESBOI\", "E:\GoogleDrive\BackUps\Templates\Bjorn\")
+            _Folders.Add("D:\Games\Activision\World of Warcraft\_retail_\WTF\Account\POESBOI\", "Z:\BackUps\Templates\Bjorn\")
 
             If IncludeTemplatesCheckBox.Checked Then
                 _IncludeTemplates = True
@@ -244,8 +244,8 @@
             Enabled = False
 
             _Folders.Clear()
-            _Folders.Add("D:\Games\Activision\World of Warcraft\_retail_\WTF\Account\POESBOI\", "E:\GoogleDrive\BackUps\Templates\Bjorn\")
-            _Folders.Add("\\Study21R1\World of Warcraft\_retail_\WTF\Account\POESBOI2\", "E:\GoogleDrive\BackUps\Templates\Nix\")
+            _Folders.Add("D:\Games\Activision\World of Warcraft\_retail_\WTF\Account\POESBOI\", "Z:\BackUps\Templates\Bjorn\")
+            _Folders.Add("\\Study21R1\World of Warcraft\_retail_\WTF\Account\POESBOI2\", "Z:\BackUps\Templates\Nix\")
 
             If IncludeTemplatesCheckBox.Checked Then
                 _IncludeTemplates = True
@@ -312,7 +312,7 @@
             Enabled = False
 
             _Folders.Clear()
-            _Folders.Add("\\Study21R1\World of Warcraft\_retail_\WTF\Account\POESBOI2\", "E:\GoogleDrive\BackUps\Templates\Nix\")
+            _Folders.Add("\\Study21R1\World of Warcraft\_retail_\WTF\Account\POESBOI2\", "Z:\BackUps\Templates\Nix\")
 
             If IncludeTemplatesCheckBox.Checked Then
                 _IncludeTemplates = True
