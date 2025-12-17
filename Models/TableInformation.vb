@@ -58,7 +58,7 @@ Namespace Models
 
             Select Case _ModelName.ToLower
                 Case "step", "error", "delegate", "option"
-                    _SafeModelName = "[{0}]".FormatWith(_ModelName)
+                    _SafeModelName = $"[{_ModelName}]"
                 Case Else
                     _SafeModelName = _ModelName
             End Select

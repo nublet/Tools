@@ -3,7 +3,7 @@
     Public Class BuildSoftware
 
         Private Const _DotNetLocation = "C:\Program Files\dotnet\dotnet.exe"
-        Private Const _MSBuildLocation = "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\amd64\MSBuild.exe"
+        Private Const _MSBuildLocation = "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\amd64\MSBuild.exe"
 
         Private _Version As String
 

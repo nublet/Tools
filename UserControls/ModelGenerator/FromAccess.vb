@@ -133,7 +133,7 @@ Namespace UserControls.ModelGenerator
                 Dim CLRDataType As String = ""
                 Dim DefaultValue As String = ""
 
-                Select Case _DATA_TYPE.ToLower
+                Select Case _DATA_TYPE.ToLower()
                     Case "2", "3"
                         CLRDataType = "Integer"
                         DefaultValue = "-1"

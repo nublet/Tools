@@ -283,13 +283,13 @@ Namespace UserControls.ModelGenerator
                         End If
                         _DefaultValue = "{}"
                     Case "decimal"
-                        _DataType_CLR = "Double"
+                        _DataType_CLR = "Decimal"
                         If Numeric_Precision > 0 Then
                             _DataType_DB = $"[{Data_Type}]({Numeric_Precision},{Numeric_Scale})"
                         Else
                             _DataType_DB = $"[{Data_Type}]"
                         End If
-                        _DefaultValue = "0.0!"
+                        _DefaultValue = "0d"
 
                     Case "timestamp"
                         If Column_Name.IsEqualTo("RowVersion") Then
