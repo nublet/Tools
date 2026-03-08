@@ -303,6 +303,12 @@ Namespace UserControls.ModelGenerator
                         Else
                             System_String.ToLog($"Unhandled Data Type: {_Data_Type}, Table: {_Table_Name}, Column: {_Column_Name}")
                         End If
+
+                    Case "uniqueidentifier"
+                        _DataType_CLR = "Guid"
+                        _DataType_DB = "uniqueidentifier"
+                        _DefaultValue = "Guid.Empty"
+
                     Case Else
                         System_String.ToLog($"Unhandled Data Type: {_Data_Type}, Table: {_Table_Name}, Column: {_Column_Name}")
                 End Select
