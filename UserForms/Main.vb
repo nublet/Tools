@@ -44,7 +44,7 @@
 
                 Dim Solutions As New List(Of Models.SolutionInformation)
 
-                For Each Current As String In IO.Directory.GetFiles("D:\Projects\", "*.sln", IO.SearchOption.AllDirectories)
+                For Each Current In IO.Directory.GetFiles("D:\Projects\", "*.sln*", IO.SearchOption.AllDirectories)
                     Solutions.Add(New Models.SolutionInformation(Current))
                 Next
 
